@@ -1,0 +1,553 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+#hero_banner img {
+  height: 650px;
+  transition: all 3s;
+  object-fit: cover;
+  scale: 1.2;
+}
+
+#hero_banner .slick-slide.slick-active img {
+  scale: 1;
+}
+
+.hero_form label {
+  font-size: 16px;
+  font-weight: 300;
+  color: #000;
+  display: block;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:after {
+  background: #ffffff;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: 0.3;
+  position: absolute;
+  top: -50px;
+  transform: rotate(35deg);
+  transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 50px;
+  /* z-index: 1; */
+}
+
+.btn:hover:after {
+  left: 110%;
+  transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cursive {
+  font-family: "Cinzel Decorative", serif !important;
+}
+
+.hero_p {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1250px;
+  padding: 0 2rem;
+}
+
+.quick_access {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  height: 450px;
+}
+
+.quick_access::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 11;
+}
+
+.quick_access .viewquick {
+  transition: all 0.5s;
+  transform: translateY(120px);
+  opacity: 0;
+}
+
+.quick_access:hover .viewquick {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.quick_access .parentqa {
+  transform: translateY(50px);
+  transition: all 0.5s;
+}
+
+.quick_access:hover .parentqa {
+  transform: translateY(0);
+}
+
+.parentqa img {
+  transition: all 0.5s;
+}
+
+.quick_access .overlaybg {
+  transition: all 0.5s;
+  transform: scale(0);
+  transform-origin: right bottom;
+  z-index: 15;
+}
+
+.quick_access:hover .overlaybg {
+  transform: scale(1);
+}
+
+.section_title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: "Cinzel Decorative", serif !important;
+  margin-bottom: 2rem;
+}
+
+.profileTesti {
+  clip-path: polygon(50% 0px, 100% 50%, 50% 100%, 0px 50%);
+  position: relative;
+  top: 66px;
+  left: 20px;
+  z-index: 8;
+}
+
+.testimonial p {
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+
+.whyUs::after {
+  content: "";
+  position: absolute;
+  background: url("./assets/why-us.png");
+  width: 500px;
+  height: 344px;
+  background-size: cover;
+  left: calc(50% - 220px);
+  top: -219px;
+}
+
+.workflow::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #00897b;
+  border-radius: 50%;
+}
+
+.workflow:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 50.8%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: #00897b65;
+}
+
+.footer-widget li a {
+  display: block;
+  padding: 4px 0;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.navlinks a {
+  display: block;
+
+  font-weight: 400;
+  font-size: 15px;
+  color: #00897b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.stroke_text{
+  font-weight: 700;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    -webkit-text-fill-color: transparent;
+    font-size: 80px;
+    z-index: 1;
+}
+.included_ul ul, .excluded_ul ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.included_ul ul li, .excluded_ul ul li{
+  position: relative;
+  padding-left: 26px;
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+.included_ul ul li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background:url(./assets/checkmark.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.excluded_ul ul li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background:url(./assets/cross.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.form-label{
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.loginbg {
+  width: 100%;
+  height: 77px;
+  background: url("./assets/login-bg.png") center bottom / 300px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  transition: all 0.5s ease-in-out 0s;
+  animation: 800s linear 0s infinite normal both running movehor;
+  border-radius: 0px 0px 10px 10px;
+  background-repeat-y: no-repeat;
+}
+
+@keyframes movehor {
+  0% {
+    background-position: 0px -18px;
+  }
+
+  100% {
+    background-position: -10000% -18px;
+  }
+}
+
+.otpbox input {
+  width: 50px !important;
+  height: 50px;
+  outline: none;
+  border: 1px solid #ddd;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  outline: none;
+  border: 1px solid #66451cdc;
+  border-radius: 3px;
+  padding: 6px 10px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.themeform label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+
+.profile_completion {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px solid #ffffff;
+  color: #fff;
+  font-size: 20px;
+  position: relative;
+  box-shadow: 0px 0px 32px -7px #b8b8b8;
+  background: linear-gradient(45deg, #0027ff, #ff0074);
+}
+
+.quotabox.active .checkbox:before {
+  content: "✓";
+  left: 4px;
+
+  color: #000;
+  font-size: 17px;
+  font-weight: 800;
+  position: absolute;
+}
+
+.radiogroup label {
+  font-size: 14px;
+}
+
+.subscription_title {
+  box-shadow: -3px 2px 0px #a569bd, inset -4px 5px 7px #845597;
+}
+
+.subscription_body {
+  min-height: 300px;
+  width: 100%;
+  border-radius: 1rem 1rem 3rem 3rem;
+  box-shadow: -3px 2px 0px #f1d9fb, inset -5px 5px 7px #c1c1c1;
+}
+
+.subscription_body ul li {
+  list-style: decimal;
+  padding: 10px 0;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.button_1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.button_1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.contactPage::before {
+  /* content: ""; */
+  position: absolute;
+  bottom: -51px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url(/src/assets/grass.png);
+  opacity: 1;
+  background-repeat: no-repeat;
+  z-index: 3;
+  rotate: 180deg;
+}
+
+img {
+  max-width: 100%;
+}
+
+.ab-wel-1 {
+  position: absolute;
+  width: 75%;
+  height: 550px;
+  object-fit: cover;
+  left: 0px;
+  top: 0px;
+  border-radius: 15px;
+}
+
+.ab-wel-2 {
+  width: 80%;
+  height: 300px;
+  object-fit: cover;
+  z-index: 1;
+  position: relative;
+  margin: 47% 10% 5% 15%;
+  border-width: 15px 0px 0px 15px;
+  border-top-style: solid;
+  border-left-style: solid;
+  border-top-color: rgb(255, 255, 255);
+  border-left-color: rgb(255, 255, 255);
+  border-image: initial;
+  border-right-style: initial;
+  border-right-color: initial;
+  border-bottom-style: initial;
+  border-bottom-color: initial;
+  border-radius: 0px 100px 15px;
+}
+
+.ab-wel-lhs span {
+  position: absolute;
+}
+
+.ab-wel-3 {
+  width: 100px;
+  height: 100px;
+  border: 7px solid rgb(240, 168, 5);
+  border-radius: 50%;
+  left: -39px;
+  top: -32px;
+  z-index: 0;
+}
+
+.aboutUs h2 {
+  font-family: "Cinzel Decorative", serif !important;
+  font-size: 3rem;
+  color: #66451c;
+}
+
+.ab-wel-rhs p {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 25px;
+}
+.work-section {
+  background: #FEEDEB;
+  position: relative;
+}
+
+.work-section::before {
+  content: "";
+  background-image: url(./assets/section-top-bg.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  top: -50px;
+}
+.work-section .work-avatar {
+  font-size: 50px;
+  font-weight: bold;
+  color: transparent;
+  -webkit-text-stroke: 1px #0E9384;
+  position: relative;
+  background: transparent;
+}
+.bg-overlay{
+  background: url('./assets/bg-body.png');
+  background-size: contain;
+  opacity: 0.35;
+  transition: all 0.3s, border-radius 0.3s, opacity 0.3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+@media (max-width: 998px) {
+  .section_title {
+    font-size: 1.3rem;
+  }
+
+  .quick_access {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    height: 250px;
+  }
+
+  .whyUs::after {
+    content: "";
+    position: absolute;
+    background: url(/src/assets/why-us.png);
+    width: 335px;
+    height: 230px;
+    background-size: cover;
+    left: calc(50% - 169px);
+    top: -147px;
+  }
+
+  .workflow:not(:last-of-type)::after {
+    right: 0;
+    top: 20%;
+    left: 100%;
+    background: red;
+    display: none;
+  }
+
+  .workflow::before {
+    left: 98%;
+    right: 0;
+    display: none;
+  }
+
+  .container {
+    margin: 0 auto;
+
+    padding: 0 1.5rem;
+  }
+
+  .profile_completion {
+    font-size: 16px;
+    width: 60px;
+    height: 60px;
+
+  }
+
+  .navlinkmobile a {
+    display: block;
+    padding: 10px 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    font-weight: 200;
+
+
+  }
+
+  .aboutUs h2 {
+    font-family: "Cinzel Decorative", serif !important;
+    font-size: 1.5rem;
+    color: #66451c;
+  }
+
+  .ab-wel-rhs p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+  }
+}
