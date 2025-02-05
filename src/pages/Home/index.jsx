@@ -17,8 +17,12 @@ import Destinations from '../destinations';
 import CtaLayoutTwo from "../cta/CtaLayoutTwo";
 import axios from "axios";
 import { API_URL, usertoken } from "../../utils";
+import { useParams } from 'react-router-dom';
+import Bannertwo from './banners/Bannertwo';
+import PackageLayoutTwo from '../packages/elements/PackageLayoutTwo';
 
 const Home = () => {
+  const { id } = useParams();
   const [packages, setPackages] = React.useState([]);
   const getpackages = async () => {
     const resp = await axios.get(API_URL + "package/most-viewed", {
@@ -44,7 +48,22 @@ const Home = () => {
   }, []);
   return (
     <>
-      <SingleScreenBanner />
+      {
+        (!id || id == 1) && (
+          <>
+            <SingleScreenBanner />
+          </>
+        )
+      }
+      {
+        (id == 2) && (
+          <>
+            <Bannertwo />
+          </>
+        )
+      }
+
+
 
       <Destinations />
 
@@ -63,10 +82,23 @@ const Home = () => {
               </div>
             </div>
             {
-             packages.map((itm) => (
+              packages.map((itm) => (
                 <>
                   <div className="col-span-4">
-                    <PackageLayoutOne data={itm} />
+                    {
+                      (!id || id == 1) && (
+                        <>
+                          <PackageLayoutOne data={itm} />
+                        </>
+                      )
+                    }
+                    {
+                      (id == 2) && (
+                        <>
+                          <PackageLayoutTwo data={itm} />
+                        </>
+                      )
+                    }
                   </div>
                 </>
               ))
@@ -77,7 +109,7 @@ const Home = () => {
 
       <CtaLayoutTwo />
 
-      <Testimonials pb={'pb-10'} bg="bg-primary/10" />
+      <Testimonials pb={'pb-10'} bg="bg-primary/10 hidden" />
       <Visa />
       {/* <WhyUs /> */}
       <HowItWorks />

@@ -21,7 +21,7 @@ import ResetPassword from "./pages/Login/ResetPassword";
 import ProfilePage from "./pages/Account/ProfilePage";
 import Packages from "./pages/packages";
 // import HomeTwo from "./pages/Home/HomeTwo";
-import AboutTwo from "./pages/About/AboutTwo";
+// import AboutTwo from "./pages/About/AboutTwo";
 import SinglePackageOne from "./pages/packages/singlePackage/SinglePackageOne";
 import Visa from "./pages/visa";
 
@@ -30,14 +30,14 @@ function App() {
     createRoutesFromElements(
       <>
         <Route path='/' element={<Layout />} >
-          {/* <Route index element={<Home />} /> */}
+          <Route index element={<Home />} />
           <Route path="/home/:id" element={<Home />} />
           <Route path="/visa" element={<Visa />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/about/:id" element={<AboutTwo />} />
+          <Route path="/about/:id" element={<About />} />
           <Route path="/policy/:url" element={<AppPolicy />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/packages" element={<Packages />} />

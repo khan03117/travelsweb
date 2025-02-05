@@ -1,17 +1,27 @@
 import { CalendarOutlined, EnvironmentOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 import { Button } from '@material-tailwind/react'
+import { Image_URL } from '../../../utils';
+import PropTypes from 'prop-types'
+import dummyimg from '../../../assets/packages/8.jpeg'
 
-const PackageLayoutTwo = () => {
+
+const PackageLayoutTwo = ({ data }) => {
     return (
         <>
             <div className="w-full p-4 bg-white shadow shadow-black/40 rounded">
                 <figure className="w-full relative overflow-hidden">
-                    <img src="https://solo-elementor.travelerwp.com/wp-content/uploads/2015/01/3-3-450x300.png" alt="" className="w-full rounded-lg" />
+                    <img
+                        src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg}
+                        onError={(e) => e.target.src = dummyimg}
+                        alt=""
+                        className="w-full h-48 object-cover"
+                    />
+
                 </figure>
                 <div className="w-full">
                     <div className="w-full py-2">
                         <h4 className='text-lg font-bold text-black'>
-                            Rainbow Mountain Valley
+                            {data.title ?? data.activity_name}
                         </h4>
                         <div className="w-full mb-2">
                             <span>
@@ -52,3 +62,8 @@ const PackageLayoutTwo = () => {
 }
 
 export default PackageLayoutTwo
+
+
+PackageLayoutTwo.propTypes = {
+    data: PropTypes.object
+}

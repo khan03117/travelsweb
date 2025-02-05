@@ -7,7 +7,7 @@ import {  isMobile } from 'react-device-detect';
 import React from 'react';
 import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 const Header = () => {
-    const {id} = useParams();
+    const {id = 1} = useParams();
     const { user } = useUser();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
@@ -52,15 +52,6 @@ const Header = () => {
             <li>
                 <Link to={'/visa'} >Visa</Link>
             </li>
-            {
-                user.name && (
-                    <>
-                        <li>
-                            <Link to={'/users'} >Profiles</Link>
-                        </li>
-                    </>
-                )
-            }
 
             <li>
                 <Link to={'/faqs'} >Faqs</Link>

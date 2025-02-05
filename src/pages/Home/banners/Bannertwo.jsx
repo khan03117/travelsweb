@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import banner1 from '../../../assets/banners/banner1.jpeg';
 import banner2 from '../../../assets/banners/banner2.jpeg';
 import banner3 from '../../../assets/banners/banner3.jpg';
+import ContactForm from '../ContactForm';
 const Bannertwo = () => {
   const settings = {
     dots: true,
@@ -39,14 +40,14 @@ const Bannertwo = () => {
             <div className="grid grid-cols-12 items-center gap-4">
               <div className="lg:col-span-5 col-span-12">
                 <div className="w-full lg:block hidden">
-                 
+                  <ContactForm/>
                 </div>
               </div>
 
               <div className="lg:col-span-7 col-span-12 ">
                 <div className="w-full text-white lg:ps-20 p-4">
                   <h2 className="cursive lg:text-[3rem] text-[1.5rem] mb-5 font-bold">
-                    Find your <br></br> perfect soul Mate!
+                    Find your <br></br> perfect Enjoy
                   </h2>
                   <p className="mb-10 hero_p">
                     While perfection is an unattainable ideal, in this imagined partnership, we would complement each other in a beautifully imperfect harmony, bound by the threads of mutual respect, admiration, and love.

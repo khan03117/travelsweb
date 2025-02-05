@@ -3,8 +3,8 @@ import { FileImageOutlined } from '@ant-design/icons'
 import { TiWeatherWindyCloudy } from 'react-icons/ti'
 import aboutimg from '../../assets/about/about-1.webp'
 import BreadCrumb from '../../components/BreadCrumb'
-import Vision from './AboutElements/Vision'
-import Testimonials from '../Home/Testimonials'
+// import Vision from './AboutElements/Vision'
+// import Testimonials from '../Home/Testimonials'
 // import CtaLayoutTwo from '../cta/CtaLayoutTwo'
 const AboutTwo = () => {
     return (
@@ -50,8 +50,6 @@ const AboutTwo = () => {
                                                 </span>
                                             </div>
                                         </div>
-
-
                                     </li>
                                     <li>
                                         <div className="flex gap-2">
@@ -72,25 +70,9 @@ const AboutTwo = () => {
                 </div>
             </section>
             
-            <section className='py-[3rem]'  >
-                <div className="container">
-                    <div className="grid  gap-6 grid-cols-12">
-                        <div className="col-span-6">
-                            <Vision title="Vision"
-                            desc='To be a globally recognized leader in visa, immigration, tours, and travel consultancy, helping people build successful futures abroad and explore the world with ease. We aim to create a world where opportunities are accessible, migration is hassle-free, and travel experiences are enriching—ensuring a smooth and stress-free journey for our clients.' 
-                             />
-                        </div>
-                        <div className="col-span-6">
-                            <Vision  title="Mission" 
-                            
-                            desc="To provide seamless and reliable visa, immigration, and travel solutions, empowering individuals, families, and businesses to achieve their global dreams with trust, transparency, and professionalism. We strive to simplify complex immigration and travel processes while delivering exceptional service and expert guidance."
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
             {/* <CtaLayoutTwo/> */}
-            <Testimonials pb={'pb-20'}/>
+            {/* <Testimonials pb={'pb-20'}/> */}
 
           
 

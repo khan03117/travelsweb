@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import BreadCrumb from '../../components/BreadCrumb'
 import LayoutOne from './VisaLayout/LayoutOne'
 import VisaSteps from './VisaSteps';
-import Testimonials from '../Home/Testimonials';
+// import Testimonials from '../Home/Testimonials';
 
 const Visa = () => {
     const { pathname } = useLocation();
@@ -84,7 +84,7 @@ const Visa = () => {
                 pathname == "/visa" && (
                     <>
                         <VisaSteps />
-                        <Testimonials/>
+                        {/* <Testimonials/> */}
                         <section className="pb-20"></section>
                     </>
                 )

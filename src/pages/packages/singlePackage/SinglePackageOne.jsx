@@ -44,7 +44,7 @@ const SinglePackageOne = () => {
                                 <div className="grid grid-cols-12 gap-3 pb-10">
                                     <div className="col-span-12">
                                         <h1 className='section_title !mb-0'>
-                                           {mpackage.title ?? 'Package title not available'}
+                                           {mpackage.title ?? mpackage?.activity_name ?? 'Not Available'}
                                         </h1>
                                     </div>
                                     <div className="col-span-4">
