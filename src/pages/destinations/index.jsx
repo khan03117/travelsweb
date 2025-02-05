@@ -1,24 +1,48 @@
-// import React from 'react'
+import React from 'react'
+import axios from 'axios';
 import DestinationLayoutOne from './DestinationLayoutOne'
+import { API_URL, usertoken } from '../../utils';
+// import DestinationLayoutTwo from './DestinationLayoutTwo';
 
 const Destinations = () => {
+    const [items, setItems] = React.useState([]);
+    const getitems = async () => {
+        try{
+            const resp = await axios.get(API_URL + "destinations", {
+                headers : {
+                    Authorization : usertoken
+                }
+            });
+            if(resp.data.success == 1){
+                setItems(resp.data.data);
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+    React.useEffect(() => {
+        getitems();
+    }, []);
     return (
         <>
             <section className=' py-10'>
                 <div className="container">
-                    <div className="w-full mb-20 text-center">
-                        <h2 className="section_title mb-3">Top Destinations</h2>
+                    <div className="w-full mb-10 text-center">
+                        <h2 className="section_title !mb-2">Top Destinations</h2>
                         <p>
                         Explore our top destinations voted by more than 100,000+ customers around the world.
                         </p>
                     </div>
                     <div className="grid grid-cols-12 gap-3">
                         {
-                            [...Array(4)].map(() => (
+                            items.map((itm) => (
                                 <>
                                     <div className="col-span-3">
-                                        <DestinationLayoutOne />
+                                        <DestinationLayoutOne data={itm} />
                                     </div>
+                                    {/* <div className="col-span-3">
+                                        <DestinationLayoutTwo data={itm} />
+                                    </div> */}
 
                                 </>
                             ))

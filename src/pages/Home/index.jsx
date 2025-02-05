@@ -1,9 +1,9 @@
-// import React from 'react'
+import React from 'react'
 // import banner1 from '../../assets/banner1.jpg';
 // import banner2 from '../../assets/banner2.jpg';
 
 import Testimonials from "./Testimonials";
-import WhyUs from "./WhyUs";
+// import WhyUs from "./WhyUs";
 import HowItWorks from "./HowItWorks";
 
 import SingleScreenBanner from "./banners/SingleScreenBanner";
@@ -15,14 +15,39 @@ import Faqs from '../Faq';
 // import CtaLayoutOne from '../cta/CtaLayoutOne';
 import Destinations from '../destinations';
 import CtaLayoutTwo from "../cta/CtaLayoutTwo";
-const Home = () => {
+import axios from "axios";
+import { API_URL, usertoken } from "../../utils";
 
+const Home = () => {
+  const [packages, setPackages] = React.useState([]);
+  const getpackages = async () => {
+    const resp = await axios.get(API_URL + "package/most-viewed", {
+      headers: {
+        Authorization: usertoken
+      }
+    });
+    setPackages(resp.data.data);
+  }
+  React.useEffect(() => {
+    getpackages();
+  }, []);
+  const getuser = async () => {
+    const resp = await axios.get(API_URL + "profile", {
+      headers: {
+        apikey: "DUMMY_API_KEY_1234567890"
+      }
+    });
+    console.log(resp.data);
+  }
+  React.useEffect(() => {
+    getuser();
+  }, []);
   return (
     <>
-      <SingleScreenBanner />   
-     
-      <Destinations/>
-     
+      <SingleScreenBanner />
+
+      <Destinations />
+
       {/* <VisaSteps /> */}
       <section className="py-10 bg-primary/10">
         <div className="container">
@@ -38,10 +63,10 @@ const Home = () => {
               </div>
             </div>
             {
-              [1, 2, 3, 4, 5, 6].map(() => (
+             packages.map((itm) => (
                 <>
                   <div className="col-span-4">
-                    <PackageLayoutOne />
+                    <PackageLayoutOne data={itm} />
                   </div>
                 </>
               ))
@@ -50,13 +75,13 @@ const Home = () => {
         </div>
       </section>
 
-      <CtaLayoutTwo/>
-     
-      <Testimonials pb={'pb-10'} bg="bg-primary/10" /> 
+      <CtaLayoutTwo />
+
+      <Testimonials pb={'pb-10'} bg="bg-primary/10" />
       <Visa />
       {/* <WhyUs /> */}
       <HowItWorks />
-     
+
       <Faqs />
     </>
   )

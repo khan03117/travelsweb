@@ -41,8 +41,8 @@ function App() {
           <Route path="/policy/:url" element={<AppPolicy />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/packages" element={<Packages />} />
-          <Route path="/packages/:id" element={<Packages />} />
-          <Route path="/packages/show/:id" element={<SinglePackageOne />} />
+          <Route path="/packages/:url" element={<Packages />} />
+          <Route path="/package/show/:url" element={<SinglePackageOne />} />
 
         </Route>
         <Route path="/" element={<AccountLayout />}>

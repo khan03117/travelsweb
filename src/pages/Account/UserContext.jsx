@@ -31,14 +31,13 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem(usertoken);
-            const response = await axios.get(API_URL + 'user/all?id=self', {
+            // const token = localStorage.getItem(usertoken);
+            const response = await axios.get(API_URL + 'profile', {
                 headers: {
-                    Authorization: "Bearer " + token
+                    Authorization : usertoken
                 }
             }); // Replace with your API endpoint
-
-            const userData = response.data.data[0];
+            const userData = response.data.data;
             setUser(userData);
         } catch (err) {
             userLogout();

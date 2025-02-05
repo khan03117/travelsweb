@@ -6,12 +6,32 @@ import { GoLocation } from 'react-icons/go'
 import { RiHotelLine, RiVisaFill } from 'react-icons/ri'
 import { PiAirplaneInFlightLight, PiBowlFood } from 'react-icons/pi'
 import { Accordion, AccordionBody, AccordionHeader, Button } from '@material-tailwind/react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { API_URL, usertoken } from '../../../utils'
 const SinglePackageOne = () => {
+    const {url} = useParams();
     const [open, setOpen] = React.useState(1);
-
     const handleOpen = (value) => setOpen(open === value ? 0 : value);
+    const [mpackage, setPackage] = React.useState(false);
+    const getpackage = async () => {
+        const resp = await axios.get(API_URL + "package/show/"+url, {
+            headers : {
+                Authorization : usertoken
+            }
+        });
+        setPackage(resp.data.data);
+    }
+    React.useEffect(() => {
+        getpackage();
+    }, []);
     return (
         <>
+
+        {
+            mpackage && (
+
+           
             <section className='pb-20'>
                 <img src={banner1} alt="" className="w-full h-96 object-cover block mb-10 object-bottom" />
                 <div className="container my-4">
@@ -24,13 +44,13 @@ const SinglePackageOne = () => {
                                 <div className="grid grid-cols-12 gap-3 pb-10">
                                     <div className="col-span-12">
                                         <h1 className='section_title !mb-0'>
-                                            Dubai – All Stunning Places
+                                           {mpackage.title ?? 'Package title not available'}
                                         </h1>
                                     </div>
                                     <div className="col-span-4">
                                         <PackageShortInfoWithIcon
                                             icon={<WiDayCloudy />}
-                                            title='8Days/ 7 Nights'
+                                            title={`${mpackage.days}Days/${mpackage.nights}Nights`}
                                         />
                                     </div>
                                     <div className="col-span-4">
@@ -190,6 +210,8 @@ const SinglePackageOne = () => {
                     </div>
                 </div>
             </section>
+             )
+            }
         </>
     )
 }
