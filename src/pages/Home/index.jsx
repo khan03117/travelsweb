@@ -1,11 +1,9 @@
 import React from 'react'
 // import banner1 from '../../assets/banner1.jpg';
 // import banner2 from '../../assets/banner2.jpg';
-
 import Testimonials from "./Testimonials";
 // import WhyUs from "./WhyUs";
 import HowItWorks from "./HowItWorks";
-
 import SingleScreenBanner from "./banners/SingleScreenBanner";
 import PackageLayoutOne from '../packages/elements/PackageLayoutOne';
 // import AboutTwo from '../About/AboutTwo';
@@ -115,8 +113,6 @@ const Home = () => {
                       </>
                     )
                   }
-
-
                   {
                     (id == 3) && (
                       <>

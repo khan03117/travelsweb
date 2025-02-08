@@ -98,7 +98,7 @@ const TestimonialLayoutThree = () => {
 
                                                                     <img src={itm.profile} alt="" className=" profileTesti size-[130px] block object-cover object-top" />
 
-                                                                    <div className="w-full border bg-white/40 backdrop-blur-sm rounded-lg relative px-5 pt-16 pb-10  border-primary/50">
+                                                                    <div className="w-full border bg-white/40 backdrop-blur-sm rounded-[2rem] relative px-5 pt-16 pb-10  border-primary/50">
 
 
                                                                         <p className=" h-44 text-sm overflow-y-auto">
