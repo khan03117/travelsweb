@@ -40,6 +40,7 @@ function App() {
           <Route path="/about/:id" element={<About />} />
           <Route path="/policy/:url" element={<AppPolicy />} />
           <Route path="/faqs" element={<Faqs />} />
+          <Route path="/destinations" element={<Packages />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:url" element={<Packages />} />
           <Route path="/package/show/:url" element={<SinglePackageOne />} />

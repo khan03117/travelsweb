@@ -1,8 +1,9 @@
 // import React from 'react'
 
 import { CalendarOutlined, EnvironmentOutlined, UsergroupAddOutlined } from "@ant-design/icons"
+import { Button } from "@material-tailwind/react"
 
-const PackageLayoutFour = () => {
+const PackageLayoutFour = ({data}) => {
     return (
         <>
             <div className="w-full overflow-hidden rounded-xl bg-white shadow shadow-black/40">

@@ -354,6 +354,9 @@ body {
   font-weight: 300;
   letter-spacing: 1px;
 }
+.themetransition{
+  transition: all 0.8s linear !important;
+}
 
 .button_1::before {
   content: "";
@@ -487,6 +490,7 @@ img {
   width: 100%;
   z-index: 1;
 }
+
 
 @media (max-width: 998px) {
   .section_title {

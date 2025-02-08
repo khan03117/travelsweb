@@ -27,7 +27,7 @@ const Layout = () => {
 
                 />
 
-                <Header />
+                <Header classname={''} />
                 <Outlet />
                 <Footer />
             </UserProvider>

@@ -11,7 +11,7 @@ import PackageLayoutOne from '../packages/elements/PackageLayoutOne';
 // import AboutTwo from '../About/AboutTwo';
 import Visa from '../visa';
 // import VisaSteps from '../visa/VisaSteps';
-import Faqs from '../Faq';
+// import Faqs from '../Faq';
 // import CtaLayoutOne from '../cta/CtaLayoutOne';
 import Destinations from '../destinations';
 import CtaLayoutTwo from "../cta/CtaLayoutTwo";
@@ -20,6 +20,10 @@ import { API_URL, usertoken } from "../../utils";
 import { useParams } from 'react-router-dom';
 import Bannertwo from './banners/Bannertwo';
 import PackageLayoutTwo from '../packages/elements/PackageLayoutTwo';
+import BannerThree from './banners/BannerThree';
+// import PackageLayoutFour from '../packages/elements/PackageLayoutFour';
+import PackageLayoutFive from '../packages/elements/PackageLayoutFive';
+import TestimonialLayoutThree from '../Testimonial/TestimonialLayoutThree';
 
 const Home = () => {
   const { id } = useParams();
@@ -62,6 +66,13 @@ const Home = () => {
           </>
         )
       }
+      {
+        (id == 3) && (
+          <>
+            <BannerThree />
+          </>
+        )
+      }
 
 
 
@@ -70,7 +81,7 @@ const Home = () => {
       {/* <VisaSteps /> */}
       <section className="py-10 bg-primary/10">
         <div className="container">
-          <div className="grid grid-cols-12 gap-5">
+          <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12">
               <div className="w-full mb-10 text-center">
                 <h2 className="section_title">
@@ -84,23 +95,39 @@ const Home = () => {
             {
               packages.map((itm) => (
                 <>
-                  <div className="col-span-4">
-                    {
-                      (!id || id == 1) && (
-                        <>
+
+                  {
+                    (!id || id == 1) && (
+                      <>
+                        <div className="col-span-4">
                           <PackageLayoutOne data={itm} />
-                        </>
-                      )
-                    }
-                    {
-                      (id == 2) && (
-                        <>
+                        </div>
+                      </>
+                    )
+                  }
+                  {
+                    (id == 2) && (
+                      <>
+                        <div className="col-span-4">
                           <PackageLayoutTwo data={itm} />
-                        </>
-                      )
-                    }
-                  </div>
+                        </div>
+
+                      </>
+                    )
+                  }
+
+
+                  {
+                    (id == 3) && (
+                      <>
+                        <div className="col-span-6">
+                          <PackageLayoutFive data={itm} />
+                        </div>
+                      </>
+                    )
+                  }
                 </>
+
               ))
             }
           </div>
@@ -110,11 +137,11 @@ const Home = () => {
       <CtaLayoutTwo />
 
       <Testimonials pb={'pb-10'} bg="bg-primary/10 hidden" />
+      <TestimonialLayoutThree />
       <Visa />
       {/* <WhyUs /> */}
       <HowItWorks />
 
-      <Faqs />
     </>
   )
 }

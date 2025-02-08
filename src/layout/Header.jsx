@@ -3,11 +3,13 @@ import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
 import { UserOutlined } from '@ant-design/icons';
 import { CgMenuRight } from 'react-icons/cg';
-import {  isMobile } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import React from 'react';
-import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
-const Header = () => {
-    const {id = 1} = useParams();
+import PropTypes from 'prop-types';
+
+// import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
+const Header = ({classname}) => {
+    const { id = 1 } = useParams();
     const { user } = useUser();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
@@ -19,35 +21,36 @@ const Header = () => {
         <>
 
             <li>
-                <Link to={'/home/'+id} >Home</Link>
+                <Link to={'/home/' + id} >Home</Link>
             </li>
             <li>
-                <Link to={'/about/'+id} >About</Link>
+                <Link to={'/about/' + id} >About</Link>
             </li>
 
             <li>
-                <Menu>
+            <Link to={'/destinations/' + id} >Destinations</Link>
+                {/* <Menu className="hidden">
                     <MenuHandler>
-                       <button className='text-primary uppercase'>Packages</button>
+                        <button className='text-primary uppercase'>Packages</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem>
-                            <Link to={'/packages/'+id}>Domestic</Link>
-                         </MenuItem>
-                        <MenuItem>
-                        <Link to={'/packages/'+id}>Internationl</Link>
+                            <Link to={'/packages/' + id}>Domestic</Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to={'/packages/'+id}>Umrah</Link>
+                            <Link to={'/packages/' + id}>Internationl</Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to={'/packages/'+id}>Study</Link>
+                            <Link to={'/packages/' + id}>Umrah</Link>
                         </MenuItem>
                         <MenuItem>
-                        <Link to={'/packages/'+id}>Religious</Link>
+                            <Link to={'/packages/' + id}>Study</Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to={'/packages/' + id}>Religious</Link>
                         </MenuItem>
                     </MenuList>
-                </Menu>
+                </Menu> */}
             </li>
             <li>
                 <Link to={'/visa'} >Visa</Link>
@@ -63,7 +66,7 @@ const Header = () => {
     )
     return (
         <>
-            <section className='bg-primary/10 relative'>
+            <section className={`bg-primary/10 relative ${classname}`}>
                 <div className="container relative">
                     <div className="grid grid-cols-12">
                         <div className="col-span-12">
@@ -130,3 +133,8 @@ const Header = () => {
 }
 
 export default Header
+
+
+Header.propTypes = {
+    classname : PropTypes.string
+}

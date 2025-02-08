@@ -4,10 +4,12 @@ import DestinationLayoutOne from './DestinationLayoutOne'
 import { API_URL, usertoken } from '../../utils';
 import { useParams } from 'react-router-dom';
 import DestinationLayoutTwo from './DestinationLayoutTwo';
+import DestinationLayoutThree from './DestinationLayoutThree';
 // import DestinationLayoutTwo from './DestinationLayoutTwo';
 
 const Destinations = () => {
     const { id } = useParams();
+    console.log(id);
     const [items, setItems] = React.useState([]);
     const getitems = async () => {
         try {
@@ -36,7 +38,7 @@ const Destinations = () => {
                             Explore our top destinations voted by more than 100,000+ customers around the world.
                         </p>
                     </div>
-                    <div className="grid grid-cols-12 gap-3">
+                    <div className="grid grid-cols-12 gap-8">
                         {
                             items.map((itm) => (
                                 <>
@@ -54,6 +56,15 @@ const Destinations = () => {
                                             <>
                                                 <div className="col-span-3">
                                                     <DestinationLayoutTwo data={itm} />
+                                                </div>
+                                            </>
+                                        )
+                                    }
+                                    {
+                                        (id == 3) && (
+                                            <>
+                                                <div className="col-span-4">
+                                                    <DestinationLayoutThree data={itm} />
                                                 </div>
                                             </>
                                         )
