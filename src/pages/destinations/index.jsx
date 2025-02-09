@@ -2,17 +2,19 @@ import React from 'react'
 import axios from 'axios';
 import DestinationLayoutOne from './DestinationLayoutOne'
 import { API_URL, usertoken } from '../../utils';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import DestinationLayoutTwo from './DestinationLayoutTwo';
 import DestinationLayoutThree from './DestinationLayoutThree';
 import BreadCrumb from '../../components/BreadCrumb';
+import { useUser } from '../Account/UserContext';
 // import DestinationLayoutTwo from './DestinationLayoutTwo';
 
 const Destinations = () => {
-    const { id } = useParams();
+    const { user } = useUser();
+    const id = user.web_theme ?? 1;
     console.log(id);
     const [items, setItems] = React.useState([]);
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const getitems = async () => {
         try {
             const resp = await axios.get(API_URL + "destinations", {
@@ -29,15 +31,14 @@ const Destinations = () => {
     }
     React.useEffect(() => {
         getitems();
-      
+
     }, []);
     return (
         <>
             {
-                pathname == "/destinations/"+id && (
+                pathname == "/destinations/"  && (
                     <>
-            <BreadCrumb path={['Home', 'Destinations']} title={'Destinations'} />
-
+                        <BreadCrumb path={['Home', 'Destinations']} title={'Destinations'} />
                     </>
                 )
             }
@@ -54,7 +55,7 @@ const Destinations = () => {
                             items.map((itm) => (
                                 <>
                                     {
-                                        (!id || id == 1) && (
+                                        (id == 1) && (
                                             <>
                                                 <div className="col-span-3">
                                                     <DestinationLayoutOne data={itm} />

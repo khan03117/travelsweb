@@ -1,15 +1,17 @@
-import { Link, useLocation, useParams } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import { Link, useLocation } from 'react-router-dom'
+// import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
 import { UserOutlined } from '@ant-design/icons';
 import { CgMenuRight } from 'react-icons/cg';
 import { isMobile } from 'react-device-detect';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Image_URL } from '../utils';
+import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 
 // import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 const Header = ({classname}) => {
-    const { id = 1 } = useParams();
+   
     const { user } = useUser();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
@@ -21,14 +23,14 @@ const Header = ({classname}) => {
         <>
 
             <li>
-                <Link to={'/home/' + id} >Home</Link>
+                <Link to={'/'} >Home</Link>
             </li>
             <li>
-                <Link to={'/about/' + id} >About</Link>
+                <Link to={'/about/'} >About</Link>
             </li>
 
             <li>
-            <Link to={'/destinations/' + id} >Destinations</Link>
+            <Link to={'/destinations/'} >Destinations</Link>
                 {/* <Menu className="hidden">
                     <MenuHandler>
                         <button className='text-primary uppercase'>Packages</button>
@@ -53,12 +55,25 @@ const Header = ({classname}) => {
                 </Menu> */}
             </li>
             <li>
-                <Link to={'/visa'} >Visa</Link>
+                {/* <Link to={'/visa'} >Visa</Link> */}
+                <Menu className="hidden">
+                    <MenuHandler>
+                        <button className='text-primary uppercase'>Visa</button>
+                    </MenuHandler>
+                    <MenuList className=''>
+                        <MenuItem>
+                            <Link to={'/visa-assistant/'}>Visa Assistant</Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to={'/visa-services/'}>Visa Services</Link>
+                        </MenuItem>
+                    </MenuList>
+                </Menu>
             </li>
 
-            <li>
+            {/* <li>
                 <Link to={'/faqs'} >Faqs</Link>
-            </li>
+            </li> */}
             <li>
                 <Link to={'/contact'} >Contact</Link>
             </li>
@@ -71,14 +86,12 @@ const Header = ({classname}) => {
                     <div className="grid grid-cols-12">
                         <div className="col-span-12">
                             <div className="flex relative justify-between items-center">
-                                <Link to={'/'} className="w-[150px] py-5 inline-block">
-                                    <img src={logo} className='w-full' alt="" />
+                                <Link to={'/'} className="w-[120px] py-5 inline-block">
+                                    <img src={Image_URL + "assets/images/" + user.logo} className='w-full' alt="" />
                                 </Link>
-
                                 <ul className="lg:inline-flex hidden gap-5   navlinks mx-auto">
                                     {weblinks()}
                                 </ul>
-
                                 <ul className="hidden relative items-center ms-auto gap-5">
                                     <li>
                                         {
@@ -108,7 +121,6 @@ const Header = ({classname}) => {
                                         </button>
                                     </li>
                                 </ul>
-
                             </div>
                         </div>
                     </div>

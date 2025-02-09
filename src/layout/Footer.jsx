@@ -2,10 +2,11 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
-import { FacebookFilled, GoogleSquareFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
+import { EnvironmentOutlined, FacebookFilled, GoogleSquareFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
+import { IoIosCall, IoMdMail } from 'react-icons/io';
 
 const Footer = () => {
-    const { policies } = useUser();
+    const { user } = useUser();
     return (
         <>
             <div className="w-full  overflow-x-hidden relative">
@@ -17,9 +18,9 @@ const Footer = () => {
                                 <div className="col-span-10">
                                     <div className="w-full overflow-hidden text-center text-white bg-primary p-8 rounded-lg">
                                         <h2 className='text-xl '><span className='cursive'>Free support: </span>
-                                            <div className='inline-block' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "mobile")?.description }} />
+                                            <div className='inline-block'  >{user.mobile}</div>
                                             &nbsp;&nbsp;|&nbsp;&nbsp; <span className='cursive'>Email: </span>
-                                            <div className='inline-block' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "email")?.description }} />
+                                            <div className='inline-block'>{user.email}</div>
                                         </h2>
                                     </div>
                                 </div>
@@ -27,7 +28,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </section>
-                <footer className="bg-primary/20 py-20">
+                <footer className="bg-gray-300 rounded-lg  py-20">
                     <div className="container">
                         <div className="grid grid-cols-12 gap-4">
                             <div className="lg:col-span-3 col-span-12">
@@ -38,29 +39,58 @@ const Footer = () => {
                                                 width="90" alt="" className="img-fluid" /></div>
                                             <ul className='flex gap-4'>
                                                 <li>
-                                                    <Link to={policies.find(obj => obj.url == "facebook")?.description?.replace(/<\/?p>/g, "")} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
-                                                        <FacebookFilled />
-                                                    </Link>
+                                                    {
+                                                        user.facebook && (
+                                                            <>
+                                                                <Link to={'/'} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                    <FacebookFilled />
+                                                                </Link>
+                                                            </>
+                                                        )
+                                                    }
+
 
                                                 </li>
-                                                <li>
-                                                    <Link to={policies.find(obj => obj.url == "twitter")?.description?.replace(/<\/?p>/g, "")} className='inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white '>
-                                                        <TwitterSquareFilled />
-                                                    </Link>
+                                                {
+                                                    user.twitter && (
+                                                        <>
+                                                            <li>
 
-                                                </li>
-                                                <li>
-                                                    <Link to={policies.find(obj => obj.url == "instagram")?.description?.replace(/<\/?p>/g, "")} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
-                                                        <InstagramFilled />
-                                                    </Link>
+                                                                <Link to={'/'} className='inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white '>
+                                                                    <TwitterSquareFilled />
+                                                                </Link>
 
-                                                </li>
-                                                <li>
-                                                    <Link to={policies.find(obj => obj.url == "email")?.description?.replace(/<\/?p>/g, "")} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
-                                                        <GoogleSquareFilled />
-                                                    </Link>
+                                                            </li>
+                                                        </>
+                                                    )
+                                                }
+                                                {
+                                                    user.instagram && (
+                                                        <>
+                                                            <li>
+                                                                <Link to={'/'} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                    <InstagramFilled />
+                                                                </Link>
 
-                                                </li>
+                                                            </li>
+                                                        </>
+                                                    )
+                                                }
+                                                {
+                                                    user.linkedin && (
+                                                        <>
+                                                            <li>
+                                                                <Link to={'/'} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                    <GoogleSquareFilled />
+                                                                </Link>
+
+                                                            </li>
+                                                        </>
+                                                    )
+                                                }
+
+
+
                                             </ul>
 
                                         </div>
@@ -109,13 +139,19 @@ const Footer = () => {
                                             <div className="footer-widget-contact">
                                                 <ul className="list-unstyled *:py-2">
                                                     <li>
-                                                        <div className='inline-block font-light text-sm' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "address")?.description }} />
+                                                        <div className='inline-block font-light text-sm'>
+                                                            <span className="text-primary font-bold text-lg"> <EnvironmentOutlined />   </span>    {user.address_1} {user.address_2} {user.city} {user.pincode}
+                                                        </div>
                                                     </li>
                                                     <li>
-                                                        <div className='inline-block font-light text-sm' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "mobile")?.description }} />
+                                                        <div className='inline-flex items-center gap-1 font-light text-sm'>
+                                                            <span className="text-primary font-bold text-lg"><IoIosCall />  </span>    {user.mobile}
+                                                        </div>
                                                     </li>
                                                     <li>
-                                                        <div className='inline-block font-light text-sm' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "email")?.description }} />
+                                                        <div className='inline-flex gap-1 items-center font-light text-sm'>
+                                                            <span className="text-primary font-bold text-lg">  <IoMdMail />  </span>   {user.email}
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -126,7 +162,7 @@ const Footer = () => {
                             <div className="col-span-12 border-t border-primary pb-4">
                                 <div className="footer-text">
                                     <p className='text-sm pt-5 font-light tracking-widest leading-6'><span className="font-bold text-dark">Disclaimer</span> :
-                                        <div className='inline-block *:pb-5  font-light' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "diclaimer")?.description }} />
+                                        <div className='inline-block *:pb-5  font-light'  ></div>
                                     </p>
                                 </div>
                             </div>
@@ -137,7 +173,7 @@ const Footer = () => {
                 <div className="tiny-footer bg-primary text-white">
                     <div className="grid grid-cols-12 align-items-center">
                         <div className="col-span-12 mb-0 text-center p-3 text-xs">Copyright © <span id="yearText">{new Date().getFullYear()} </span>
-                            <strong>Surajmal</strong> Web & App All rights reserved.
+                            <strong>{user.company_name}</strong> Web & App All rights reserved.
                         </div>
                     </div>
                 </div>

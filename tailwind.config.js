@@ -8,8 +8,8 @@ export default withMT({
   theme: {
     extend: {
       colors: {
-        primary : "#00897b",
-        secondary : "#66451c"
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
       }
     },
   },

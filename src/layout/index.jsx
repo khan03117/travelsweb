@@ -2,13 +2,14 @@ import React from 'react'
 import Header from './Header'
 import { Outlet, useLocation } from 'react-router-dom'
 import Footer from './Footer'
-import { UserProvider } from '../pages/Account/UserContext'
+import { UserProvider, useUser } from '../pages/Account/UserContext'
 import { ToastContainer } from 'react-toastify'
 
 const Layout = () => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
+    const { theme } = useUser();
     React.useEffect(() => {
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }, [pathname])
     return (
         <>
@@ -24,12 +25,14 @@ const Layout = () => {
                     draggable
                     pauseOnHover
                     theme="colored"
-
                 />
+                <main style={{ "--primary": theme.primary, "--secondary": theme.secondary }}>
 
+              
                 <Header classname={''} />
                 <Outlet />
                 <Footer />
+                </main>
             </UserProvider>
         </>
     )

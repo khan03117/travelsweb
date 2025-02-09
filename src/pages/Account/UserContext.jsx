@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     // const navigate = useNavigate();
-    const [user, setUser] = useState({ filledFieldsCount: 0, totalColumns: 1 });
+    const [theme, setTheme] = useState({
+        primary: "#00897b",
+        secondary: "#9333ea",
+    });
+    const [user, setUser] = useState(false);
+   
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const policies = useState([]);
@@ -33,14 +38,17 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
         try {
             setLoading(true);
-            // const token = localStorage.getItem(usertoken);
-            const response = await axios.get(API_URL + 'profile', {
+            const resp = await axios.get(API_URL + "profile", {
                 headers: {
                     Authorization: usertoken
                 }
-            }); // Replace with your API endpoint
-            const userData = response.data.data;
-            setUser(userData);
+            })
+            const data = resp.data.data;
+            if(data.theme){
+                setTheme(JSON.parse(data.theme))
+            }
+           
+            setUser(resp.data.data);
         } catch (err) {
             userLogout();
             setError(err.message);
@@ -83,10 +91,11 @@ export const UserProvider = ({ children }) => {
         // fetchfaqs();
         // fetchpolicies();
         fetchUser();
+
         fetchBanners();
     }, []);
     return (
-        <UserContext.Provider value={{ user, testimonial, setUser, loading, error, fetchUser, userLogout, policies, banners, faqs }}>
+        <UserContext.Provider value={{ user, theme, setTheme, testimonial, setUser, loading, error, fetchUser, userLogout, policies, banners, faqs }}>
             {children}
         </UserContext.Provider>
     );

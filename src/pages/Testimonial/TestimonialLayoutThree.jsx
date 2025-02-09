@@ -6,7 +6,9 @@ import Slider from "react-slick/lib/slider";
 import profile1 from '../../assets/profile/men1.jpg';
 import profile2 from '../../assets/profile/men2.jpg';
 import pofile3 from '../../assets/profile/men3.jpg';
+import { useUser } from '../Account/UserContext';
 const TestimonialLayoutThree = () => {
+    const {theme} = useUser();
     const testimonials = [
         {
             profile: profile1,
@@ -74,7 +76,7 @@ const TestimonialLayoutThree = () => {
                 <div className="container">
                     <div className="grid grid-cols-12 gap-5">
                         <div className="col-span-12">
-                            <div className="w-full relative overflow-hidden testimonialbg p-10 rounded-[2rem] bg-primary/20">
+                            <div className="w-full relative overflow-hidden testimonialbg p-10 rounded-[2rem] bg-primary" style={{background : `${theme.primary}4D`}}>
                                 <img src={testibg} alt="" className="absolute top-0 z-10 opacity-[0.4] start-0 w-[300px]" />
                                 <div className="grid grid-cols-12 gap-4 relative z-50">
                                     <div className="col-span-12">

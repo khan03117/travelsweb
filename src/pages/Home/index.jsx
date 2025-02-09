@@ -7,7 +7,7 @@ import HowItWorks from "./HowItWorks";
 import SingleScreenBanner from "./banners/SingleScreenBanner";
 import PackageLayoutOne from '../packages/elements/PackageLayoutOne';
 // import AboutTwo from '../About/AboutTwo';
-import Visa from '../visa';
+// import Visa from '../visa';
 // import VisaSteps from '../visa/VisaSteps';
 // import Faqs from '../Faq';
 // import CtaLayoutOne from '../cta/CtaLayoutOne';
@@ -15,16 +15,18 @@ import Destinations from '../destinations';
 import CtaLayoutTwo from "../cta/CtaLayoutTwo";
 import axios from "axios";
 import { API_URL, usertoken } from "../../utils";
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import Bannertwo from './banners/Bannertwo';
 import PackageLayoutTwo from '../packages/elements/PackageLayoutTwo';
 import BannerThree from './banners/BannerThree';
 // import PackageLayoutFour from '../packages/elements/PackageLayoutFour';
 import PackageLayoutFive from '../packages/elements/PackageLayoutFive';
 import TestimonialLayoutThree from '../Testimonial/TestimonialLayoutThree';
+import { useUser } from '../Account/UserContext';
 
 const Home = () => {
-  const { id } = useParams();
+  const {user} = useUser();
+  const id = user.web_theme ?? 1;
   const [packages, setPackages] = React.useState([]);
   const getpackages = async () => {
     const resp = await axios.get(API_URL + "package/most-viewed", {
@@ -40,7 +42,7 @@ const Home = () => {
   const getuser = async () => {
     const resp = await axios.get(API_URL + "profile", {
       headers: {
-        apikey: "DUMMY_API_KEY_1234567890"
+        Authorization: usertoken
       }
     });
     console.log(resp.data);
@@ -48,10 +50,13 @@ const Home = () => {
   React.useEffect(() => {
     getuser();
   }, []);
+  if(!user){
+    return '....loading'
+  }
   return (
     <>
       {
-        (!id || id == 1) && (
+        ( id == 1) && (
           <>
             <SingleScreenBanner />
           </>
@@ -134,7 +139,7 @@ const Home = () => {
 
       <Testimonials pb={'pb-10'} bg="bg-primary/10 hidden" />
       <TestimonialLayoutThree />
-      <Visa />
+      {/* <Visa /> */}
       {/* <WhyUs /> */}
       <HowItWorks />
 

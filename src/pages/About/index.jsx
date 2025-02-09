@@ -1,5 +1,5 @@
 // import React from 'react'
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import about1 from '../../assets/about/1.jpg'
 import about2 from '../../assets/about/2.jpg'
 import { useUser } from '../Account/UserContext';
@@ -12,8 +12,9 @@ import AboutTwo from './AboutTwo';
 import Vision from './AboutElements/Vision';
 import TestimonialLayoutThree from '../Testimonial/TestimonialLayoutThree';
 const About = () => {
-    const { id } = useParams();
-    const { policies } = useUser();
+    const {user} = useUser();
+   const id = user.web_theme;
+    // const { policies } = useUser();
     return (
         <>
             {
@@ -32,7 +33,9 @@ const About = () => {
                                     </div>
                                     <div className="lg:col-span-6 col-span-12">
                                         <div className="w-full aboutUs lg:mt-0 mt-10 ">
-                                            <div className='w-[calc(100%-1rem)] ab-wel-rhs *:mb-5 text-wrap block' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "about")?.description }} />
+                                            <div className='w-[calc(100%-1rem)] ab-wel-rhs *:mb-5 text-wrap block' >
+                                                {user.about_us}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +79,6 @@ const About = () => {
                         </div>
                         <div className="col-span-6">
                             <Vision title="Mission"
-
                                 desc="To provide seamless and reliable visa, immigration, and travel solutions, empowering individuals, families, and businesses to achieve their global dreams with trust, transparency, and professionalism. We strive to simplify complex immigration and travel processes while delivering exceptional service and expert guidance."
                             />
                         </div>

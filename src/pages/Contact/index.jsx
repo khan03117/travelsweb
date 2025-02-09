@@ -4,7 +4,7 @@ import { useUser } from '../Account/UserContext'
 import { IoIosCall, IoMdMail, IoMdPaperPlane } from 'react-icons/io';
 
 const Contact = () => {
-    const { policies } = useUser();
+    const {  user } = useUser();
     return (
         <>
             <section className='relative contactPage bg-yellow-100/20 z-[1] py-20 '>
@@ -20,7 +20,9 @@ const Contact = () => {
                                         <IoMdPaperPlane />
                                     </span>
                                 </div>
-                                <div className='w-[calc(100%-6rem)] text-wrap block' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "address")?.description }} />
+                                <div className='w-[calc(100%-6rem)] text-wrap block'  >
+                                    {user.address_1}   {user.address_2}  {user.city} {user.pincode}
+                                </div>
                             </div>
                             <div className="w-full flex items-center gap-3 flex-wrap  mt-5">
                                 <div className="size-20">
@@ -28,7 +30,9 @@ const Contact = () => {
                                         <IoIosCall />
                                     </span>
                                 </div>
-                                <div className='w-[calc(100%-6rem)] text-wrap block' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "mobile")?.description }} />
+                                <div className='w-[calc(100%-6rem)] text-wrap block'  >
+                                {user.mobile}
+                                </div>
                             </div>
                             <div className="w-full flex items-center gap-3 flex-wrap  mt-5">
                                 <div className="size-20">
@@ -36,7 +40,9 @@ const Contact = () => {
                                         <IoMdMail />
                                     </span>
                                 </div>
-                                <div className='w-[calc(100%-6rem)] text-wrap block' dangerouslySetInnerHTML={{ __html: policies.find(itm => itm.url == "email")?.description }} />
+                                <div className='w-[calc(100%-6rem)] text-wrap block' >
+                                    {user.email}
+                                </div>
                             </div>
                         </div>
                         <div className="lg:col-span-6 col-span-12">
