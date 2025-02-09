@@ -24,6 +24,7 @@ import Packages from "./pages/packages";
 // import AboutTwo from "./pages/About/AboutTwo";
 import SinglePackageOne from "./pages/packages/singlePackage/SinglePackageOne";
 import Visa from "./pages/visa";
+import Destinations from "./pages/destinations";
 
 function App() {
   const ThemeRoutes = createBrowserRouter(
@@ -44,7 +45,7 @@ function App() {
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:url" element={<Packages />} />
           <Route path="/package/show/:url" element={<SinglePackageOne />} />
-
+          <Route path="/destinations/:id" element={<Destinations/>} />
         </Route>
         <Route path="/" element={<AccountLayout />}>
           <Route path="/user/dashboard" element={<Dashboard />} />
