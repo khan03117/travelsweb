@@ -2,15 +2,17 @@ import React from 'react'
 import axios from 'axios';
 import DestinationLayoutOne from './DestinationLayoutOne'
 import { API_URL, usertoken } from '../../utils';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import DestinationLayoutTwo from './DestinationLayoutTwo';
 import DestinationLayoutThree from './DestinationLayoutThree';
+import BreadCrumb from '../../components/BreadCrumb';
 // import DestinationLayoutTwo from './DestinationLayoutTwo';
 
 const Destinations = () => {
     const { id } = useParams();
     console.log(id);
     const [items, setItems] = React.useState([]);
+    const {pathname} = useLocation();
     const getitems = async () => {
         try {
             const resp = await axios.get(API_URL + "destinations", {
@@ -27,9 +29,18 @@ const Destinations = () => {
     }
     React.useEffect(() => {
         getitems();
+      
     }, []);
     return (
         <>
+            {
+                pathname == "/destinations/"+id && (
+                    <>
+            <BreadCrumb path={['Home', 'Destinations']} title={'Destinations'} />
+
+                    </>
+                )
+            }
             <section className=' py-10'>
                 <div className="container">
                     <div className="w-full mb-10 text-center">
