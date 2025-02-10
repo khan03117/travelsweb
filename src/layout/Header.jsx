@@ -61,11 +61,11 @@ const Header = ({classname}) => {
                         <button className='text-primary uppercase'>Visa</button>
                     </MenuHandler>
                     <MenuList className=''>
-                        <MenuItem>
-                            <Link to={'/visa-assistant/'}>Visa Assistant</Link>
+                        <MenuItem className='p-0'>
+                            <Link className='w-full block py-2' to={'/visa-assistant/'}>Visa Assistant</Link>
                         </MenuItem>
-                        <MenuItem>
-                            <Link to={'/visa-services/'}>Visa Services</Link>
+                        <MenuItem className='p-0'>
+                            <Link  className='w-full block py-2' to={'/visa-services/'}>Visa Services</Link>
                         </MenuItem>
                     </MenuList>
                 </Menu>

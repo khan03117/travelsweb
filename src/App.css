@@ -490,7 +490,61 @@ img {
   width: 100%;
   z-index: 1;
 }
+.dynamicContent ul{
+  position: relative;
+  list-style:none;
+  margin: 0;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+.dynamicContent ul li{
+  position: relative;
+  padding-left: 25px;
+  font-size: 15px;
+  /* letter-spacing: 1px; */
+  padding-bottom: 10px;
+}
+.dynamicContent ul li::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 20px;
+  background: url('./assets/checkmark.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+}
+.dynamicContent ul li strong{
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.dynamicContent ul li ul li {
+  padding-left: 25px;
+}
+.dynamicContent h4{
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary);
+  font-size: 20px;
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 600;
 
+}
+.embesyDetail h4{
+  font-size: 20px;
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: 0.5rem;
+}
+.dynamicContent p{
+  font-size: 14px;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
 
 @media (max-width: 998px) {
   .section_title {
