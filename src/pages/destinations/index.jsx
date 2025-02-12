@@ -7,19 +7,27 @@ import DestinationLayoutTwo from './DestinationLayoutTwo';
 import DestinationLayoutThree from './DestinationLayoutThree';
 import BreadCrumb from '../../components/BreadCrumb';
 import { useUser } from '../Account/UserContext';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 // import DestinationLayoutTwo from './DestinationLayoutTwo';
 
 const Destinations = () => {
     const { user } = useUser();
     const id = user.web_theme ?? 1;
-    console.log(id);
+   
     const [items, setItems] = React.useState([]);
     const { pathname } = useLocation();
+    const [page, setPage] = React.useState(1);
     const getitems = async () => {
         try {
+            const perPage = pathname == "/destinations/" ? 9 : 6;
+            
             const resp = await axios.get(API_URL + "destinations", {
                 headers: {
                     Authorization: usertoken
+                },
+                params : {
+                    perPage ,
+                    page
                 }
             });
             if (resp.data.success == 1) {
@@ -32,7 +40,7 @@ const Destinations = () => {
     React.useEffect(() => {
         getitems();
 
-    }, []);
+    }, [page]);
     return (
         <>
             {
@@ -89,6 +97,21 @@ const Destinations = () => {
                                 </>
                             ))
                         }
+                    </div>
+                    <div className="w-full">
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-12">
+                                <div className="w-full *:size-10 items-center *:text-center *:leading-10 *:border *:border-primary *:rounded flex gap-2">
+                                    <button onClick={() => page > 1 && setPage(prev => prev - 1)}>
+                                        <LeftOutlined/>
+                                    </button>
+                                    <div>{page}</div>
+                                    <button onClick={() =>  setPage(prev => prev + 1)}>
+                                        <RightOutlined/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

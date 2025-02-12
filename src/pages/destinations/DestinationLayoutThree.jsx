@@ -42,13 +42,16 @@ const DestinationLayoutThree = ({ data }) => {
                         </div>
                         <div className="col-span-1">
                             <div className="text-end">
-                                8 Packages
+                                {data.package_count} Packages
                             </div>
                         </div>
                     </div>
                     <div className="py-3">
                         <h4 className="text-xl font-semibold capitalize">{data.country.toLowerCase()}</h4>
-                        <p className="text-sm text-gray-700  transition-all duration-1000">Indonesia</p>
+                        <div className="text-sm text-gray-700  transition-all duration-1000">
+                           
+                            <div dangerouslySetInnerHTML={{ __html: data.about?.substr(0,100) }} />...
+                        </div>
                     </div>
                     <div className="pb-3   *:transition-all *:duration-1000">
                         <button className="w-full rounded-full text-white bg-primary px-4 py-3 text-sm">

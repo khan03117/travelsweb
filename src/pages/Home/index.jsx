@@ -20,12 +20,15 @@ import Bannertwo from './banners/Bannertwo';
 import PackageLayoutTwo from '../packages/elements/PackageLayoutTwo';
 import BannerThree from './banners/BannerThree';
 // import PackageLayoutFour from '../packages/elements/PackageLayoutFour';
-import PackageLayoutFive from '../packages/elements/PackageLayoutFive';
+// import PackageLayoutFive from '../packages/elements/PackageLayoutFive';
 import TestimonialLayoutThree from '../Testimonial/TestimonialLayoutThree';
 import { useUser } from '../Account/UserContext';
+import PackageLayoutThree from '../packages/elements/PackageLayoutThree';
+import Loading from '../../components/Loading';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const {user} = useUser();
+  const { user } = useUser();
   const id = user.web_theme ?? 1;
   const [packages, setPackages] = React.useState([]);
   const getpackages = async () => {
@@ -50,13 +53,17 @@ const Home = () => {
   React.useEffect(() => {
     getuser();
   }, []);
-  if(!user){
-    return '....loading'
+  if (!user) {
+    return (
+      <>
+        <Loading className="min-h-lvh h-full" />
+      </>
+    )
   }
   return (
     <>
       {
-        ( id == 1) && (
+        (id == 1) && (
           <>
             <SingleScreenBanner />
           </>
@@ -100,10 +107,13 @@ const Home = () => {
                 <>
 
                   {
-                    (!id || id == 1) && (
+                    (id == 1) && (
                       <>
                         <div className="col-span-4">
-                          <PackageLayoutOne data={itm} />
+                          <Link to={'/package/show/' + itm.url}>
+
+                            <PackageLayoutOne data={itm} />
+                          </Link>
                         </div>
                       </>
                     )
@@ -112,7 +122,9 @@ const Home = () => {
                     (id == 2) && (
                       <>
                         <div className="col-span-4">
-                          <PackageLayoutTwo data={itm} />
+                          <Link to={'/package/show/' + itm.url}>
+                            <PackageLayoutTwo data={itm} />
+                          </Link>
                         </div>
 
                       </>
@@ -121,8 +133,10 @@ const Home = () => {
                   {
                     (id == 3) && (
                       <>
-                        <div className="col-span-6">
-                          <PackageLayoutFive data={itm} />
+                        <div className="col-span-4">
+                          <Link to={'/package/show/' + itm.url}>
+                            <PackageLayoutThree data={itm} />
+                          </Link>
                         </div>
                       </>
                     )

@@ -355,7 +355,7 @@ body {
   letter-spacing: 1px;
 }
 .themetransition{
-  transition: all 0.8s linear !important;
+  transition: all 0.5s linear !important;
 }
 
 .button_1::before {

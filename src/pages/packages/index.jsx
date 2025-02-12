@@ -9,8 +9,15 @@ import PackageLayoutOne from "./elements/PackageLayoutOne"
 import axios from 'axios'
 import { API_URL, usertoken } from '../../utils'
 import BreadCrumb from '../../components/BreadCrumb'
+import { useUser } from '../Account/UserContext'
+import PackageLayoutTwo from './elements/PackageLayoutTwo'
+import PackageLayoutThree from './elements/PackageLayoutThree'
+import PackageLayoutFour from './elements/PackageLayoutFour'
+import PackageLayoutFive from './elements/PackageLayoutFive'
 
 const Packages = () => {
+  const {user} = useUser();
+  const id = user.web_theme;
   const { url } = useParams();
   const [items, setItems] = React.useState([]);
   const getitems = async () => {
@@ -29,23 +36,23 @@ const Packages = () => {
     getitems();
   }, []);
   console.log(url)
-  // const getlayout = () => {
-  //   if (id == 1) {
-  //     return <PackageLayoutOne />
-  //   }
-  //   if (id == 2) {
-  //     return <PackageLayoutTwo />
-  //   }
-  //   if (id == 3) {
-  //     return <PackageLayoutThree />
-  //   }
-  //   if (id == 4) {
-  //     return <PackageLayoutFour />
-  //   }
-  //   if (id == 5) {
-  //     return <PackageLayoutFive />
-  //   }
-  // }
+  const getlayout = (data) => {
+    if (id == 1) {
+      return <PackageLayoutOne data={data} />
+    }
+    if (id == 2) {
+      return <PackageLayoutTwo data={data}  />
+    }
+    if (id == 3) {
+      return <PackageLayoutThree data={data}  />
+    }
+    if (id == 4) {
+      return <PackageLayoutFour  data={data}  />
+    }
+    if (id == 5) {
+      return <PackageLayoutFive data={data}  />
+    }
+  }
   return (
     <>
       <section>
@@ -65,8 +72,8 @@ const Packages = () => {
               items.map((itm) => (
                 <>
                   <div className="col-span-4">
-                    <Link to={'/packages/show/' + itm.url} className="block">
-                      <PackageLayoutOne data={itm} />
+                    <Link to={'/package/show/' + itm.url} className="block">
+                      {getlayout(itm)}
                     </Link>
                   </div>
                 </>
