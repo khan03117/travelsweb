@@ -67,7 +67,7 @@ const Destinations = () => {
                                         Explore our top destinations voted by more than 100,000+ customers around the world.
                                     </p>
                                 </div>
-                                <div className="grid grid-cols-12 gap-8">
+                                <div className="grid grid-cols-12 lg:gap-8 gap-4">
                                     {
                                         items.map((itm) => (
                                             <>
@@ -92,7 +92,7 @@ const Destinations = () => {
                                                 {
                                                     (id == 3) && (
                                                         <>
-                                                            <div className="col-span-4">
+                                                            <div className="lg:col-span-4 col-span-6">
                                                                 <DestinationLayoutThree data={itm} />
                                                             </div>
                                                         </>
@@ -107,7 +107,7 @@ const Destinations = () => {
                                         ))
                                     }
                                 </div>
-                                <div className="w-full">
+                                <div className="w-full mt-10">
                                     <div className="grid grid-cols-12">
                                         <div className="col-span-12">
                                             <div className="w-full *:size-10 items-center *:text-center *:leading-10 *:border *:border-primary *:rounded flex gap-2">

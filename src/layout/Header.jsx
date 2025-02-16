@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 // import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
-import { UserOutlined } from '@ant-design/icons';
+
 import { CgMenuRight } from 'react-icons/cg';
 import { isMobile } from 'react-device-detect';
 import React from 'react';
@@ -58,7 +58,7 @@ const Header = ({classname}) => {
                 {/* <Link to={'/visa'} >Visa</Link> */}
                 <Menu className="hidden">
                     <MenuHandler>
-                        <button className='text-primary uppercase'>Visa</button>
+                        <button className='text-white uppercase'>Visa</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem className='p-0'>
@@ -74,7 +74,7 @@ const Header = ({classname}) => {
                 {/* <Link to={'/visa'} >Visa</Link> */}
                 <Menu className="hidden">
                     <MenuHandler>
-                        <button className='text-primary uppercase'>Add On Services</button>
+                        <button className='text-white sm:font-light uppercase'>Add On Services</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem className='p-0'>
@@ -112,31 +112,10 @@ const Header = ({classname}) => {
                                 <ul className="lg:inline-flex hidden gap-5   navlinks mx-auto">
                                     {weblinks()}
                                 </ul>
-                                <ul className="hidden relative items-center ms-auto gap-5">
-                                    <li>
-                                        {
-                                            (user?.name) ? (<>
-                                                <Link to={'/user/dashboard'} className="lg:bg-primary lg:text-white px-3 py-2 rounded  text-sm  font-light uppercase btn overflow-hidden relative block">
-                                                    <span className="inline-block lg:bg-white text-primary leading-8 text-center rounded-full size-8">
-                                                        <UserOutlined />
-                                                    </span>
-                                                    <span className=''>
-                                                        {user?.name} {user?.last_name}
-                                                    </span>
-                                                </Link>
-                                            </>) : (<>
-                                                <Link to={'/login'} className="lg:bg-primary lg:text-white text-primary px-3 py-2 rounded  lg:text-sm text-xl  font-light uppercase btn overflow-hidden relative block">
-                                                    <span className='lg:inline hidden'>Account</span>
-                                                    <span className='lg:hidden inline'>
-                                                        <UserOutlined />
-                                                    </span>
-                                                </Link>
-                                            </>)
-                                        }
-
-                                    </li>
+                                <ul className="lg:hidden block relative items-center ms-auto gap-5">
+                                   
                                     <li >
-                                        <button onClick={() => handleOpen()} className='text-primary lg:hidden block text-xl'>
+                                        <button onClick={() => handleOpen()} className='text-[var(--primary)] lg:hidden block text-xl'>
                                             <CgMenuRight />
                                         </button>
                                     </li>

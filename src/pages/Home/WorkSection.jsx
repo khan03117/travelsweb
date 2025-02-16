@@ -6,15 +6,15 @@ const WorkSection = () => {
         <>
             <section className="work-section relative py-10">
                 <div className="container">
-                    <div className="grid grid-cols-12 gap-5">
-                        <div className="col-span-3">
-                            <h2 className='text-3xl font-bold cursive '>Here’s a breakdown of how our services work<span className="text-primary">.</span></h2>
+                    <div className="grid grid-cols-12 lg:gap-5 gap-2">
+                        <div className="lg:col-span-3 col-span-6">
+                            <h2 className='lg:text-3xl text-lg font-bold cursive '>Here’s a breakdown of how our services work<span className="text-primary">.</span></h2>
                         </div>
                         {
                             [1, 2, 3].map(it => (
                                 <>
 
-                                    <div className="col-span-3">
+                                    <div className="lg:col-span-3 col-span-6">
                                         <div className="bg-white/50 rounded-lg overflow-hidden mb-4 shadow-md shadow-primary/40 ">
                                             <div className="relative  ">
                                                 <div className="card-body p-4">

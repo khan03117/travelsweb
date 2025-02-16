@@ -23,7 +23,7 @@ const VisaAssistantPage = () => {
                         {
                             countries.map(itm => (
                                 <>
-                                    <div className="col-span-2">
+                                    <div className="lg:col-span-2 col-span-6">
                                         <Link to={'/visa-assistant/' +itm.country.url} className="w-full block cursor-pointer  p-2 capitalize shadow shadow-primary h-full rounded-lg ">
                                             {itm.country.country.toLowerCase()}
                                         </Link>

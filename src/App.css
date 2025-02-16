@@ -621,14 +621,14 @@ img {
 
   }
 
-  .navlinkmobile a {
+  .navlinkmobile a,   .navlinkmobile button {
     display: block;
-    padding: 10px 5px;
+    padding: 6px 5px;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
     font-weight: 200;
-
+    font-size: 14px;
 
   }
 
@@ -643,4 +643,10 @@ img {
     font-weight: 300;
     line-height: 20px;
   }
+  
+#hero_banner img {
+  height: 350px;
+ 
+}
+
 }

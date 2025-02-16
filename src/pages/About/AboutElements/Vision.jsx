@@ -12,7 +12,7 @@ const Vision = ({ title, desc }) => {
                     <h4 className='section_title flex items-center gap-5 text-primary'>
                         {title} <FiTarget/>
                     </h4>
-                    <p className='text-lg leading-9 font-light'>
+                    <p className='lg:text-lg text-sm leading-9 font-light'>
                         {desc}
                     </p>
                 </div>

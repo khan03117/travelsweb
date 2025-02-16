@@ -84,19 +84,19 @@ const TestimonialLayoutThree = () => {
                                             <h2 className="section_title"> Overheard from travelers</h2>
                                         </div>
                                     </div>
-                                    <div className="col-span-5">
+                                    <div className="col-span-5 lg:block hidden">
                                         <div className="w-full h-full relative flex items-end">
                                             <img src={testimg} alt="" className="max-w-full relative -mb-10 " />
                                         </div>
                                     </div>
-                                    <div className="col-span-7">
+                                    <div className="lg:col-span-7 col-span-12">
                                         <div className="w-full">
                                             <Slider  {...tsettings}>
                                                 {
                                                     testimonials.map(itm => (
                                                         <>
                                                             <div className="w-full testimonial ">
-                                                                <div className="w-full  px-6">
+                                                                <div className="w-full  lg:px-6 px-2">
 
                                                                     <img src={itm.profile} alt="" className=" profileTesti size-[130px] block object-cover object-top" />
 

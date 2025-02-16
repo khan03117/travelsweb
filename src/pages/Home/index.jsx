@@ -91,7 +91,7 @@ const Home = () => {
       {/* <VisaSteps /> */}
       <section className="py-10 bg-primary/10">
         <div className="container">
-          <div className="grid grid-cols-12 gap-8">
+          <div className="grid grid-cols-12 lg:gap-8 gap-4">
             <div className="col-span-12">
               <div className="w-full mb-10 text-center">
                 <h2 className="section_title">
@@ -133,7 +133,7 @@ const Home = () => {
                   {
                     (id == 3) && (
                       <>
-                        <div className="col-span-4">
+                        <div className="lg:col-span-4 col-span-12">
                           <Link to={'/package/show/' + itm.url}>
                             <PackageLayoutThree data={itm} />
                           </Link>

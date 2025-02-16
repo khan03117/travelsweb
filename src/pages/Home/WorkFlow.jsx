@@ -18,12 +18,12 @@ const WorkFlow = ({ title, desc, icon, isOdd }) => {
 
                 <div className={`lg:col-span-6 col-span-12 ${isOdd ? 'order-1' : 'order-2'}`}>
                     <div className="w-full px-20">
-                        <h3 className={`cursive ${isOdd ? 'lg:text-end text-center' : 'lg:text-start text-center'} relative text-2xl text-primary mb-5 font-bold`}>
+                        <h3 className={`cursive ${isOdd ? 'lg:text-end text-center' : 'lg:text-start text-center'} relative lg:text-2xl text-lg text-primary mb-5 font-bold`}>
 
                             {title}
 
                         </h3>
-                        <p className={`font-light tracking-wider text-md ${isOdd ? 'lg:text-end text-center' : 'lg:text-start text-center'} `}>{desc}</p>
+                        <p className={`font-light tracking-wider lg:text-md text-sm ${isOdd ? 'lg:text-end text-center' : 'lg:text-start text-center'} `}>{desc}</p>
                     </div>
                 </div>
             </div>

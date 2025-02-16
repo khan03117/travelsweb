@@ -12,12 +12,13 @@ const PackageLayoutThree = ({data}) => {
             <div className="w-full rounded-lg group overflow-hidden bg-white shadow shadow-primary/40">
                 <div className="grid grid-cols-12  h-full gap-3 relative" >
                     <div className="col-span-12 h-full">
-                        <figure className='rounded-xl overflow-hidden w-full h-full'>
-                            <img src={data.main_image ? Image_URL + "assets/images/"+data.main_image : imageone} alt="" className="w-full h-full min-h-[450px]" />
+                        <figure className='rounded-xl relative overflow-hidden w-full h-full'>
+                            <div className="absolute top-0 end-0 w-full h-full z-10 bg-black/20"></div>
+                            <img src={data.main_image ? Image_URL + "assets/images/"+data.main_image : imageone} alt="" className="w-full  lg:h-[450px] h-[300px]" />
                         </figure>
                     </div>
                     <div className="bg-black/30 themetransition transition-all translate-y-14 group-hover:-translate-y-0  *:text-white backdrop-blur-sm p-4 absolute bottom-0 w-full start-[50%]  translate-x-[-50%] z-40" >
-                        <div className="w-full">
+                        <div className="w-full relative z-50">
                             <h4 className='text-lg font-bold text-white'>
                                 {data.package_title}
                             </h4>

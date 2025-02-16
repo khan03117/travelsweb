@@ -58,15 +58,15 @@ const VisaServices = () => {
 
                             <div className="container">
                                 <div className={`grid grid-cols-12 gap-5 py-10 ${index % 2 != 0 ? '' : ''}`}>
-                                    <div className={`col-span-6 ${index % 2 == 0 ? 'order-1' : 'order-2'}`}>
+                                    <div className={`lg:col-span-6 col-span-12 ${index % 2 == 0 ? 'lg:order-1 order-1' : 'lg:order-2 order-1'}`}>
                                         <div className="w-full h-full">
                                             <img src={itm.image} alt={itm.image} className="w-full max-h-[400px] overflow-hidden object-cover rounded-lg shadow-md shadow-primary" />
                                         </div>
                                     </div>
-                                    <div className={`col-span-6 ${index % 2 == 0 ? 'order-2' : 'order-1'}`}>
+                                    <div className={`lg:col-span-6 col-span-12 ${index % 2 == 0 ? 'order-2' : 'order-1'}`}>
                                         <div className={`w-full p-5  ${index % 2 != 0 ? ' h-full rounded-lg relative bg-white/30 backdrop-blur-sm' : ''} `}>
                                             <h3 className="font-semibold pb-3 text-primary inline-block border-b border-primary text-2xl">{itm.title}</h3>
-                                            <div className="w-full py-5">
+                                            <div className="w-full py-5 *:text-sm font-light tracking-wider *:leading-[1.8]">
                                                 <div dangerouslySetInnerHTML={{ __html: itm?.content }} />
                                             </div>
                                             <div className="w-full mt-10">

@@ -72,12 +72,12 @@ const About = () => {
             <section className='py-[3rem]'  >
                 <div className="container">
                     <div className="grid  gap-6 grid-cols-12">
-                        <div className="col-span-6">
+                        <div className="lg:col-span-6 col-span-12">
                             <Vision title="Vision"
                                 desc='To be a globally recognized leader in visa, immigration, tours, and travel consultancy, helping people build successful futures abroad and explore the world with ease. We aim to create a world where opportunities are accessible, migration is hassle-free, and travel experiences are enriching—ensuring a smooth and stress-free journey for our clients.'
                             />
                         </div>
-                        <div className="col-span-6">
+                        <div className="lg:col-span-6 col-span-12">
                             <Vision title="Mission"
                                 desc="To provide seamless and reliable visa, immigration, and travel solutions, empowering individuals, families, and businesses to achieve their global dreams with trust, transparency, and professionalism. We strive to simplify complex immigration and travel processes while delivering exceptional service and expert guidance."
                             />

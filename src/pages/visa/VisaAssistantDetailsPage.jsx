@@ -30,7 +30,7 @@ const VisaAssistantDetailsPage = () => {
             <section className="py-10">
               <div className="container">
                 <div className="grid grid-cols-12 gap-4">
-                  <div className="col-span-8">
+                  <div className="lg:col-span-8 col-span-12">
                     <div className="w-full mb-10 flex gap-3">
                       {
                         visa.option_visa.map((itm, index) => (
@@ -43,7 +43,7 @@ const VisaAssistantDetailsPage = () => {
                     </div>
                     <div className="w-full dynamicContent">
 
-                      <div className=' p-3' dangerouslySetInnerHTML={{ __html: visa.desc_visa[active] }} />
+                      <div className=' p-3 ' dangerouslySetInnerHTML={{ __html: visa.desc_visa[active] }} />
                       <div className="w-full p-3 rounded" style={{ background: `${theme.primary}26` }}>
                         <h4>Processing</h4>
                         <div className='' dangerouslySetInnerHTML={{ __html: visa.processing_visa[active] }} />
@@ -51,7 +51,7 @@ const VisaAssistantDetailsPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-span-4">
+                  <div className="lg:col-span-4 col-span-12">
                     <div className="w-full sticky top-0 p-4 embesyDetail rounded" style={{ background: `${theme.primary}33` }}>
                       <h4 className="text-primary">Embassy Details</h4>
                       <table className="w-full ">
