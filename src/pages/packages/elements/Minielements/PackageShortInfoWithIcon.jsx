@@ -5,11 +5,11 @@ const PackageShortInfoWithIcon = ({ icon, title, value }) => {
     return (
         <>
             <div className="flex w-full gap-2">
-                <span className='text-primary text-3xl'>
+                <span className='text-primary lg:text-3xl text-xl'>
                     {icon}
                 </span>
                 <div className="w-full">
-                    <h4 className='text-black font-semibold tracking-wider text-md'>{title}</h4>
+                    <h4 className='text-black lg:font-semibold tracking-wider lg:text-md text-sm'>{title}</h4>
                     <p className='text-gray-600 text-xs'>
                         {value}
                     </p>

@@ -8,7 +8,7 @@ const ApplyNow = () => {
                 <div className="container">
                     <div className="grid grid-cols-12">
                         <div className="col-span-2"></div>
-                        <div className="col-span-8">
+                        <div className="lg:col-span-8 col-span-12">
                             <div className="w-full forexBox">
                                 <ContactForm />
                             </div>

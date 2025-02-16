@@ -197,48 +197,50 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.stroke_text{
+.stroke_text {
   font-weight: 700;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #fff;
-    -webkit-text-fill-color: transparent;
-    font-size: 80px;
-    z-index: 1;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
+  -webkit-text-fill-color: transparent;
+  font-size: 80px;
+  z-index: 1;
 }
-.included_ul ul, .excluded_ul ul{
+.included_ul ul,
+.excluded_ul ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.included_ul ul li, .excluded_ul ul li{
+.included_ul ul li,
+.excluded_ul ul li {
   position: relative;
   padding-left: 26px;
   font-size: 15px;
   padding-bottom: 20px;
 }
-.included_ul ul li::before{
+.included_ul ul li::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 20px;
   height: 20px;
-  background:url(./assets/checkmark.png);
+  background: url(./assets/checkmark.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
-.excluded_ul ul li::before{
+.excluded_ul ul li::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 20px;
   height: 20px;
-  background:url(./assets/cross.png);
+  background: url(./assets/cross.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
-.form-label{
+.form-label {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -269,7 +271,7 @@ body {
     background-position: -10000% -18px;
   }
 }
-.destinationbgoverlay::before{
+.destinationbgoverlay::before {
   content: "";
   position: absolute;
   top: 0;
@@ -354,7 +356,7 @@ body {
   font-weight: 300;
   letter-spacing: 1px;
 }
-.themetransition{
+.themetransition {
   transition: all 0.5s linear !important;
 }
 
@@ -455,7 +457,7 @@ img {
   line-height: 25px;
 }
 .work-section {
-  background: #FEEDEB;
+  background: #feedeb;
   position: relative;
 }
 
@@ -474,12 +476,12 @@ img {
   font-size: 50px;
   font-weight: bold;
   color: transparent;
-  -webkit-text-stroke: 1px #0E9384;
+  -webkit-text-stroke: 1px #0e9384;
   position: relative;
   background: transparent;
 }
-.bg-overlay{
-  background: url('./assets/bg-body.png');
+.bg-overlay {
+  background: url("./assets/bg-body.png");
   background-size: contain;
   opacity: 0.35;
   transition: all 0.3s, border-radius 0.3s, opacity 0.3s;
@@ -490,49 +492,48 @@ img {
   width: 100%;
   z-index: 1;
 }
-.dynamicContent ul{
+.dynamicContent ul {
   position: relative;
-  list-style:none;
+  list-style: none;
   margin: 0;
   margin-bottom: 2rem;
   padding: 0;
 }
-.dynamicContent ul li{
+.dynamicContent ul li {
   position: relative;
   padding-left: 25px;
   font-size: 15px;
   /* letter-spacing: 1px; */
   padding-bottom: 10px;
 }
-.dynamicContent ul li::before{
+.dynamicContent ul li::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 18px;
   height: 20px;
-  background: url('./assets/checkmark.png');
+  background: url("./assets/checkmark.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left;
 }
-.dynamicContent ul li strong{
+.dynamicContent ul li strong {
   font-size: 20px;
   text-transform: capitalize;
 }
 .dynamicContent ul li ul li {
   padding-left: 25px;
 }
-.dynamicContent h4{
+.dynamicContent h4 {
   margin-bottom: 0.5rem;
   border-bottom: 2px solid var(--primary);
   font-size: 20px;
   display: inline-block;
   color: var(--primary);
   font-weight: 600;
-
 }
-.embesyDetail h4{
+.embesyDetail h4 {
   font-size: 20px;
   display: inline-block;
   color: var(--primary);
@@ -540,7 +541,7 @@ img {
   border-bottom: 2px solid var(--primary);
   margin-bottom: 0.5rem;
 }
-.dynamicContent p{
+.dynamicContent p {
   font-size: 14px;
   margin-bottom: 1rem;
   line-height: 1.8;
@@ -618,10 +619,10 @@ img {
     font-size: 16px;
     width: 60px;
     height: 60px;
-
   }
 
-  .navlinkmobile a,   .navlinkmobile button {
+  .navlinkmobile a,
+  .navlinkmobile button {
     display: block;
     padding: 6px 5px;
     text-transform: uppercase;
@@ -629,7 +630,6 @@ img {
     position: relative;
     font-weight: 200;
     font-size: 14px;
-
   }
 
   .aboutUs h2 {
@@ -643,10 +643,17 @@ img {
     font-weight: 300;
     line-height: 20px;
   }
-  
-#hero_banner img {
-  height: 350px;
- 
-}
 
+  #hero_banner img {
+    height: 350px;
+  }
+  .forexBox h4 {
+    font-size: 1.2rem;
+  
+  }
+  .forexBox p {
+    font-size: 14px;
+  }
+  
+  
 }

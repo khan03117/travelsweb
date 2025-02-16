@@ -56,7 +56,7 @@ const BannerThree = () => {
                   </div>
                   <div className="w-full h-full justify-center  flex items-center absolute z-50  top-0 start-0 ">
                     <div className="lg:w-1/2 lg:p-0 p-5 md:w-full sm:w-full text-center *:transition-all" >
-                      <h2 className={`text-white  cursive lg:text-[3rem] text-xl themetransition transition-all  duration-[1s] ease-linear font-bold ${activeSlide == indx ? 'lg:-translate-y-24' : ''}`}>{bnr.title}</h2>
+                      <h2 className={`text-white  cursive lg:text-[3rem] leading-[1.6] text-xl themetransition transition-all  duration-[1s] ease-linear font-bold ${activeSlide == indx ? 'lg:-translate-y-24' : ''}`}>{bnr.title}</h2>
                       <p className={`lg:text-lg text-sm text-white font-light themetransition tracking-widest mt-5  duration-[3s] transition-all ${activeSlide == indx ? 'lg:-translate-y-24' : ''} `}>{bnr.desc}</p>
                       <Link className={`px-20 inline-block mt-5 py-3 bg-primary themetransition text-white rounded-full ${activeSlide == indx ? 'lg:-translate-y-24' : ''} `} to={'/destinations'}>Explore</Link>
                     </div>

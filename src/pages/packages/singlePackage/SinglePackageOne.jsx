@@ -77,10 +77,10 @@ const SinglePackageOne = () => {
 
 
                                 <section className='pb-20'>
-                                    <img src={mpackage?.main_image ? Image_URL + "assets/images/" + mpackage?.main_image : banner1} alt="" className="w-full h-96 object-cover block mb-10 object-bottom" />
+                                    <img src={mpackage?.main_image ? Image_URL + "assets/images/" + mpackage?.main_image : banner1} alt="" className="w-full lg:h-96 h-60 object-cover block mb-10 object-bottom" />
                                     <div className="container my-4">
                                         <div className="grid grid-cols-12">
-                                            <div className="col-span-8">
+                                            <div className="lg:col-span-8 col-span-12">
                                                 <div className="container">
 
                                                     <div className="grid grid-cols-12 gap-3 pb-10">
@@ -89,13 +89,13 @@ const SinglePackageOne = () => {
                                                                 {mpackage.title}
                                                             </h1>
                                                         </div>
-                                                        <div className="col-span-4">
+                                                        <div className="lg:col-span-4 col-span-6">
                                                             <PackageShortInfoWithIcon
                                                                 icon={<WiDayCloudy />}
                                                                 title={`${mpackage.days}Days/${mpackage.nights}Nights`}
                                                             />
                                                         </div>
-                                                        <div className="col-span-4">
+                                                        <div className="lg:col-span-4 col-span-6">
                                                             <PackageShortInfoWithIcon
                                                                 icon={<GoLocation />}
                                                                 title={`${mpackage.state?.state},${country[0].country}`}
@@ -104,7 +104,7 @@ const SinglePackageOne = () => {
                                                         {
                                                             mpackage.is_visa && (
                                                                 <>
-                                                                    <div className="col-span-4">
+                                                                    <div className="lg:col-span-4 col-span-6">
                                                                         <PackageShortInfoWithIcon
                                                                             icon={<RiVisaFill />}
                                                                             title='Visa Included'
@@ -116,7 +116,7 @@ const SinglePackageOne = () => {
                                                         {
                                                             mpackage.is_transportation > 0 && (
                                                                 <>
-                                                                    <div className="col-span-4">
+                                                                    <div className="lg:col-span-4 col-span-6">
                                                                         <PackageShortInfoWithIcon
                                                                             icon={<MdEmojiTransportation />}
                                                                             title='Transportation Included'
@@ -128,7 +128,7 @@ const SinglePackageOne = () => {
                                                         {
                                                             mpackage.meal && (
                                                                 <>
-                                                                    <div className="col-span-4">
+                                                                    <div className="lg:col-span-4 col-span-6">
                                                                         <PackageShortInfoWithIcon
                                                                             icon={<PiBowlFood />}
                                                                             title={mpackage.meal}
@@ -141,7 +141,7 @@ const SinglePackageOne = () => {
                                                         {
                                                             mpackage.is_flight && (
                                                                 <>
-                                                                    <div className="col-span-4">
+                                                                    <div className="lg:col-span-4 col-span-6">
                                                                         <PackageShortInfoWithIcon
                                                                             icon={<PiAirplaneInFlightLight />}
                                                                             title='Flight Included'
@@ -151,7 +151,7 @@ const SinglePackageOne = () => {
                                                             )
                                                         }
 
-                                                        <div className="col-span-4">
+                                                        <div className="lg:col-span-4 col-span-6">
                                                             <PackageShortInfoWithIcon
                                                                 icon={<RiHotelLine />}
                                                                 title={mpackage.hotel}
@@ -203,10 +203,10 @@ const SinglePackageOne = () => {
                                                         }
 
                                                     </div>
-                                                    <div className="grid grid-cols-12 gap-10 my-10">
+                                                    <div className="grid lg:grid-cols-12 grid-cols-6 mb-10 gap-10">
                                                         <div className="col-span-6">
-                                                            <div className="w-full  included_ul rounded-lg px-5 py-5 bg-primary/10 h-full">
-                                                                <h4 className="mb-5 font-bold text-lg text-primary">Inclusions</h4>
+                                                            <div className="w-full  included_ul rounded-lg px-5 py-5  h-full">
+                                                                <h4 className="mb-5 font-bold lg:text-lg text-sm text-primary">Inclusions</h4>
                                                                 <ul>
                                                                     <li>
                                                                         Hotel accommodation with breakfast (Based on Twin Sharing/ triple sharing).
@@ -238,11 +238,11 @@ const SinglePackageOne = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="grid grid-cols-12">
+                                                    <div className="grid grid-cols-12 mb-10">
                                                         <div className="col-span-12">
                                                             <div className="flex mb-5  *:pe-3 *:py-2 *:text-xs *:tracking-wider *:uppercase *:font-semibold gap-4">
                                                                 {
-                                                                    ['Cancellation Terms', ' Terms & Conditions', ' Contact Information'].map((itm, index) => (
+                                                                    [ ' Terms & Conditions', ' Contact Information'].map((itm, index) => (
                                                                         <>
                                                                             <button onClick={() => setActive(index)} className={` ${index == activebtn ? 'active  border-b text-primary border-primary' : ''} `} >
                                                                                 {itm}
@@ -281,7 +281,7 @@ const SinglePackageOne = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-span-4">
+                                            <div className="lg:col-span-4 col-span-12">
                                                 <div className="w-full p-5 sticky top-0 shadow shadow-primary rounded">
                                                     <h4 className='font-bold text-[1.5rem]  text-primary mb-5 block' >Get Free Quotes</h4>
                                                     <form action="" method="post" className='*:pb-2'>
