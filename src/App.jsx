@@ -27,6 +27,9 @@ import Visa from "./pages/visa";
 import Destinations from "./pages/destinations";
 import VisaAssistantPage from "./pages/visa/VisaAssistantPage";
 import VisaAssistantDetailsPage from "./pages/visa/VisaAssistantDetailsPage";
+import VisaServices from "./pages/visa/VisaServices";
+import OkayBoard from "./pages/visa/OkayBoard";
+import ApplyNow from "./pages/Contact/ApplyNow";
 
 function App() {
   const ThemeRoutes = createBrowserRouter(
@@ -41,7 +44,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/policy/:url" element={<AppPolicy />} />
           <Route path="/faqs" element={<Faqs />} />
-          {/* <Route path="/destinations" element={<Packages />} /> */}
+          <Route path="/apply-now" element={<ApplyNow />} />
+          <Route path="/visa/:slug" element={<VisaServices />} />
+          <Route path="/addon/:slug" element={<OkayBoard />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:url" element={<Packages />} />
           <Route path="/package/show/:url" element={<SinglePackageOne />} />

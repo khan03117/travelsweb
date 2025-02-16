@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
-import { API_URL } from '../../utils';
+import { API_URL, usertoken } from '../../utils';
+import { toast } from 'react-toastify';
 
 const ContactForm = () => {
     const [fdata, setFdata] = React.useState({ name: "", email: "", mobile: "", message: "" });
@@ -15,7 +16,16 @@ const ContactForm = () => {
     }
     const sendQuery = async () => {
         try {
-            const resp = await axios.post(API_URL + "user/query", fdata);
+            const data = { ...fdata }
+            const resp = await axios.post(API_URL + "contact-query", data, {
+                headers: {
+                    Authorization: usertoken
+                }
+            });
+            if (resp.data.success) {
+                toast.success('query saved successfully');
+                setFdata({});
+            }
             setStatus(resp.data.success);
             setMsg(resp.data.message);
 
@@ -45,23 +55,23 @@ const ContactForm = () => {
 
 
                 <div className="form-group mb-3">
-                    <label htmlFor="">Enter Name</label>
-                    <input type="text" name="name" value={fdata?.name} onChange={handleFdata} className="w-full p-2 outline-none  rounded border border-primary/40" />
+                    <label htmlFor="" className='text-sm font-semibold mb-3 block text-[var(--primary)] uppercase tracking-widest'>Enter Name</label>
+                    <input type="text" name="name" value={fdata?.name} onChange={handleFdata} className="w-full p-2 outline-none  rounded border border-[var(--primary)]" />
                 </div>
                 <div className="form-group mb-3">
-                    <label htmlFor="">Enter Email</label>
-                    <input type="text" name="email" value={fdata?.email} onChange={handleFdata} className="w-full p-2 outline-none  rounded border border-primary/40" />
+                    <label htmlFor="" className='text-sm font-semibold mb-3 block text-[var(--primary)] uppercase tracking-widest'>Enter Email</label>
+                    <input type="text" name="email" value={fdata?.email} onChange={handleFdata} className="w-full p-2 outline-none  rounded border border-[var(--primary)]" />
                 </div>
                 <div className="form-group mb-3">
-                    <label htmlFor="">Enter Mobile</label>
+                    <label htmlFor="" className='text-sm font-semibold mb-3 block text-[var(--primary)] uppercase tracking-widest'>Enter Mobile</label>
                     <div className="flex gap-2">
-                        <span className="inline-flex items-center justify-center bg-white rounded-s size-10 w-16 border border-primary/40">+91</span>
-                        <input type="text" name="mobile" value={fdata?.mobile} onChange={handleFdata} className="w-full p-2 outline-none  rounded-e border border-primary/40" />
+                        <span className="inline-flex items-center justify-center bg-white rounded-s size-10 w-16 border border-[var(--primary)]">+91</span>
+                        <input type="text" name="mobile" value={fdata?.mobile} onChange={handleFdata} className="w-full p-2 outline-none  rounded-e border border-[var(--primary)]" />
                     </div>
                 </div>
                 <div className="form-group mb-4">
-                    <label htmlFor="">Enter Message</label>
-                    <textarea name="message" value={fdata?.message} onChange={handleFdata} rows={4} className="w-full p-2 outline-none  rounded border border-primary/40"></textarea>
+                    <label htmlFor="" className='text-sm font-semibold mb-3 block text-[var(--primary)] uppercase tracking-widest'>Enter Message</label>
+                    <textarea name="message" value={fdata?.message} onChange={handleFdata} rows={4} className="w-full p-2 outline-none  rounded border border-[var(--primary)]"></textarea>
                 </div>
                 <div className="form-group">
                     <button onClick={sendQuery} disabled={!fdata?.name || !fdata?.email || !fdata.mobile} className="bg-primary btn text-white w-full py-3">Submit</button>

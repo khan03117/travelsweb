@@ -65,7 +65,27 @@ const Header = ({classname}) => {
                             <Link className='w-full block py-2' to={'/visa-assistant/'}>Visa Assistant</Link>
                         </MenuItem>
                         <MenuItem className='p-0'>
-                            <Link  className='w-full block py-2' to={'/visa-services/'}>Visa Services</Link>
+                            <Link  className='w-full block py-2' to={'/visa/services/'}>Visa Services</Link>
+                        </MenuItem>
+                    </MenuList>
+                </Menu>
+            </li>
+            <li>
+                {/* <Link to={'/visa'} >Visa</Link> */}
+                <Menu className="hidden">
+                    <MenuHandler>
+                        <button className='text-primary uppercase'>Add On Services</button>
+                    </MenuHandler>
+                    <MenuList className=''>
+                        <MenuItem className='p-0'>
+                            <Link className='w-full block py-2' to={'/addon/okay-board'}>Okay to Board</Link>
+                        </MenuItem>
+                        <MenuItem className='p-0'>
+                            <Link  className='w-full block py-2' to={'/visa/miscellaneous'}>Miscellaneous Services</Link>
+                        </MenuItem>
+                        <MenuItem className='p-0'>
+                            <Link  className='w-full block py-2' to={'/apply-now'}>Document Attestation
+                            </Link>
                         </MenuItem>
                     </MenuList>
                 </Menu>

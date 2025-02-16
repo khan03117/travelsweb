@@ -9,225 +9,314 @@ import { Accordion, AccordionBody, AccordionHeader, Button } from '@material-tai
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { API_URL, Image_URL, usertoken } from '../../../utils'
+import { MdEmojiTransportation } from 'react-icons/md'
+import { toast } from 'react-toastify'
+import Loading from '../../../components/Loading'
 const SinglePackageOne = () => {
+    const [loading, setLoading] = React.useState(true);
     const { url } = useParams();
     const [open, setOpen] = React.useState(1);
     const handleOpen = (value) => setOpen(open === value ? 0 : value);
     const [idata, setItinerary] = React.useState({});
     const [mpackage, setPackage] = React.useState(false);
+    const [activebtn, setActive] = React.useState(0);
+    const [fdata, setFdata] = React.useState({});
+    const [country, setCountry] = React.useState([]);
+    const handleFdata = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setFdata((prev) => {
+            return {
+                ...prev,
+                [name]: value
+            }
+        })
+    }
+    const savecontactquery = async () => {
+        const data = { ...fdata, ['package_id']: mpackage.id }
+        const resp = await axios.post(API_URL + "contact-query", data, {
+            headers: {
+                Authorization: usertoken
+            }
+        });
+        if (resp.data.success) {
+            toast.success('query saved successfully');
+            setFdata({});
+        }
+    }
     const getpackage = async () => {
+        setLoading(true);
         const resp = await axios.get(API_URL + "package/show/" + url, {
             headers: {
                 Authorization: usertoken
             }
         });
         setItinerary(resp.data.itinerary)
-      
+        setCountry(resp.data.countries)
         setPackage(resp.data.data);
-       
+        setLoading(false);
+
+
     }
     React.useEffect(() => {
         getpackage();
     }, []);
     return (
         <>
-
             {
-                mpackage && (
+                loading ? (
+                    <>
+                        <Loading height={'min-h-lvh h-full'} />
+                    </>
+                ) : (
+                    <>
 
 
-                    <section className='pb-20'>
-                        <img src={banner1} alt="" className="w-full h-96 object-cover block mb-10 object-bottom" />
-                        <div className="container my-4">
-                            <div className="grid grid-cols-12">
-                                <div className="col-span-9">
-                                    <div className="container">
+                        {
+                            mpackage && (
 
-                                        <div className="grid grid-cols-12 gap-3 pb-10">
-                                            <div className="col-span-12">
-                                                <h1 className='section_title !mb-0'>
-                                                    {mpackage.title}
-                                                </h1>
-                                            </div>
-                                            <div className="col-span-4">
-                                                <PackageShortInfoWithIcon
-                                                    icon={<WiDayCloudy />}
-                                                    title={`${mpackage.days}Days/${mpackage.nights}Nights`}
-                                                />
-                                            </div>
-                                            <div className="col-span-4">
-                                                <PackageShortInfoWithIcon
-                                                    icon={<GoLocation />}
-                                                    title='Sharjah, United Arab Amirat '
-                                                />
-                                            </div>
-                                            <div className="col-span-4">
-                                                <PackageShortInfoWithIcon
-                                                    icon={<RiVisaFill />}
-                                                    title='Visa Included'
-                                                />
-                                            </div>
-                                            <div className="col-span-4">
-                                                <PackageShortInfoWithIcon
-                                                    icon={<PiBowlFood />}
-                                                    title='Meal Included'
-                                                />
-                                            </div>
-                                            <div className="col-span-4">
-                                                <PackageShortInfoWithIcon
-                                                    icon={<PiAirplaneInFlightLight />}
-                                                    title='Flight Included'
-                                                />
-                                            </div>
-                                            <div className="col-span-4">
-                                                <PackageShortInfoWithIcon
-                                                    icon={<RiHotelLine />}
-                                                    title='Hotel 5 star'
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="grid grid-cols-12 gap-6">
-                                            <div className="col-span-12 mb-2">
-                                                <div className="w-full">
-                                                    <h2 className='text-[1.6rem] font-bold'>Itinerary</h2>
-                                                </div>
-                                            </div>
-                                            {
-                                                 Object.entries(idata).map(([d,v], ind) => (
-                                                    <>
 
-                                                        <div key={d} className="col-span-12">
-                                                            <Accordion open={open == ind} >
-                                                                <AccordionHeader onClick={() => handleOpen(ind)}>
-                                                                    <div className="w-full">
-                                                                        Day {ind}. {v[0]?.activity_name}
-                                                                    </div>
-                                                                </AccordionHeader>
-                                                                <AccordionBody>
-                                                                    <>
-                                                                        <div className="dynamicContent">
-                                                                            {
-                                                                                v.map(itm => (
-                                                                                    <>
-                                                                                    <div className="grid grid-cols-12">
-                                                                                        <div className="col-span-4">
-<img src={Image_URL + "assets/images/" + itm.main_image} alt="" className="w-full" />
-                                                                                        </div>
-                                                                                        <div className="col-span-8">
-                                                                                        <div dangerouslySetInnerHTML={{ __html: itm?.description }} />
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    </>
-                                                                                ))
-                                                                            }
-                                                                        </div>
-                                                                    </>
-                                                                </AccordionBody>
-                                                            </Accordion>
-                                                        </div>
-                                                    </>
-                                                ))
-                                            }
-
-                                        </div>
-                                        <div className="grid grid-cols-12 gap-10 my-10">
-                                            <div className="col-span-6">
-                                                <div className="w-full  included_ul rounded-lg px-5 py-5 bg-primary/10 h-full">
-                                                    <h4 className="mb-5 font-bold text-lg text-primary">Inclusions</h4>
-                                                    <ul>
-                                                        <li>
-                                                            Hotel accommodation with breakfast (Based on Twin Sharing/ triple sharing).
-                                                        </li>
-                                                        <li>
-                                                            All airport-hotel-airport without guide  and tour excursion transfers with English speaking guide.
-                                                        </li>
-                                                        <li>
-                                                            Meals as mention program ( SIC tour stand local food only).
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="col-span-6">
-                                                <div className="w-full excluded_ul rounded-lg px-5 py-5 bg-red-50 h-full">
-                                                    <h4 className="mb-5 font-bold text-lg text-red-700">Exclusions</h4>
-
-                                                    <ul>
-                                                        <li>
-                                                            Personal expenses such as drinks at meals,
-                                                        </li>
-                                                        <li>
-                                                            üIssuance, Air tickets
-                                                        </li>
-                                                        <li>
-                                                            Upgrade meals / surcharge for Indian food
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <section className='pb-20'>
+                                    <img src={mpackage?.main_image ? Image_URL + "assets/images/" + mpackage?.main_image : banner1} alt="" className="w-full h-96 object-cover block mb-10 object-bottom" />
+                                    <div className="container my-4">
                                         <div className="grid grid-cols-12">
-                                            <div className="col-span-12">
-                                                <div className="flex mb-5  *:pe-3 *:py-2 *:text-xs *:tracking-wider *:uppercase *:font-semibold gap-4">
-                                                    <button className='active border-b text-primary border-primary' >
-                                                        Cancellation Terms
-                                                    </button>
-                                                    <button>
-                                                        Terms & Conditions
-                                                    </button>
-                                                    <button>
-                                                        Contact Information
-                                                    </button>
+                                            <div className="col-span-8">
+                                                <div className="container">
+
+                                                    <div className="grid grid-cols-12 gap-3 pb-10">
+                                                        <div className="col-span-12">
+                                                            <h1 className='section_title !mb-0'>
+                                                                {mpackage.title}
+                                                            </h1>
+                                                        </div>
+                                                        <div className="col-span-4">
+                                                            <PackageShortInfoWithIcon
+                                                                icon={<WiDayCloudy />}
+                                                                title={`${mpackage.days}Days/${mpackage.nights}Nights`}
+                                                            />
+                                                        </div>
+                                                        <div className="col-span-4">
+                                                            <PackageShortInfoWithIcon
+                                                                icon={<GoLocation />}
+                                                                title={`${mpackage.state?.state},${country[0].country}`}
+                                                            />
+                                                        </div>
+                                                        {
+                                                            mpackage.is_visa && (
+                                                                <>
+                                                                    <div className="col-span-4">
+                                                                        <PackageShortInfoWithIcon
+                                                                            icon={<RiVisaFill />}
+                                                                            title='Visa Included'
+                                                                        />
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                        }
+                                                        {
+                                                            mpackage.is_transportation > 0 && (
+                                                                <>
+                                                                    <div className="col-span-4">
+                                                                        <PackageShortInfoWithIcon
+                                                                            icon={<MdEmojiTransportation />}
+                                                                            title='Transportation Included'
+                                                                        />
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                        }
+                                                        {
+                                                            mpackage.meal && (
+                                                                <>
+                                                                    <div className="col-span-4">
+                                                                        <PackageShortInfoWithIcon
+                                                                            icon={<PiBowlFood />}
+                                                                            title={mpackage.meal}
+                                                                        />
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                        }
+
+                                                        {
+                                                            mpackage.is_flight && (
+                                                                <>
+                                                                    <div className="col-span-4">
+                                                                        <PackageShortInfoWithIcon
+                                                                            icon={<PiAirplaneInFlightLight />}
+                                                                            title='Flight Included'
+                                                                        />
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                        }
+
+                                                        <div className="col-span-4">
+                                                            <PackageShortInfoWithIcon
+                                                                icon={<RiHotelLine />}
+                                                                title={mpackage.hotel}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="grid grid-cols-12 gap-6">
+                                                        <div className="col-span-12 mb-2">
+                                                            <div className="w-full">
+                                                                <h2 className='text-[1.6rem] font-bold'>Itinerary</h2>
+                                                            </div>
+                                                        </div>
+                                                        {
+                                                            Object.entries(idata).map(([d, v], ind) => (
+                                                                <>
+
+                                                                    <div key={d} className="col-span-12">
+                                                                        <Accordion open={open == ind} >
+                                                                            <AccordionHeader onClick={() => handleOpen(ind)}>
+                                                                                <div className="w-full">
+                                                                                    Day {ind + 1}. {v[0]?.activity_name}
+                                                                                </div>
+                                                                            </AccordionHeader>
+                                                                            <AccordionBody>
+                                                                                <>
+                                                                                    <div className="dynamicContent">
+                                                                                        {
+                                                                                            v.map(itm => (
+                                                                                                <>
+                                                                                                    <div className="grid grid-cols-12 gap-10">
+                                                                                                        <div className="col-span-4">
+                                                                                                            <img src={Image_URL + "assets/images/" + itm.main_image} alt="" className="w-full" />
+                                                                                                        </div>
+                                                                                                        <div className="col-span-8">
+                                                                                                            <div dangerouslySetInnerHTML={{ __html: itm?.description }} />
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </>
+                                                                                            ))
+                                                                                        }
+                                                                                    </div>
+                                                                                </>
+                                                                            </AccordionBody>
+                                                                        </Accordion>
+                                                                    </div>
+                                                                </>
+                                                            ))
+                                                        }
+
+                                                    </div>
+                                                    <div className="grid grid-cols-12 gap-10 my-10">
+                                                        <div className="col-span-6">
+                                                            <div className="w-full  included_ul rounded-lg px-5 py-5 bg-primary/10 h-full">
+                                                                <h4 className="mb-5 font-bold text-lg text-primary">Inclusions</h4>
+                                                                <ul>
+                                                                    <li>
+                                                                        Hotel accommodation with breakfast (Based on Twin Sharing/ triple sharing).
+                                                                    </li>
+                                                                    <li>
+                                                                        All airport-hotel-airport without guide  and tour excursion transfers with English speaking guide.
+                                                                    </li>
+                                                                    <li>
+                                                                        Meals as mention program ( SIC tour stand local food only).
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-span-6">
+                                                            <div className="w-full excluded_ul rounded-lg px-5 py-5 bg-red-50 h-full">
+                                                                <h4 className="mb-5 font-bold text-lg text-red-700">Exclusions</h4>
+
+                                                                <ul>
+                                                                    <li>
+                                                                        Personal expenses such as drinks at meals,
+                                                                    </li>
+                                                                    <li>
+                                                                        üIssuance, Air tickets
+                                                                    </li>
+                                                                    <li>
+                                                                        Upgrade meals / surcharge for Indian food
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="grid grid-cols-12">
+                                                        <div className="col-span-12">
+                                                            <div className="flex mb-5  *:pe-3 *:py-2 *:text-xs *:tracking-wider *:uppercase *:font-semibold gap-4">
+                                                                {
+                                                                    ['Cancellation Terms', ' Terms & Conditions', ' Contact Information'].map((itm, index) => (
+                                                                        <>
+                                                                            <button onClick={() => setActive(index)} className={` ${index == activebtn ? 'active  border-b text-primary border-primary' : ''} `} >
+                                                                                {itm}
+                                                                            </button>
+                                                                        </>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-span-12">
+                                                            <div className="w-full p-5 bg-black/10 rounded">
+                                                                {
+                                                                    activebtn == 0 && (
+                                                                        <>
+                                                                            <div dangerouslySetInnerHTML={{ __html: mpackage?.terms }} />
+                                                                        </>
+                                                                    )
+                                                                }
+                                                                {
+                                                                    activebtn == 1 && (
+                                                                        <>
+                                                                            <div dangerouslySetInnerHTML={{ __html: mpackage?.terms }} />
+                                                                        </>
+                                                                    )
+                                                                }
+                                                                {
+                                                                    activebtn == 2 && (
+                                                                        <>
+                                                                            <div dangerouslySetInnerHTML={{ __html: mpackage?.policy }} />
+                                                                        </>
+                                                                    )
+                                                                }
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-span-12">
-                                                <div className="w-full p-5 bg-black/10 rounded">
-                                                    <ul className='list-inside list-disc'>
-                                                        <li>25% cancellation within 30 days from travel date</li>
-                                                        <li>50% cancellation within 16 days from travel date</li>
-                                                        <li>100% cancellation within 08 days from travel date or after issuing the voucher
-                                                        </li>
-                                                        <li>No Refund on any cancellation within 05 days prior&nbsp;to&nbsp;arrival
-                                                        </li>
-                                                    </ul>
+                                            <div className="col-span-4">
+                                                <div className="w-full p-5 sticky top-0 shadow shadow-primary rounded">
+                                                    <h4 className='font-bold text-[1.5rem]  text-primary mb-5 block' >Get Free Quotes</h4>
+                                                    <form action="" method="post" className='*:pb-2'>
+                                                        <div className="form-group">
+                                                            <label className='form-label' htmlFor="">Enter Name</label>
+                                                            <input type="text" name="name" onChange={handleFdata} className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label className='form-label' htmlFor="">Enter Email</label>
+                                                            <input type="text" name="email" onChange={handleFdata} className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label className='form-label' htmlFor="">Enter Mobile</label>
+                                                            <input type="text" name="mobile" onChange={handleFdata} className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label className='form-label' htmlFor="">Expected Date</label>
+                                                            <input type="date" name="expected_date" onChange={handleFdata} className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label className='form-label' htmlFor="">Enter Message</label>
+                                                            <textarea name="message" onChange={handleFdata} className='w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4' id=""></textarea>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <Button onClick={savecontactquery} variant='gradient' color='teal' fullWidth>Send Query</Button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-span-3">
-                                    <div className="w-full p-5 shadow shadow-primary rounded">
-                                        <h4 className='font-bold text-[1.5rem]  text-primary mb-5 block' >Get Free Quotes</h4>
-                                        <form action="" method="post" className='*:pb-2'>
-                                            <div className="form-group">
-                                                <label className='form-label' htmlFor="">Enter Name</label>
-                                                <input type="text" name="" className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className='form-label' htmlFor="">Enter Email</label>
-                                                <input type="text" name="" className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className='form-label' htmlFor="">Enter Mobile</label>
-                                                <input type="text" name="" className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className='form-label' htmlFor="">Enter Date</label>
-                                                <input type="text" name="" className="w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4" id="" />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className='form-label' htmlFor="">Enter Message</label>
-                                                <textarea name="" className='w-full border border-primary/40 outline-none rounded py-3 text-xs ps-4' id=""></textarea>
-                                            </div>
-                                            <div className="form-group">
-                                                <Button variant='gradient' color='teal' fullWidth>Send Query</Button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                                </section>
+                            )
+                        }
+                    </>
                 )
             }
         </>

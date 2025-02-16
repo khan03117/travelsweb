@@ -1,15 +1,16 @@
 // import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
 import { EnvironmentOutlined, FacebookFilled, GoogleSquareFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
 import { IoIosCall, IoMdMail } from 'react-icons/io';
+import { Image_URL } from '../utils';
 
 const Footer = () => {
     const { user } = useUser();
     return (
         <>
-            <div className="w-full  overflow-x-hidden relative">
+            <div className="w-full  overflow-x-hidden relative p-5">
                 <section className='relative lg:block hidden z-10 '>
                     <div className="w-full -mb-10">
                         <div className="container ">
@@ -17,9 +18,9 @@ const Footer = () => {
                                 <div className="col-span-1"></div>
                                 <div className="col-span-10">
                                     <div className="w-full overflow-hidden text-center text-white bg-primary p-8 rounded-lg">
-                                        <h2 className='text-xl '><span className='cursive'>Free support: </span>
+                                        <h2 className='text-xl '><span className='cursive2'>Free support: </span>
                                             <div className='inline-block'  >{user.mobile}</div>
-                                            &nbsp;&nbsp;|&nbsp;&nbsp; <span className='cursive'>Email: </span>
+                                            &nbsp;&nbsp;|&nbsp;&nbsp; <span className='cursive2'>Email: </span>
                                             <div className='inline-block'>{user.email}</div>
                                         </h2>
                                     </div>
@@ -28,15 +29,16 @@ const Footer = () => {
                         </div>
                     </div>
                 </section>
-                <footer className="bg-gray-300 rounded-lg  py-20">
+                <footer className="bg-gray-300 rounded-3xl shadow-sm shadow-black/40  py-20">
                     <div className="container">
                         <div className="grid grid-cols-12 gap-4">
                             <div className="lg:col-span-3 col-span-12">
                                 <div className="grid grid-cols-12 gap-4">
                                     <div className=" col-span-12">
                                         <div className="footer-widgets w-full">
-                                            <div className="logimg mb-4"><img src={logo}
-                                                width="90" alt="" className="img-fluid" /></div>
+                                            <div className="logimg size-[90px] mb-4">
+                                                 <img src={Image_URL + "assets/images/" + user.logo} className='w-full' alt="" />
+                                            </div>
                                             <ul className='flex gap-4'>
                                                 <li>
                                                     {
@@ -101,7 +103,7 @@ const Footer = () => {
                                 <div className="grid grid-cols-12 gap-4">
                                     <div className="lg:col-span-3 col-span-12">
                                         <div className="footer-widget">
-                                            <h4 className="widget-title cursive text-2xl  font-bold text-primary">Support</h4>
+                                            <h4 className="widget-title inline-block border-b border-[var(--primary)] cursive2 text-xl mb-5  font-semibold !text-[var(--primary)]">Support</h4>
                                             <ul className="list-unstyled *:py-2">
                                                 <li><Link to="/login">Getting started</Link></li>
 
@@ -112,30 +114,30 @@ const Footer = () => {
                                     </div>
                                     <div className="lg:col-span-3 col-span-12">
                                         <div className="footer-widget">
-                                            <h4 className="widget-title cursive text-2xl  font-bold text-primary">Services</h4>
+                                            <h4 className="widget-title inline-block border-b border-[var(--primary)] cursive2 text-xl mb-5  font-semibold !text-[var(--primary)]">Services</h4>
                                             <ul className="list-unstyled *:py-2">
                                                 {/* <li><Link to="/plans">Pricing</Link></li> */}
                                                 <li><Link to="/contact">Support</Link></li>
 
-                                                <li><Link to="/faqs">Faq’s</Link></li>
+                                                {/* <li><Link to="/faqs">Faq’s</Link></li> */}
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="lg:col-span-3 col-span-12">
                                         <div className="footer-widget">
-                                            <h4 className="widget-title cursive text-2xl  font-bold text-primary">Policy</h4>
+                                            <h4 className="widget-title inline-block border-b border-[var(--primary)] cursive2 text-xl mb-5  font-semibold !text-[var(--primary)]">Policy</h4>
                                             <ul className="list-unstyled *:py-2">
                                                 <li><Link to="/policy/diclaimer">Disclaimer</Link></li>
                                                 <li><Link to="/policy/privacy-policy">Privacy Policy</Link></li>
                                                 <li><Link to="/policy/terms-conditions">Terms &amp; Conditions</Link></li>
-                                                <li><Link to="/policy/refunds-cancellations"> Cancellation of Profile</Link></li>
-                                                <li><Link to="/policy/delete-policy">Delete Policy</Link></li>
+                                                {/* <li><Link to="/policy/refunds-cancellations"> Cancellation of Profile</Link></li> */}
+                                                {/* <li><Link to="/policy/delete-policy">Delete Policy</Link></li> */}
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="lg:col-span-3 col-span-12">
                                         <div className="footer-widget">
-                                            <h4 className="widget-title cursive text-2xl  font-bold text-primary">Contact Us</h4>
+                                            <h4 className="widget-title inline-block border-b border-[var(--primary)] cursive2 text-xl mb-5  font-semibold !text-[var(--primary)]">Contact Us</h4>
                                             <div className="footer-widget-contact">
                                                 <ul className="list-unstyled *:py-2">
                                                     <li>
@@ -159,25 +161,20 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-span-12 border-t border-primary pb-4">
-                                <div className="footer-text">
-                                    <p className='text-sm pt-5 font-light tracking-widest leading-6'><span className="font-bold text-dark">Disclaimer</span> :
-                                        <div className='inline-block *:pb-5  font-light'  ></div>
-                                    </p>
-                                </div>
-                            </div>
+                           
                         </div>
 
                     </div>
                 </footer>
-                <div className="tiny-footer bg-primary text-white">
+               
+            </div>
+            <div className="tiny-footer bg-primary text-white">
                     <div className="grid grid-cols-12 align-items-center">
                         <div className="col-span-12 mb-0 text-center p-3 text-xs">Copyright © <span id="yearText">{new Date().getFullYear()} </span>
                             <strong>{user.company_name}</strong> Web & App All rights reserved.
                         </div>
                     </div>
                 </div>
-            </div>
         </>
     )
 }
