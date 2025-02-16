@@ -1,8 +1,10 @@
 import { FileImageOutlined } from '@ant-design/icons'
-import React from 'react'
+// import React from 'react'
 import { TiWeatherWindyCloudy } from 'react-icons/ti'
 import aboutimg from '../../assets/about/about-2.webp'
+import { useUser } from '../Account/UserContext';
 const AboutThree = () => {
+    const { user } = useUser();
     return (
         <>
             <section className='py-[3rem]'>
@@ -19,10 +21,10 @@ const AboutThree = () => {
                                     Explore Beyond the Horizon: Discover the World’s Wonders
                                 </h2>
                                 <p className='py-2 text-md font-light'>
-                                    We pride themselves on offering personalized services for high-end clientele, with a commitment to crafting unique and unforgettable travel experiences
+                                    {user.about_us}
                                 </p>
-                                <p className='py-2 text-md font-light'>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believabl
+                                <p className='py-2 hidden text-md font-light'>
+                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believabl
                                 </p>
                                 <ul className='py-3 *:py-3'>
                                     <li>

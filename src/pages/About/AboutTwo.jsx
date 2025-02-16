@@ -3,13 +3,15 @@ import { FileImageOutlined } from '@ant-design/icons'
 import { TiWeatherWindyCloudy } from 'react-icons/ti'
 import aboutimg from '../../assets/about/about-1.webp'
 import BreadCrumb from '../../components/BreadCrumb'
+import { useUser } from '../Account/UserContext'
 // import Vision from './AboutElements/Vision'
 // import Testimonials from '../Home/Testimonials'
 // import CtaLayoutTwo from '../cta/CtaLayoutTwo'
 const AboutTwo = () => {
+    const { user } = useUser();
     return (
         <>
-            
+
             <BreadCrumb path={['Home', 'About']} title={'About us'} />
             <section className='py-[3rem]'>
                 <div className="container">
@@ -18,16 +20,16 @@ const AboutTwo = () => {
                             About Us
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam recusandae exercitationem officia repellendus harum vero voluptas cupiditate veritatis dolorum distinctio?
+                            {user.about_us}
                         </p>
                     </div>
                     <div className="grid grid-cols-12 items-center gap-5">
-                        <div className="col-span-5">
+                        <div className="lg:col-span-5 col-span-12">
                             <div className="w-full">
                                 <img src={aboutimg} alt="" className="w-full" />
                             </div>
                         </div>
-                        <div className="col-span-7">
+                        <div className="lg:col-span-7 col-span-12">
                             <div className="w-full p-5">
                                 <h2 className="text-3xl font-bold mb-4 text-primary">
                                     Explore Beyond the Horizon: Discover the World’s Wonders
@@ -69,12 +71,12 @@ const AboutTwo = () => {
                     </div>
                 </div>
             </section>
-            
-           
+
+
             {/* <CtaLayoutTwo/> */}
             {/* <Testimonials pb={'pb-20'}/> */}
 
-          
+
 
 
         </>

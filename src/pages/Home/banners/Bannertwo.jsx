@@ -49,12 +49,12 @@ const Bannertwo = () => {
                   <h2 className="cursive lg:text-[3rem] text-[1.5rem] mb-5 font-bold">
                     Find your <br></br> perfect Enjoy
                   </h2>
-                  <p className="mb-10 hero_p">
+                  <p className="lg:mb-10 mb-5 hero_p lg:text-md text-sm leading-[1.3]">
                     While perfection is an unattainable ideal, in this imagined partnership, we would complement each other in a beautifully imperfect harmony, bound by the threads of mutual respect, admiration, and love.
                   </p>
-                  <div className="w-full flex  gap-4 mt-5">
+                  <div className="w-full flex  gap-4 lg:mt-5 mt-2">
                    
-                    <Link to={'/login'} className="w-40 py-4 bg-primary text-center inline-block text-white rounded btn">
+                    <Link to={'/login'} className="w-40 lg:py-4 py-2 bg-primary text-center inline-block text-white rounded btn">
                       Get Started
                     </Link>
                   </div>

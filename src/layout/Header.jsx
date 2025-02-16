@@ -101,13 +101,13 @@ const Header = ({classname}) => {
     )
     return (
         <>
-            <section className={`bg-primary/10 relative ${classname}`}>
+            <section className={`shadow-sm shadow-[var(--primary)] relative ${classname}`}>
                 <div className="container relative">
                     <div className="grid grid-cols-12">
                         <div className="col-span-12">
                             <div className="flex relative justify-between items-center">
-                                <Link to={'/'} className="w-[120px] py-5 inline-block">
-                                    <img src={Image_URL + "assets/images/" + user.logo} className='w-full' alt="" />
+                                <Link to={'/'} className="h-[120px] w-auto py-5 inline-block">
+                                    <img src={Image_URL + "assets/images/" + user.logo} className='h-full w-auto' alt="" />
                                 </Link>
                                 <ul className="lg:inline-flex hidden gap-5   navlinks mx-auto">
                                     {weblinks()}

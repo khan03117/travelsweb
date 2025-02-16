@@ -8,7 +8,7 @@ import dummyimg from '../../../assets/packages/8.jpeg'
 const PackageLayoutTwo = ({ data }) => {
     return (
         <>
-            <div className="w-full p-4 bg-white shadow shadow-black/40 rounded">
+            <div className="w-full lg:p-4 p-0 bg-white shadow shadow-black/40 rounded">
                 <figure className="w-full relative overflow-hidden">
                     <img
                         src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg}
@@ -18,18 +18,18 @@ const PackageLayoutTwo = ({ data }) => {
                     />
 
                 </figure>
-                <div className="w-full">
-                    <div className="w-full py-2">
+                <div className="w-full lg:p-0 p-4">
+                    <div className="w-full lg:py-2 p-0">
                         <h4 className='text-lg font-bold text-black'>
-                            {data.title ?? data.activity_name}
+                            {data.title}
                         </h4>
                         <div className="w-full mb-2">
                             <span>
                                 <EnvironmentOutlined />
                             </span>
-                            <span>Barcelona, Spain</span>
+                            <span>{data?.state?.state} , {data?.state?.country?.country}</span>
                         </div>
-                        <p className='text-gray-700 text-xs tracking-widest'>
+                        <p className='text-gray-700 hidden text-xs tracking-widest'>
                             Here we will write short descrition to each package which will be added from backend admin panel
                         </p>
                     </div>
@@ -53,7 +53,7 @@ const PackageLayoutTwo = ({ data }) => {
                                 </div>
                             </div>
                         </div>
-                        <Button variant='gradient' fullWidth color='teal'>Book Now</Button>
+                        <Button variant='gradient' fullWidth color='teal'>View Now</Button>
                     </div>
                 </div>
             </div>

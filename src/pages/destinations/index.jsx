@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import DestinationLayoutOne from './DestinationLayoutOne'
 import { API_URL, usertoken } from '../../utils';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import DestinationLayoutTwo from './DestinationLayoutTwo';
 import DestinationLayoutThree from './DestinationLayoutThree';
 import BreadCrumb from '../../components/BreadCrumb';
@@ -74,7 +74,7 @@ const Destinations = () => {
                                                 {
                                                     (id == 1) && (
                                                         <>
-                                                            <div className="col-span-3">
+                                                            <div className="lg:col-span-3 col-span-6">
                                                                 <DestinationLayoutOne data={itm} />
                                                             </div>
                                                         </>
@@ -83,7 +83,7 @@ const Destinations = () => {
                                                 {
                                                     (id == 2) && (
                                                         <>
-                                                            <div className="col-span-3">
+                                                            <div className="lg:col-span-3 col-span-6">
                                                                 <DestinationLayoutTwo data={itm} />
                                                             </div>
                                                         </>
@@ -109,7 +109,7 @@ const Destinations = () => {
                                 </div>
                                 <div className="w-full mt-10">
                                     <div className="grid grid-cols-12">
-                                        <div className="col-span-12">
+                                        <div className="col-span-6">
                                             <div className="w-full *:size-10 items-center *:text-center *:leading-10 *:border *:border-primary *:rounded flex gap-2">
                                                 <button onClick={() => page > 1 && setPage(prev => prev - 1)}>
                                                     <LeftOutlined />
@@ -119,6 +119,10 @@ const Destinations = () => {
                                                     <RightOutlined />
                                                 </button>
                                             </div>
+                                        </div>
+                                        <div className="col-span-6">
+                                        <Link to={'/destinations'} className='bg-[var(--primary)] rounded-full px-10 hover:bg-opacity-75 py-2 lg:text-sm text-xs text-white'>View All</Link>
+
                                         </div>
                                     </div>
                                 </div>

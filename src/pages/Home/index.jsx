@@ -109,7 +109,7 @@ const Home = () => {
                   {
                     (id == 1) && (
                       <>
-                        <div className="col-span-4">
+                        <div className="lg:col-span-4 col-span-12">
                           <Link to={'/package/show/' + itm.url}>
 
                             <PackageLayoutOne data={itm} />
@@ -145,6 +145,11 @@ const Home = () => {
 
               ))
             }
+            <div className="col-span-12 my-4">
+              <div className="w-full text-center">
+                <Link to={'/destinations'} className='bg-[var(--primary)] rounded-full px-10 hover:bg-opacity-75 py-2 lg:text-sm text-xs text-white'>View All</Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

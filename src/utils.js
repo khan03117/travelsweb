@@ -6,5 +6,6 @@ export const BASE_URL = "https://b2b.aahiltours.com/";
 export const API_URL = "https://b2b.aahiltours.com/api/";
 export const Image_URL = "https://b2b.aahiltours.com/public/";
 
-export const usertoken = "DUMMY_API_KEY_1234567890";
+// export const usertoken = "DUMMY_API_KEY_1234567890";
+export const usertoken = "5|Uz7g7BixTqYmCLq2XZFJaS956a8iUCcSdFpDzHhQc243c82d";
 // export const API_URL  = `https://surajsujanmatrimony.in:5900/api/v1/`;

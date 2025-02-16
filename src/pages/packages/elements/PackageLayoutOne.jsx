@@ -9,24 +9,24 @@ import dummyimg from '../../../assets/packages/8.jpeg'
 const PackageLayoutOne = ({ data }) => {
     return (
         <>
-            <div className="w-full p-4 bg-white shadow shadow-black/40 rounded">
+            <div className="w-full overflow-hidden p-0 bg-white shadow shadow-black/40 rounded">
                 <figure className="w-full  relative overflow-hidden">
                     <img
                         src={Image_URL + "assets/images/" + data.main_image}
                         onError={(e) => e.target.src = dummyimg}
                         alt=""
-                        className="w-full"
+                        className="w-full h-48"
                     />
 
                 </figure>
-                <div className="w-full bg-white pt-2">
+                <div className="w-full px-3 pb-4 bg-white pt-2">
                     <h4 className="text-black  mb-2 font-bold text-lg">
                         {data?.package_title ?? 'Package Title Not Available'}
                     </h4>
                     <p className='text-gray-700 text-xs tracking-widest'>
                         Here we will write short descrition to each package which will be added from backend admin panel
                     </p>
-                    <div className="border-t py-2 mt-2 border-gray-400">
+                    <div className="border-t py-2 my-3 border-gray-400">
                         <div className="grid grid-cols-2">
                             <div className="col-span-1">
                                 <PackageShortInfoWithIcon icon={<CalendarOutlined />} title={'Duration'} value={data?.days + ' days ' + data?.nights + ' Nights'} />

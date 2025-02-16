@@ -161,7 +161,7 @@ const SinglePackageOne = () => {
                                                     <div className="grid grid-cols-12 gap-6">
                                                         <div className="col-span-12 mb-2">
                                                             <div className="w-full">
-                                                                <h2 className='text-[1.6rem] font-bold'>Itinerary</h2>
+                                                                <h2 className='lg:text-[1.6rem] text-lg font-bold'>Itinerary</h2>
                                                             </div>
                                                         </div>
                                                         {
@@ -170,8 +170,8 @@ const SinglePackageOne = () => {
 
                                                                     <div key={d} className="col-span-12">
                                                                         <Accordion open={open == ind} >
-                                                                            <AccordionHeader onClick={() => handleOpen(ind)}>
-                                                                                <div className="w-full">
+                                                                            <AccordionHeader className='lg:text-xl text-sm' onClick={() => handleOpen(ind)}>
+                                                                                <div className="w-full lg:text-xl text-sm">
                                                                                     Day {ind + 1}. {v[0]?.activity_name}
                                                                                 </div>
                                                                             </AccordionHeader>
@@ -182,10 +182,10 @@ const SinglePackageOne = () => {
                                                                                             v.map(itm => (
                                                                                                 <>
                                                                                                     <div className="grid grid-cols-12 gap-10">
-                                                                                                        <div className="col-span-4">
+                                                                                                        <div className="lg:col-span-4 col-span-12">
                                                                                                             <img src={Image_URL + "assets/images/" + itm.main_image} alt="" className="w-full" />
                                                                                                         </div>
-                                                                                                        <div className="col-span-8">
+                                                                                                        <div className="lg:col-span-8 col-span-12">
                                                                                                             <div dangerouslySetInnerHTML={{ __html: itm?.description }} />
 
                                                                                                         </div>

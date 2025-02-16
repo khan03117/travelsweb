@@ -11,13 +11,13 @@ const DestinationLayoutTwo = ({ data }) => {
                 <Link to={'/packages/' + data.url} className='size-10 bg-white z-50 rounded-full shadow-md shadow-white/50 absolute top-3 end-3 flex items-center justify-center'>
                     <RightOutlined/>
                 </Link>
-                <figure className="w-full destinationbgoverlay relative h-[350px]">
+                <figure className="w-full destinationbgoverlay relative lg:h-[350px] h-[250px]">
                     <img src={Image_URL + "assets/images/" + data.image} alt="" className="w-full h-full object-cover" />
                 </figure>
-                <div className="w-full  p-3 absolute z-50 bottom-0 start-0">
-                    <div className="w-full bg-white p-2 rounded-md">
-                        <h5 className="text-lg  font-semibold text-center capitalize">{data.country.toLowerCase()}</h5>
-                        <div className='flex  text-sm  items-center justify-center'>
+                <div className="w-full  lg:p-3 p-1 absolute z-50 bottom-0 start-0">
+                    <div className="w-full bg-white lg:p-2 px-0 py-1 rounded-md">
+                        <h5 className="lg:text-lg text-xs  font-semibold text-center capitalize">{data.country.toLowerCase()}</h5>
+                        <div className='flex *:lg:text-sm *:text-xs  items-center justify-center'>
                             <span className='text-yellow-600'>
                                 <StarFilled />
                             </span>
@@ -34,7 +34,7 @@ const DestinationLayoutTwo = ({ data }) => {
                                 <StarFilled />
                             </span>
                             <span>
-                                400 Reviews
+                                {data.package_count > 10 ? '10+' : data.package_count } Packages
                             </span>
                         </div>
                     </div>
