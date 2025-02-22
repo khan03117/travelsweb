@@ -10,8 +10,8 @@ import { Image_URL } from '../utils';
 import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 
 // import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
-const Header = ({classname}) => {
-   
+const Header = ({ classname }) => {
+
     const { user } = useUser();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
@@ -30,7 +30,7 @@ const Header = ({classname}) => {
             </li>
 
             <li>
-            <Link to={'/destinations/'} >Destinations</Link>
+                <Link to={'/destinations/'} >Destinations</Link>
                 {/* <Menu className="hidden">
                     <MenuHandler>
                         <button className='text-primary uppercase'>Packages</button>
@@ -65,7 +65,7 @@ const Header = ({classname}) => {
                             <Link className='w-full block py-2' to={'/visa-assistant/'}>Visa Assistant</Link>
                         </MenuItem>
                         <MenuItem className='p-0'>
-                            <Link  className='w-full block py-2' to={'/visa/services/'}>Visa Services</Link>
+                            <Link className='w-full block py-2' to={'/visa/services/'}>Visa Services</Link>
                         </MenuItem>
                     </MenuList>
                 </Menu>
@@ -81,10 +81,10 @@ const Header = ({classname}) => {
                             <Link className='w-full block py-2' to={'/addon/okay-board'}>Okay to Board</Link>
                         </MenuItem>
                         <MenuItem className='p-0'>
-                            <Link  className='w-full block py-2' to={'/visa/miscellaneous'}>Miscellaneous Services</Link>
+                            <Link className='w-full block py-2' to={'/visa/miscellaneous'}>Miscellaneous Services</Link>
                         </MenuItem>
                         <MenuItem className='p-0'>
-                            <Link  className='w-full block py-2' to={'/apply-now'}>Document Attestation
+                            <Link className='w-full block py-2' to={'/apply-now'}>Document Attestation
                             </Link>
                         </MenuItem>
                     </MenuList>
@@ -113,7 +113,7 @@ const Header = ({classname}) => {
                                     {weblinks()}
                                 </ul>
                                 <ul className="lg:hidden block relative items-center ms-auto gap-5">
-                                   
+
                                     <li >
                                         <button onClick={() => handleOpen()} className='text-[var(--primary)] lg:hidden block text-xl'>
                                             <CgMenuRight />
@@ -147,5 +147,5 @@ export default Header
 
 
 Header.propTypes = {
-    classname : PropTypes.string
+    classname: PropTypes.string
 }

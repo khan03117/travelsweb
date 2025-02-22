@@ -23,7 +23,7 @@ const PackageLayoutOne = ({ data }) => {
                     <h4 className="text-black  mb-2 font-bold text-lg">
                         {data?.package_title ?? 'Package Title Not Available'}
                     </h4>
-                    <p className='text-gray-700 text-xs tracking-widest'>
+                    <p className='text-gray-700 text-xs hidden tracking-widest'>
                         Here we will write short descrition to each package which will be added from backend admin panel
                     </p>
                     <div className="border-t py-2 my-3 border-gray-400">

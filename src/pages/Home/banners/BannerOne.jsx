@@ -22,7 +22,7 @@ const BannerOne = () => {
                             [].map(bnr => (
                                 <>
                                     <div className="w-full">
-                                        <img src={BASE_URL + bnr.image} alt="" className="w-full" />
+                                        <img src={bnr.image} alt="" className="w-full" />
                                     </div>
                                 </>
                             ))

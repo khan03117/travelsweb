@@ -26,6 +26,10 @@ import { useUser } from '../Account/UserContext';
 import PackageLayoutThree from '../packages/elements/PackageLayoutThree';
 import Loading from '../../components/Loading';
 import { Link } from 'react-router-dom';
+import BannerFour from './banners/BannerFour';
+import BannerFive from './banners/BannerFive';
+import PackageLayoutFour from '../packages/elements/PackageLayoutFour';
+import PackageLayoutFive from '../packages/elements/PackageLayoutFive';
 
 const Home = () => {
   const { user } = useUser();
@@ -62,6 +66,22 @@ const Home = () => {
   }
   return (
     <>
+    {
+      id == 4 && (
+        <>
+         <BannerFour/>
+        </>
+      )
+    }
+    {
+      id == 5 && (
+        <>
+         <BannerFive/>
+        </>
+      )
+    }
+   
+   
       {
         (id == 1) && (
           <>
@@ -111,7 +131,6 @@ const Home = () => {
                       <>
                         <div className="lg:col-span-4 col-span-12">
                           <Link to={'/package/show/' + itm.url}>
-
                             <PackageLayoutOne data={itm} />
                           </Link>
                         </div>
@@ -121,7 +140,7 @@ const Home = () => {
                   {
                     (id == 2) && (
                       <>
-                        <div className="col-span-4">
+                        <div className="lg:col-span-4 col-span-12">
                           <Link to={'/package/show/' + itm.url}>
                             <PackageLayoutTwo data={itm} />
                           </Link>
@@ -136,6 +155,28 @@ const Home = () => {
                         <div className="lg:col-span-4 col-span-12">
                           <Link to={'/package/show/' + itm.url}>
                             <PackageLayoutThree data={itm} />
+                          </Link>
+                        </div>
+                      </>
+                    )
+                  }
+                  {
+                    (id == 4) && (
+                      <>
+                        <div className="lg:col-span-4 col-span-12">
+                          <Link to={'/package/show/' + itm.url}>
+                            <PackageLayoutFour data={itm} />
+                          </Link>
+                        </div>
+                      </>
+                    )
+                  }
+                  {
+                    (id == 5) && (
+                      <>
+                        <div className="lg:col-span-4 col-span-12">
+                          <Link to={'/package/show/' + itm.url}>
+                            <PackageLayoutFive data={itm} />
                           </Link>
                         </div>
                       </>

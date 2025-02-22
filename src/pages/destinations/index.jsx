@@ -98,6 +98,24 @@ const Destinations = () => {
                                                         </>
                                                     )
                                                 }
+                                                {
+                                                    (id == 4) && (
+                                                        <>
+                                                            <div className="lg:col-span-4 col-span-6">
+                                                                <DestinationLayoutThree data={itm} />
+                                                            </div>
+                                                        </>
+                                                    )
+                                                }
+                                                {
+                                                    (id == 5) && (
+                                                        <>
+                                                            <div className="lg:col-span-4 col-span-6">
+                                                                <DestinationLayoutThree data={itm} />
+                                                            </div>
+                                                        </>
+                                                    )
+                                                }
 
                                                 {/* <div className="col-span-3">
                                         <DestinationLayoutTwo data={itm} />
