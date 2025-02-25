@@ -30,29 +30,23 @@ const Header = ({ classname }) => {
             </li>
 
             <li>
-                <Link to={'/destinations/'} >Destinations</Link>
-                {/* <Menu className="hidden">
+                {/* <Link to={'/destinations/'} >Destinations</Link> */}
+                <Menu >
                     <MenuHandler>
-                        <button className='text-primary uppercase'>Packages</button>
+                        <button className='text-primary uppercase'>Destinations</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem>
-                            <Link to={'/packages/' + id}>Domestic</Link>
+                            <Link to={'/packages/india'}>Domestic Packages</Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link to={'/packages/' + id}>Internationl</Link>
+                            <Link to={'/destinations'}>International Packages</Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link to={'/packages/' + id}>Umrah</Link>
-                        </MenuItem>
-                        <MenuItem>
-                            <Link to={'/packages/' + id}>Study</Link>
-                        </MenuItem>
-                        <MenuItem>
-                            <Link to={'/packages/' + id}>Religious</Link>
+                            <Link to={'/category-packages/umrah'}>Umrah Packages</Link>
                         </MenuItem>
                     </MenuList>
-                </Menu> */}
+                </Menu>
             </li>
             <li>
                 {/* <Link to={'/visa'} >Visa</Link> */}

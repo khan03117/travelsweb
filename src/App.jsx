@@ -30,6 +30,7 @@ import VisaAssistantDetailsPage from "./pages/visa/VisaAssistantDetailsPage";
 import VisaServices from "./pages/visa/VisaServices";
 import OkayBoard from "./pages/visa/OkayBoard";
 import ApplyNow from "./pages/Contact/ApplyNow";
+import CategoryPackage from "./pages/packages/CategoryPackage";
 
 function App() {
   const ThemeRoutes = createBrowserRouter(
@@ -49,6 +50,7 @@ function App() {
           <Route path="/addon/:slug" element={<OkayBoard />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:url" element={<Packages />} />
+          <Route path="/category-packages/:url" element={<CategoryPackage />} />
           <Route path="/package/show/:url" element={<SinglePackageOne />} />
           <Route path="/destinations" element={<Destinations/>} />
           <Route path="/visa-assistant" element={<VisaAssistantPage/>} />
