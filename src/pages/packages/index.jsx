@@ -75,7 +75,7 @@ const Packages = () => {
                   {
                     items.map((itm) => (
                       <>
-                        <div className="lg:col-span-4 col-span-12">
+                        <div className={` ${id == 5 ? 'lg:col-span-6 col-span-12' : 'lg:col-span-4 col-span-12'} `}>
                           <Link to={'/package/show/' + itm.url} className="block">
                             {getlayout(itm)}
                           </Link>

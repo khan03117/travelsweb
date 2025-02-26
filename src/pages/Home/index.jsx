@@ -174,8 +174,8 @@ const Home = () => {
                   {
                     (id == 5) && (
                       <>
-                        <div className="lg:col-span-4 col-span-12">
-                          <Link to={'/package/show/' + itm.url}>
+                        <div className="lg:col-span-6 col-span-12">
+                          <Link className='h-full block w-full' to={'/package/show/' + itm.url}>
                             <PackageLayoutFive data={itm} />
                           </Link>
                         </div>

@@ -8,8 +8,8 @@ import PropTypes from "prop-types"
 const PackageLayoutFive = ({ data }) => {
     return (
         <>
-            <div className="w-full overflow-hidden rounded-xl bg-white shadow shadow-black/40">
-                <div className="grid grid-cols-12">
+            <div className="w-full h-full overflow-hidden rounded-xl bg-white shadow shadow-black/40">
+                <div className="grid grid-cols-12 h-60">
                     <div className="col-span-6">
                         <figure className="w-full h-full">
                             <img src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg} onError={(e) => e.target.src = dummyimg} alt="" className="w-full h-full max-h-[270px]" />
@@ -55,7 +55,7 @@ const PackageLayoutFive = ({ data }) => {
                                     <span>
                                         <EnvironmentOutlined />
                                     </span>
-                                    <span>{data?.state?.state} , {data?.state?.country?.country}</span>
+                                    <span className="capitalize">{data?.state?.state} , {data?.state?.country?.country.toLowerCase()}</span>
                                 </div>
                                 <p className='text-gray-800 text-xs hidden tracking-widest'>
                                     Here we will write short descrition to each package which will be added from backend admin panel
@@ -66,8 +66,8 @@ const PackageLayoutFive = ({ data }) => {
                                     <div className="col-span-1">
                                         <div className="flex text-sm">
                                             <CalendarOutlined />
-                                            <span>
-                                            {data?.days + ' days ' + data?.nights + ' Nights'}
+                                            <span className="ms-3">
+                                            {data?.days + ' D ' + data?.nights + ' N'}
                                             </span>
                                         </div>
                                     </div>
