@@ -105,7 +105,7 @@ const Footer = () => {
                                         <div className="footer-widget">
                                             <h4 className="widget-title inline-block border-b border-[var(--primary)] cursive2 text-xl mb-5  font-semibold !text-[var(--primary)]">Support</h4>
                                             <ul className="list-unstyled *:py-2">
-                                                <li><Link to="/login">Getting started</Link></li>
+                                                <li><Link to="/destinations">Getting started</Link></li>
 
                                                 <li><Link to="/contact">Help center</Link></li>
 
