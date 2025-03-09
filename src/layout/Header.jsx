@@ -33,7 +33,7 @@ const Header = ({ classname }) => {
                 {/* <Link to={'/destinations/'} >Destinations</Link> */}
                 <Menu >
                     <MenuHandler>
-                        <button className='text-primary uppercase'>Destinations</button>
+                        <button className='lg:text-primary uppercase'>Packages</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem>
