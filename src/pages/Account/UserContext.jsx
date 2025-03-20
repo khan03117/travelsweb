@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
    
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const policies = useState([]);
+    const [policies, setPolicies] = useState([]);
     const [banners, setBanners] = useState([]);
     const faqs = useState([]);
     const [testimonial, setTestimonial] = useState([]);
@@ -71,17 +71,17 @@ export const UserProvider = ({ children }) => {
             setLoading(false);
         }
     }
-    // const fetchpolicies = async () => {
-    //     try {
-    //         setLoading(true);
-    //         const items = await axios.get(API_URL + "policy");
-    //         setPolicies(items.data.data);
-    //     } catch (err) {
-    //         console.log(err);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }
+    const fetchpolicies = async () => {
+        try {
+            setLoading(true);
+            const items = await axios.get(API_URL + "policies");
+            setPolicies(items.data.data);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
+    }
     const userLogout = () => {
         localStorage.clear();
         // navigate('/');
@@ -89,7 +89,7 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         gettestimonial();
         // fetchfaqs();
-        // fetchpolicies();
+        fetchpolicies();
         fetchUser();
 
         fetchBanners();

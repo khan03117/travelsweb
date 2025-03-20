@@ -9,17 +9,17 @@ const PackageLayoutFive = ({ data }) => {
     return (
         <>
             <div className="w-full h-full overflow-hidden rounded-xl bg-white shadow shadow-black/40">
-                <div className="grid grid-cols-12 h-60">
+                <div className="grid grid-cols-12  h-auto">
                     <div className="col-span-6">
                         <figure className="w-full h-full">
-                            <img src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg} onError={(e) => e.target.src = dummyimg} alt="" className="w-full h-full max-h-[270px]" />
+                            <img src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg} onError={(e) => e.target.src = dummyimg} alt="" className="w-full h-full  lg:max-h-[290px] max-h-[220px]" />
                         </figure>
                     </div>
                     <div className="col-span-6 ">
-                        <div className="w-full px-4 pt-8 flex flex-col gap-5" >
+                        <div className="w-full h-full lg:px-4 px-2 lg:pt-8 pt-2 flex flex-col lg:gap-5 gap-2" >
                             <div className="pb-3 grid grid-cols-2 border-b border-blue-gray-200">
                                 <div className="col-span-1">
-                                    <div className="flex gap-1 ">
+                                    <div className="flex lg:gap-1 gap-0 ">
                                         <span className="text-sm text-orange-400">
                                             <StarFilled />
                                         </span>
@@ -43,15 +43,15 @@ const PackageLayoutFive = ({ data }) => {
                                 </div>
                                 <div className="col-span-1">
                                     <div className="text-end">
-                                        <span className="inline-block px-4 py-1  rounded-full bg-primary text-white text-xs">Featured</span>
+                                        <span className="inline-block lg:px-4 px-2 py-1  rounded-full bg-primary text-white text-xs">Featured</span>
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full">
-                                <h4 className='text-lg font-semibold text-black'>
+                                <h4 className='lg:text-lg text-sm font-semibold text-black'>
                                     {data?.package_title ?? 'Package Title Not Available'}
                                 </h4>
-                                <div className="w-full mb-2">
+                                <div className="w-full mb-2 lg:text-md text-xs">
                                     <span>
                                         <EnvironmentOutlined />
                                     </span>
@@ -66,20 +66,23 @@ const PackageLayoutFive = ({ data }) => {
                                     <div className="col-span-1">
                                         <div className="flex text-sm">
                                             <CalendarOutlined />
-                                            <span className="ms-3">
+                                            <span className="lg:ms-3 ms-1">
                                             {data?.days + ' D ' + data?.nights + ' N'}
                                             </span>
                                         </div>
                                     </div>
                                     <div className="col-span-1 text-end">
-                                        <div className="inline-flex text-sm">
+                                        <div className="flex gap-0 text-sm">
                                             <UsergroupAddOutlined />
-                                            <span>
+                                            <span className="text-nowrap">
                                                 12 Guests
                                             </span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="w-full pb-5">
+                                <button className="px-3 lg:py-2 py-1 lg:text-md text-xs rounded-full w-full bg-[var(--primary)] text-white">View Details</button>
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 // import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
-import { EnvironmentOutlined, FacebookFilled, GoogleSquareFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
+import { EnvironmentOutlined, FacebookFilled,  InstagramFilled, LinkedinFilled, TwitterSquareFilled } from '@ant-design/icons';
 import { IoIosCall, IoMdMail } from 'react-icons/io';
 import { Image_URL } from '../utils';
 
@@ -44,9 +44,9 @@ const Footer = () => {
                                                     {
                                                         user.facebook && (
                                                             <>
-                                                                <Link to={'/'} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                <a to={user.facebook} target='_blank' className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
                                                                     <FacebookFilled />
-                                                                </Link>
+                                                                </a>
                                                             </>
                                                         )
                                                     }
@@ -57,10 +57,11 @@ const Footer = () => {
                                                     user.twitter && (
                                                         <>
                                                             <li>
+                                                                
 
-                                                                <Link to={'/'} className='inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white '>
+                                                                <a target='_blank' href={user.twitter} className='inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white '>
                                                                     <TwitterSquareFilled />
-                                                                </Link>
+                                                                </a>
 
                                                             </li>
                                                         </>
@@ -70,9 +71,9 @@ const Footer = () => {
                                                     user.instagram && (
                                                         <>
                                                             <li>
-                                                                <Link to={'/'} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                <a href={user.instagram} target='_blank' className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
                                                                     <InstagramFilled />
-                                                                </Link>
+                                                                </a>
 
                                                             </li>
                                                         </>
@@ -82,9 +83,9 @@ const Footer = () => {
                                                     user.linkedin && (
                                                         <>
                                                             <li>
-                                                                <Link to={'/'} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
-                                                                    <GoogleSquareFilled />
-                                                                </Link>
+                                                                <a target='_blank' href={user.linkedin} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                   <LinkedinFilled/>
+                                                                </a>
 
                                                             </li>
                                                         </>
@@ -127,7 +128,7 @@ const Footer = () => {
                                         <div className="footer-widget">
                                             <h4 className="widget-title inline-block border-b border-[var(--primary)] cursive2 text-xl mb-5  font-semibold !text-[var(--primary)]">Policy</h4>
                                             <ul className="list-unstyled *:py-2">
-                                                <li><Link to="/policy/diclaimer">Disclaimer</Link></li>
+                                                {/* <li><Link to="/policy/diclaimer">Disclaimer</Link></li> */}
                                                 <li><Link to="/policy/privacy-policy">Privacy Policy</Link></li>
                                                 <li><Link to="/policy/terms-conditions">Terms &amp; Conditions</Link></li>
                                                 {/* <li><Link to="/policy/refunds-cancellations"> Cancellation of Profile</Link></li> */}

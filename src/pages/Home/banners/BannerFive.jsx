@@ -48,7 +48,7 @@ const BannerFive = () => {
                     <img src={bnr.image} alt="" className="w-full" />
                     <div className=" absolute w-full h-full bannerFive  top-0 start-0">
                       <div className="grid grid-cols-12 h-full relative top-0">
-                        <div className="col-span-8">
+                        <div className="lg:col-span-8 col-span-12">
                           <div className="w-full h-full justify-center flex items-center ">
                             <div className="w-full text-center">
                               <h2 className={`text-white  cursive lg:text-[3rem] leading-[1.6] text-xl themetransition transition-all  duration-[1s] ease-linear font-bold ${activeSlide == indx ? 'lg:-translate-y-24' : ''}`}>
@@ -60,7 +60,7 @@ const BannerFive = () => {
                           </div>
                         </div>
                         
-                        <div className="col-span-4 px-5 pt-2 pb-10">
+                        <div className="col-span-4 lg:block hidden  px-5 pt-2 pb-10">
                           <ContactForm />
                         </div>
 
