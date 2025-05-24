@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airticket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        .ticketborder {
+            border: 1px solid #ddd;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .space {
+            padding: 3rem 1rem;
+        }
+
+        table {
+            width: 100%;
+
+
+        }
+
+        .airdiv {
+            display: flex;
+            gap: 5px;
+        }
+
+        .aeroplane {
+            height: 30px;
+        }
+
+        .table td {
+            padding: 5px 0;
+        }
+
+        .main {
+            text-align: end;
+        }
+
+        .maindiv {
+            background-color: black;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 5px 2px;
+        }
+
+        .list {
+            padding: 1rem 1rem;
+            font-size: 18px;
+        }
+
+        .tablemain {
+            width: 100%;
+            border: 1px solid gray;
+            text-align: center;
+        }
+
+        .tablemain td {
+            border: 1px solid gray;
+        }
+
+        .info {
+            padding: 10px 0;
+        }
+
+        .second {
+            text-align: start;
+        }
+
+        .first {
+            text-align: end;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="space ticketborder">
+        <table class="table">
+            <div class="table">
+                <thead>
+                    <tr class="">
+                        <th class="second">
+                            <p> Company Logo & Name</p>
+                        </th>
+                        <th class="first">
+                            <p>Booking Reference No</p>
+                            <p>Booking Date & Time</p>
+                            <p>Booking Status
+                            </p>
+                        </th>
+                    </tr>
+                </thead>
+            </div>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="w-100 airdiv ">
+                            <div class="icon">
+                                <img src="plane.png" alt="image" class="aeroplane">
+                            </div>
+                            <div class="text">
+                                <h3>Flight Booking
+                                </h3>
+                                <p>E-Ticket Number: NF1EM1CN3JXSM0714558</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="main">
+                        <h3>AIRLINE PNR</h3>
+                        <h4>2668314</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>SpiceJet SG-2941</p>
+                        <p>Economy</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2>JAI 11:35</h2>
+                        <h4>Sat, 20 May 2023</h4>
+                    </td>
+                    <td class="main">
+                        <h2>13:00 ATQ</h2>
+                        <h4>Sat, 20 May 2023</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Terminal - 2, Jaipur International Airport,</p>
+                        <p>Jaipur
+                        </p>
+                    </td>
+                    <td class="main">
+                        <p>Sri Guru Ram Dass Jee International</p>
+                        <p>Airport, Amritsar</p>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <div class="w-100 maindiv">
+            <p>Passenger Details</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sr. No. Name </th>
+                    <th>Pax Category</th>
+                    <th>Nationality</th>
+                    <th>Passport No.</th>
+                    <th>Date of Expiry</th>
+                </tr>
+            </thead>
+        </table>
+        <table class="table">
+            <tr>
+                <td>
+                    <h3>Important Information</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Check in online 24 hours before departure, select seats, add baggage if needed, and print or
+                        save
+                        your boarding pass
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Arrive 2 hours early for domestic flights and 4 hours for international to ensure smooth
+                        check-in,
+                        security, and boarding.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Date & Time is calculated based on the local time of the city/destination
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        You must carry a valid government ID for all the travellers at the time of check-in. For infant
+                        travellers, it is mandatory to carry the date of birth certificate.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Your ability to travel is at the sole discretion of the airport authorities and shall not be
+                        held responsible.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table class="tablemain">
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        <h4>Baggage Information</h4>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <h5>JAI - ATQ, SpiceJet SG-2941</h5>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Traveller
+                    </th>
+                    <th>
+                        Cabin
+                    </th>
+                    <th>
+                        Check-in
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Adult
+                    </td>
+                    <td>
+                        7 Kgs (1 piece only)
+                    </td>
+                    <td>
+                        15 Kgs (1 piece only)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="tablemain">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <h4>Cancellation Policy</h4>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <h5>JAI - ATQ</h5>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Time frame
+                    </th>
+                    <th>
+                        Airline fee + Company Name fee
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        0 hours to 2 hours before departure
+                    </td>
+                    <td>
+                        Adult : Non Refundable
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        2 hours to 4 days before departure
+                    </td>
+                    <td>
+                        Adult : ₹3600 + ₹300
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        4 days to 365 days before
+                        departure
+
+                    </td>
+                    <td>
+                        Adult : ₹3100 + ₹300
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="tablemain">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <h4>Cancellation Policy</h4>
+                    </th>
+
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <h5>JAI - ATQ</h5>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Date Change Policy
+                    </th>
+                    <th>
+                        Airline fee + Company Name fee + Fare difference
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        0 hours to 2 hours before departure
+                    </td>
+                    <td>
+                        Adult : Non Refundable
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        2 hours to 4 days before departure
+                    </td>
+                    <td>
+                        Adult : ₹3350 + ₹300 + Fare difference
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        4 days to 365 days before
+                        departure
+
+                    </td>
+                    <td>
+                        Adult : ₹2850 + ₹300 + Fare difference
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <tr>
+                <td>If you have not cancelled your ticket and you fail to report in time for check-in, you will be
+                    treated as "No Show" by the airline.</td>
+            </tr>
+            <tr>
+                <td>In case your flight is cancelled or rescheduled by the airline or you miss your flight, you will
+                    have to cancel with us to hget your refund
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Any refund claims arising due to cancellation or delay of flight by the airline or modification
+                    by
+                    you shall be subject to us receiving the amount refunded by the airline. In the event that
+                    airline
+                    does not refund the amount, we shall not be held liable for the same.
+                </td>
+            </tr>
+            <tr>
+                <td>Please note that multiple flight sectors booked under one PNR can only be cancelled or modified
+                    together</td>
+            </tr>
+        </table>
+
+        <div class="div">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">
+                            <h3>
+                                Payment Summary
+                            </h3>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>Base fare</p>
+                            <p>Taxes & fees</p>
+                            <p>Convenience fee </p>
+                            <p>Discount applied </p>
+                            <p>Order Total</p>
+                        </td>
+                        <td class="main">
+                            <p>₹7374.00</p>
+                            <p>₹1928.00</p>
+                            <p>₹618.00</p>
+                            <p>-₹1000.00</p>
+                            <p>₹8920.00</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h3>Contact Information</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Cancel your booking by clicking</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p>For any other booking-related help, contact Company Name at</p>
+                    </td>
+                </tr>
+            </thead>
+
+
+
+        </table>
+        <table class="table">
+            <tr>
+                <td>
+                    <h3>Airline Contact Information</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Airline Name</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Airline Contact Number</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Airline Website</p>
+                </td>
+            </tr>
+        </table>
+    </section>
+</body>
+
+</html>
