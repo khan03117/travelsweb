@@ -7,7 +7,7 @@ import PackageLayoutOne from "./elements/PackageLayoutOne"
 // import PackageLayoutThree from "./elements/PackageLayoutThree"
 // import PackageLayoutTwo from "./elements/PackageLayoutTwo"
 import axios from 'axios'
-import { API_URL, usertoken } from '../../utils'
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils'
 import BreadCrumb from '../../components/BreadCrumb'
 import { useUser } from '../Account/UserContext'
 import PackageLayoutTwo from './elements/PackageLayoutTwo'
@@ -25,9 +25,9 @@ const Packages = () => {
   const getitems = async () => {
     try {
       setLoading(true);
-      const resp = await axios.get(API_URL + "destination-packages/" + url, {
+      const resp = await axios.get(WEB_API_URL + "destination-packages/" + url, {
         headers: {
-          Authorization: usertoken
+          Authorization: WEB_SANCTUM_KEY
         }
       });
       setItems(resp.data.data);

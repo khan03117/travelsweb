@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { API_URL, usertoken } from "../../utils";
+import { WEB_API_URL, WEB_SANCTUM_KEY } from "../../utils";
 import PropTypes from 'prop-types';
 const UserContext = createContext();
 export const UserProvider = ({ children }) => {
@@ -18,16 +18,16 @@ export const UserProvider = ({ children }) => {
     const faqs = useState([]);
     const [testimonial, setTestimonial] = useState([]);
     const gettestimonial = async () => {
-        const item = await axios.get(API_URL + "testimonial", {
+        const item = await axios.get(WEB_API_URL + "testimonial", {
             headers: {
-                Authorization: usertoken
+                Authorization: WEB_SANCTUM_KEY
             }
         });
         setTestimonial(item.data.data);
     }
     // const fetchfaqs = async () => {
     //     try {
-    //         const items = await axios.get(API_URL + "faq");
+    //         const items = await axios.get(WEB_API_URL + "faq");
     //         setFaqs(items.data.data);
     //     } catch (err) {
     //         console.log(err);
@@ -38,9 +38,9 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
         try {
             setLoading(true);
-            const resp = await axios.get(API_URL + "profile", {
+            const resp = await axios.get(WEB_API_URL + "profile", {
                 headers: {
-                    Authorization: usertoken
+                    Authorization: WEB_SANCTUM_KEY
                 }
             })
             const data = resp.data.data;
@@ -59,9 +59,9 @@ export const UserProvider = ({ children }) => {
     const fetchBanners = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(API_URL + 'banner?type=home_web', {
+            const response = await axios.get(WEB_API_URL + 'banner?type=home_web', {
                 headers: {
-                    Authorization: usertoken
+                    Authorization: WEB_SANCTUM_KEY
                 }
             });
             setBanners(response.data.data);
@@ -74,7 +74,7 @@ export const UserProvider = ({ children }) => {
     const fetchpolicies = async () => {
         try {
             setLoading(true);
-            const items = await axios.get(API_URL + "policies");
+            const items = await axios.get(WEB_API_URL + "policies");
             setPolicies(items.data.data);
         } catch (err) {
             console.log(err);

@@ -14,7 +14,7 @@ import PackageLayoutOne from '../packages/elements/PackageLayoutOne';
 import Destinations from '../destinations';
 import CtaLayoutTwo from "../cta/CtaLayoutTwo";
 import axios from "axios";
-import { API_URL, usertoken } from "../../utils";
+import { WEB_API_URL, WEB_SANCTUM_KEY } from "../../utils";
 // import { useParams } from 'react-router-dom';
 import Bannertwo from './banners/Bannertwo';
 import PackageLayoutTwo from '../packages/elements/PackageLayoutTwo';
@@ -36,9 +36,9 @@ const Home = () => {
   const id = user.web_theme ?? 1;
   const [packages, setPackages] = React.useState([]);
   const getpackages = async () => {
-    const resp = await axios.get(API_URL + "package/most-viewed", {
+    const resp = await axios.get(WEB_API_URL + "package/most-viewed", {
       headers: {
-        Authorization: usertoken
+        Authorization: WEB_SANCTUM_KEY
       }
     });
     setPackages(resp.data.data);
@@ -47,9 +47,9 @@ const Home = () => {
     getpackages();
   }, []);
   const getuser = async () => {
-    const resp = await axios.get(API_URL + "profile", {
+    const resp = await axios.get(WEB_API_URL + "profile", {
       headers: {
-        Authorization: usertoken
+        Authorization: WEB_SANCTUM_KEY
       }
     });
     console.log(resp.data);

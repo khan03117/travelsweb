@@ -2,7 +2,7 @@ import { CalendarOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 import PackageShortInfoWithIcon from './Minielements/PackageShortInfoWithIcon'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Image_URL } from '../../../utils'
+import { WEB_Image_URL } from '../../../utils'
 import dummyimg from '../../../assets/packages/8.jpeg'
 // import React from 'react'
 
@@ -12,7 +12,7 @@ const PackageLayoutOne = ({ data }) => {
             <div className="w-full overflow-hidden p-0 bg-white shadow shadow-black/40 rounded">
                 <figure className="w-full  relative overflow-hidden">
                     <img
-                        src={Image_URL + "assets/images/" + data.main_image}
+                        src={WEB_Image_URL + "assets/images/" + data.main_image}
                         onError={(e) => e.target.src = dummyimg}
                         alt=""
                         className="w-full h-48"

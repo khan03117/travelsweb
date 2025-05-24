@@ -1,6 +1,6 @@
 import { CalendarOutlined, EnvironmentOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 import { Button } from '@material-tailwind/react'
-import { Image_URL } from '../../../utils';
+import { WEB_Image_URL } from '../../../utils';
 import PropTypes from 'prop-types'
 import dummyimg from '../../../assets/packages/8.jpeg'
 
@@ -11,7 +11,7 @@ const PackageLayoutTwo = ({ data }) => {
             <div className="w-full lg:p-4 p-0 bg-white shadow shadow-black/40 rounded">
                 <figure className="w-full relative overflow-hidden">
                     <img
-                        src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg}
+                        src={data.main_image ? WEB_Image_URL + "assets/images/" + data.main_image : dummyimg}
                         onError={(e) => e.target.src = dummyimg}
                         alt=""
                         className="w-full h-48 object-cover"

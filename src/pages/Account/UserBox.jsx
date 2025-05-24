@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_URL, BASE_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_BASE_URL, WEB_SANCTUM_KEY } from '../../utils';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -18,16 +18,16 @@ const UserBox = ({
 
     React.useEffect(() => {
         if (userdata?.profile_image) {
-            setProfileImage(BASE_URL + userdata?.profile_image);
+            setProfileImage(WEB_BASE_URL + userdata?.profile_image);
         } else {
             setProfileImage('https://via.placeholder.com/150');
         }
     }, [userdata]);
 
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
 
     const chatUser = async (user_id) => {
-        const resp = await axios.post(API_URL + "chat/room", { user_id }, {
+        const resp = await axios.post(WEB_API_URL + "chat/room", { user_id }, {
             headers: {
                 Authorization: "Bearer " + token
             }

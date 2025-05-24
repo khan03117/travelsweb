@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types'
 import { RightOutlined, StarFilled } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import { Image_URL } from '../../utils'
+import { WEB_Image_URL } from '../../utils'
 const DestinationLayoutTwo = ({ data }) => {
     return (
         <>
@@ -12,7 +12,7 @@ const DestinationLayoutTwo = ({ data }) => {
                     <RightOutlined/>
                 </Link>
                 <figure className="w-full destinationbgoverlay relative lg:h-[350px] h-[250px]">
-                    <img src={Image_URL + "assets/images/" + data.image} alt="" className="w-full h-full object-cover" />
+                    <img src={WEB_Image_URL + "assets/images/" + data.image} alt="" className="w-full h-full object-cover" />
                 </figure>
                 <div className="w-full  lg:p-3 p-1 absolute z-50 bottom-0 start-0">
                     <div className="w-full bg-white lg:p-2 px-0 py-1 rounded-md">

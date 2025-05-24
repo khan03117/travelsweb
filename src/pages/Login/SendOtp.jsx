@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import OtpInput from 'react-otp-input';
-import { API_URL } from '../../utils';
+import { WEB_API_URL } from '../../utils';
 import Loading from '../../components/Loading';
 import RegisterUser from './RegisterUser';
 
@@ -16,7 +16,7 @@ const SendOtp = () => {
         try {
             e.preventDefault();
             setLoading(true);
-            const resp = await axios.post(API_URL + "user/send-otp", { mobile });
+            const resp = await axios.post(WEB_API_URL + "user/send-otp", { mobile });
             setStatus(resp.data.success);
             setMsg(resp.data.message);
             if (resp.data.success == "1") {
@@ -31,7 +31,7 @@ const SendOtp = () => {
         try {
             e.preventDefault();
             setLoading(true);
-            const resp = await axios.post(API_URL + "user/verify-otp", { mobile, otp });
+            const resp = await axios.post(WEB_API_URL + "user/verify-otp", { mobile, otp });
             setLoading(false);
             if (resp.data.success == "1") {
                 setStep(2)

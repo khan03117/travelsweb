@@ -1,7 +1,7 @@
 import React from 'react'
 import UserBox from './UserBox'
 import axios from 'axios';
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import Loading from '../../components/Loading';
 // import { useUser } from './UserContext';
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ const FindUsers = () => {
     // const { user } = useUser();
     const [users, setUsers] = React.useState([]);
     const [load, setLoad] = React.useState(true);
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const [states, setStates] = React.useState([]);
     const [cities, setCities] = React.useState([]);
     const [selectedState, setSelectedState] = React.useState('');
@@ -27,14 +27,14 @@ const FindUsers = () => {
     const [suubscription, setsuubscription] = React.useState([])
     const [page, setPage] = React.useState(1);
     const getstates = async () => {
-        const items = await axios.get(API_URL + "surajmal/core-values?key=state");
+        const items = await axios.get(WEB_API_URL + "surajmal/core-values?key=state");
         setStates(items.data.data);
 
     }
 
     const getcities = async () => {
         if (selectedState) {
-            const items = await axios.get(API_URL + "surajmal/core-values?key=city&parent_id=" + selectedState);
+            const items = await axios.get(WEB_API_URL + "surajmal/core-values?key=city&parent_id=" + selectedState);
             setCities(items.data.data);
         }
     }
@@ -49,7 +49,7 @@ const FindUsers = () => {
         try {
             setLoad(true);
 
-            const subscription = await axios.get(API_URL + `cart/user`, {
+            const subscription = await axios.get(WEB_API_URL + `cart/user`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -58,7 +58,7 @@ const FindUsers = () => {
             console.log("subs", subscription.data.data)
 
             if (subscription.data.data && subscription.data.data.length == 0) {
-                // const resp = await axios.get(API_URL + `user/all?page=${page}&state=${selectedState}&city=${selectedCity}`, {
+                // const resp = await axios.get(WEB_API_URL + `user/all?page=${page}&state=${selectedState}&city=${selectedCity}`, {
                 //     headers: {
                 //         Authorization: "Bearer " + token
                 //     }
@@ -70,7 +70,7 @@ const FindUsers = () => {
 
             } else {
 
-                const resp = await axios.get(API_URL + `user/all?page=${page}&state=${selectedState}&city=${selectedCity}`, {
+                const resp = await axios.get(WEB_API_URL + `user/all?page=${page}&state=${selectedState}&city=${selectedCity}`, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -94,7 +94,7 @@ const FindUsers = () => {
 
         try {
             setLoad(true);
-            const resp = await axios.post(API_URL + "user/wishlist", { user_id: id, type: "Favourite" }, {
+            const resp = await axios.post(WEB_API_URL + "user/wishlist", { user_id: id, type: "Favourite" }, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -112,7 +112,7 @@ const FindUsers = () => {
     const sendInsterest = async (id) => {
         try {
             setLoad(true);
-            const resp = await axios.post(API_URL + "user/connection", { user_id: id }, {
+            const resp = await axios.post(WEB_API_URL + "user/connection", { user_id: id }, {
                 headers: {
                     Authorization: "Bearer " + token
                 }

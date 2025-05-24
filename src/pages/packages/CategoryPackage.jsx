@@ -9,7 +9,7 @@ import PackageLayoutTwo from './elements/PackageLayoutTwo';
 import PackageLayoutOne from './elements/PackageLayoutOne';
 import { useUser } from '../Account/UserContext';
 import axios from 'axios';
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 
 const CategoryPackage = () => {
     const { user } = useUser();
@@ -20,9 +20,9 @@ const CategoryPackage = () => {
   const getitems = async () => {
     try {
       setLoading(true);
-      const resp = await axios.get(API_URL + "destination-packages/category/" + url, {
+      const resp = await axios.get(WEB_API_URL + "destination-packages/category/" + url, {
         headers: {
-          Authorization: usertoken
+          Authorization: WEB_SANCTUM_KEY
         }
       });
       setItems(resp.data.data);

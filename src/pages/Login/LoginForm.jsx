@@ -1,7 +1,7 @@
 import React from 'react'
 import Loading from '../../components/Loading'
 import axios from 'axios'
-import { API_URL, usertoken } from '../../utils'
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils'
 import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
@@ -15,10 +15,10 @@ const LoginForm = () => {
     const handleLogin = async () => {
         try {
             setLoading(true);
-            const resp = await axios.post(API_URL + "user/login", fdata);
+            const resp = await axios.post(WEB_API_URL + "user/login", fdata);
             setLoading(false);
             if (resp.data.success == "1") {
-                localStorage.setItem(usertoken, resp.data.token);
+                localStorage.setItem(WEB_SANCTUM_KEY, resp.data.token);
                 navigate('/user/dashboard')
             }
             if (resp.data.success) {

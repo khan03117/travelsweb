@@ -1,10 +1,10 @@
 // import React from 'react';
 import PropTypes from 'prop-types';
-import { BASE_URL } from '../../utils';
+import { WEB_BASE_URL } from '../../utils';
 
 const UserProfile = ({ userdata }) => {
   // Check if the profile image exists, otherwise use a placeholder
-  const profileImage = userdata?.profile_image ? `${BASE_URL}${userdata.profile_image}` : 'https://via.placeholder.com/150';
+  const profileImage = userdata?.profile_image ? `${WEB_BASE_URL}${userdata.profile_image}` : 'https://via.placeholder.com/150';
 
   const calculateAge = (dob) => {
     const dobDate = new Date(dob);

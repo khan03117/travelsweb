@@ -1,5 +1,5 @@
 import React from 'react'
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import axios from 'axios';
 import { useUser } from './UserContext';
 import UserBox from './UserBox';
@@ -9,11 +9,11 @@ const ReceivedProposals = () => {
     const { user } = useUser();
     const [users, setUsers] = React.useState([]);
     const [load, setLoad] = React.useState(true);
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const getusers = async () => {
         try {
             setLoad(true);
-            const resp = await axios.get(API_URL + "user/connection?type=received&status=pending", {
+            const resp = await axios.get(WEB_API_URL + "user/connection?type=received&status=pending", {
                 headers: {
                     Authorization: "Bearer " + token
                 }

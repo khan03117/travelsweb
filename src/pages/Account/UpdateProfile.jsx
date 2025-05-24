@@ -2,7 +2,7 @@ import React from 'react'
 import { useUser } from './UserContext'
 import { Radio } from '@material-tailwind/react';
 import axios from 'axios';
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import Loading from '../../components/Loading';
 import { FaCircle } from 'react-icons/fa6';
 
@@ -10,7 +10,7 @@ const UpdateProfile = () => {
     const { user, loading } = useUser();
     const [fdata, setFdata] = React.useState({});
     const [mdata, setMdata] = React.useState([]);
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const [years, setYears] = React.useState([]);
     const [msg, setMsg] = React.useState('');
     const [status, setStatus] = React.useState(0);
@@ -28,7 +28,7 @@ const UpdateProfile = () => {
     const getmdata = async () => {
         try {
             setLoad(true)
-            const resp = await axios.get(API_URL + "surajmal/core-values");
+            const resp = await axios.get(WEB_API_URL + "surajmal/core-values");
             setMdata(resp.data.data);
         } catch (err) {
             console.log(err);
@@ -38,7 +38,7 @@ const UpdateProfile = () => {
     }
     const [allfields, setAllFields] = React.useState({});
     const getfields = async () => {
-        const items = await axios.get(API_URL + "user/all_fields");
+        const items = await axios.get(WEB_API_URL + "user/all_fields");
         setAllFields(items.data.data);
     }
     React.useEffect(() => {
@@ -83,7 +83,7 @@ const UpdateProfile = () => {
                 formd.append(k, v);
             });
             
-            const itm = await axios.put(API_URL + "user/update", formd, {
+            const itm = await axios.put(WEB_API_URL + "user/update", formd, {
                 headers: {
                     Authorization: "Bearer " + token
                 }

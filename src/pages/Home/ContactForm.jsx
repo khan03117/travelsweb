@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react'
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import { toast } from 'react-toastify';
 
 const ContactForm = () => {
@@ -17,9 +17,9 @@ const ContactForm = () => {
     const sendQuery = async () => {
         try {
             const data = { ...fdata }
-            const resp = await axios.post(API_URL + "contact-query", data, {
+            const resp = await axios.post(WEB_API_URL + "contact-query", data, {
                 headers: {
-                    Authorization: usertoken
+                    Authorization: WEB_SANCTUM_KEY
                 }
             });
             if (resp.data.success) {

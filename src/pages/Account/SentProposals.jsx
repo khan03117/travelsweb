@@ -1,5 +1,5 @@
 import React from 'react'
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import axios from 'axios';
 // import { useUser } from './UserContext';
 import UserBox from './UserBox';
@@ -13,13 +13,13 @@ const SentProposals = () => {
     const { type } = useParams();
     const [users, setUsers] = React.useState([]);
     const [load, setLoad] = React.useState(true);
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const [pstatus, setPstatus] = React.useState('pending');
 
     const handleConnection = async (status, id) => {
         try {
             setLoad(true)
-            const resp = await axios.post(API_URL + "user/connection-handle", { status: status, user_id: id }, {
+            const resp = await axios.post(WEB_API_URL + "user/connection-handle", { status: status, user_id: id }, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -37,7 +37,7 @@ const SentProposals = () => {
     const handleWishlist = async (id) => {
         try {
             setLoad(true);
-            const resp = await axios.post(API_URL + "user/wishlist", { user_id: id, type: "Favourite" }, {
+            const resp = await axios.post(WEB_API_URL + "user/wishlist", { user_id: id, type: "Favourite" }, {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -55,12 +55,12 @@ const SentProposals = () => {
     const getusers = async () => {
         try {
             setLoad(true);
-            // const resp = await axios.get(API_URL + "user/connection?type=sent&status=pending", {
+            // const resp = await axios.get(WEB_API_URL + "user/connection?type=sent&status=pending", {
             //     headers: {
             //         Authorization: "Bearer " + token
             //     }
             // });
-            const resp = await axios.get(API_URL + `user/all?proposal=${type}&proposal_status=${pstatus}`, {
+            const resp = await axios.get(WEB_API_URL + `user/all?proposal=${type}&proposal_status=${pstatus}`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }

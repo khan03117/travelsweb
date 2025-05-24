@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
-import { API_URL, BASE_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_BASE_URL, WEB_SANCTUM_KEY } from '../../utils';
 import { useUser } from './UserContext';
 
 const Chat = ({ connectedRoom, user_id }) => {
@@ -13,10 +13,10 @@ const Chat = ({ connectedRoom, user_id }) => {
     const [client, setClient] = useState(null);
 
 
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
 
     const getchats = async () => {
-        const resp = await axios.get(API_URL + "chat?user_id=" + user_id, {
+        const resp = await axios.get(WEB_API_URL + "chat?user_id=" + user_id, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -62,7 +62,7 @@ const Chat = ({ connectedRoom, user_id }) => {
     };
 
     const sendMessage = async () => {
-        await axios.post(API_URL + "chat", { room: connectedRoom, message }, {
+        await axios.post(WEB_API_URL + "chat", { room: connectedRoom, message }, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -118,7 +118,7 @@ const Chat = ({ connectedRoom, user_id }) => {
                                 msg.sender._id == user._id && (
                                     <>
                                         <div className="size-10">
-                                            <img src={BASE_URL + msg.sender?.profile_image} alt="" className="size-full rounded-full" />
+                                            <img src={WEB_BASE_URL + msg.sender?.profile_image} alt="" className="size-full rounded-full" />
                                         </div>
                                     </>
                                 )
@@ -131,7 +131,7 @@ const Chat = ({ connectedRoom, user_id }) => {
                                 msg.sender._id != user._id && (
                                     <>
                                         <div className="size-10">
-                                            <img src={BASE_URL + msg.sender?.profile_image} alt="" className="size-full rounded-full" />
+                                            <img src={WEB_BASE_URL + msg.sender?.profile_image} alt="" className="size-full rounded-full" />
                                         </div>
                                     </>
                                 )

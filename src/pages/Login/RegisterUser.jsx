@@ -1,6 +1,6 @@
 import { Radio } from '@material-tailwind/react'
 import axios from 'axios';
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -64,9 +64,9 @@ const RegisterUser = ({ mobile }) => {
                 formData.append('file', file);
                 formData.append('mobile', mobile);
                 formData.append('adhar_no', adhar);
-                const resp = await axios.post(API_URL + "user", formData);
+                const resp = await axios.post(WEB_API_URL + "user", formData);
                 if (resp.data.success == "1") {
-                    localStorage.setItem(usertoken, resp.data.token);
+                    localStorage.setItem(WEB_SANCTUM_KEY, resp.data.token);
                     navigate('/user/dashboard')
                 } else {
                     setStatus(0);

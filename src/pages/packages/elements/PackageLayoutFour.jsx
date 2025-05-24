@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { CalendarOutlined, EnvironmentOutlined, UsergroupAddOutlined } from "@ant-design/icons"
-import { Image_URL } from "../../../utils"
+import { WEB_Image_URL } from "../../../utils"
 import PropTypes from "prop-types"
 // import { Button } from "@material-tailwind/react"
 
@@ -11,7 +11,7 @@ const PackageLayoutFour = ({ data }) => {
             <div className="w-full overflow-hidden rounded-xl bg-white shadow shadow-black/40">
                 <figure className="w-full relative overflow-hidden">
                     <img
-                        src={Image_URL + "assets/images/" + data.main_image}
+                        src={WEB_Image_URL + "assets/images/" + data.main_image}
                         alt=""
                         className="w-full h-48"
                     />

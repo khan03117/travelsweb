@@ -1,7 +1,7 @@
 import React from 'react'
 import Loading from '../../components/Loading'
 import axios from 'axios'
-import { API_URL, usertoken } from '../../utils'
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils'
 import { useNavigate } from 'react-router-dom'
 
 const ChangePassword = (props) => {
@@ -22,7 +22,7 @@ const ChangePassword = (props) => {
                     mobile: props.mobile,
                     password: fdata.password
                 }
-                const resp = await axios.post(API_URL + "user/generate-new-passworwd", json);
+                const resp = await axios.post(WEB_API_URL + "user/generate-new-passworwd", json);
                 setLoading(false);
                 if (resp.data.success == "1") {
                     window.location.reload();

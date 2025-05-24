@@ -4,7 +4,7 @@ import Slider from "react-slick/lib/slider";
 import { NextArrow, PrevArrow } from "../../components/Arrows";
 import PropTypes from "prop-types";
 import { useUser } from "../Account/UserContext";
-import { BASE_URL } from "../../utils";
+import { WEB_BASE_URL } from "../../utils";
 
 const Testimonials = ({ bg, pb }) => {
     const { testimonial } = useUser();
@@ -66,7 +66,7 @@ const Testimonials = ({ bg, pb }) => {
                                             <div className="w-full testimonial ">
                                                 <div className="w-full  px-6">
 
-                                                    <img src={BASE_URL + itm.image} alt="" className=" profileTesti size-[130px] block object-cover object-top" />
+                                                    <img src={WEB_BASE_URL + itm.image} alt="" className=" profileTesti size-[130px] block object-cover object-top" />
 
                                                     <div className="w-full border bg-white rounded-lg relative px-5 pt-16 pb-10  border-primary/50">
 

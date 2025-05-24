@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 import { useUser } from './UserContext';
-import { BASE_URL } from '../../utils';
+import { WEB_BASE_URL } from '../../utils';
 import { GiFlowerPot } from 'react-icons/gi';
 
 const Sidebar = () => {
@@ -19,7 +19,7 @@ const Sidebar = () => {
     }, [location.pathname])
     React.useEffect(() => {
         if (user && user.profile_image) {
-            setProfileImage(BASE_URL + user.profile_image); // Use user profile image
+            setProfileImage(WEB_BASE_URL + user.profile_image); // Use user profile image
         } else {
             setProfileImage('https://via.placeholder.com/150'); // Fallback image
         }

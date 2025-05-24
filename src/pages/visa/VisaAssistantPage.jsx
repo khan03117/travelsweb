@@ -2,13 +2,13 @@ import React from 'react'
 
 import BreadCrumb from "../../components/BreadCrumb"
 import axios from 'axios';
-import { API_URL } from '../../utils';
+import { WEB_API_URL } from '../../utils';
 import { Link } from 'react-router-dom';
 
 const VisaAssistantPage = () => {
     const [countries, setCountries] = React.useState([]);
     const getcountries = async () => {
-        const resp = await axios.get(API_URL + "visa-assistant");
+        const resp = await axios.get(WEB_API_URL + "visa-assistant");
         setCountries(resp.data.data);
     }
     React.useEffect(() => {

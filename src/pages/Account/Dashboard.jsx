@@ -1,7 +1,7 @@
 // import React from 'react'
 import React from 'react';
 // import profile1 from '../../assets/profile/men1.jpg';
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
@@ -11,12 +11,12 @@ const Dashboard = () => {
     const { user, loading } = useUser();
     // const navigate = useNavigate();
     const [connections, setConnections] = React.useState({});
-    const utoken = localStorage.getItem(usertoken);
+    const utoken = localStorage.getItem(WEB_SANCTUM_KEY);
     const [isload, setLoading] = React.useState(true);
     const getconnections = async () => {
         try {
             setLoading(true);
-            const connects = await axios.get(API_URL + "user/connection?status=pending&type=received", {
+            const connects = await axios.get(WEB_API_URL + "user/connection?status=pending&type=received", {
                 headers: {
                     Authorization: "Bearer " + utoken
                 }

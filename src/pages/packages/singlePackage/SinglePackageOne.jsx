@@ -8,7 +8,7 @@ import { PiAirplaneInFlightLight, PiBowlFood } from 'react-icons/pi'
 import { Accordion, AccordionBody, AccordionHeader, Button } from '@material-tailwind/react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { API_URL, Image_URL, usertoken } from '../../../utils'
+import { WEB_API_URL, WEB_Image_URL, WEB_SANCTUM_KEY } from '../../../utils'
 import { MdEmojiTransportation } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import Loading from '../../../components/Loading'
@@ -34,9 +34,9 @@ const SinglePackageOne = () => {
     }
     const savecontactquery = async () => {
         const data = { ...fdata, ['package_id']: mpackage.id }
-        const resp = await axios.post(API_URL + "contact-query", data, {
+        const resp = await axios.post(WEB_API_URL + "contact-query", data, {
             headers: {
-                Authorization: usertoken
+                Authorization: WEB_SANCTUM_KEY
             }
         });
         if (resp.data.success) {
@@ -46,9 +46,9 @@ const SinglePackageOne = () => {
     }
     const getpackage = async () => {
         setLoading(true);
-        const resp = await axios.get(API_URL + "package/show/" + url, {
+        const resp = await axios.get(WEB_API_URL + "package/show/" + url, {
             headers: {
-                Authorization: usertoken
+                Authorization: WEB_SANCTUM_KEY
             }
         });
         setItinerary(resp.data.itinerary)
@@ -77,7 +77,7 @@ const SinglePackageOne = () => {
 
 
                                 <section className='pb-20'>
-                                    <img src={mpackage?.main_image ? Image_URL + "assets/images/" + mpackage?.main_image : banner1} alt="" className="w-full lg:h-96 h-60 object-cover block mb-10 object-bottom" />
+                                    <img src={mpackage?.main_image ? WEB_Image_URL + "assets/images/" + mpackage?.main_image : banner1} alt="" className="w-full lg:h-96 h-60 object-cover block mb-10 object-bottom" />
                                     <div className="container my-4">
                                         <div className="grid grid-cols-12">
                                             <div className="lg:col-span-8 col-span-12">
@@ -183,7 +183,7 @@ const SinglePackageOne = () => {
                                                                                                 <>
                                                                                                     <div className="grid grid-cols-12 gap-10">
                                                                                                         <div className="lg:col-span-4 col-span-12">
-                                                                                                            <img src={Image_URL + "assets/images/" + itm.main_image} alt="" className="w-full" />
+                                                                                                            <img src={WEB_Image_URL + "assets/images/" + itm.main_image} alt="" className="w-full" />
                                                                                                         </div>
                                                                                                         <div className="lg:col-span-8 col-span-12">
                                                                                                             <div dangerouslySetInnerHTML={{ __html: itm?.description }} />

@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { CalendarOutlined, EnvironmentOutlined, StarFilled, UsergroupAddOutlined } from "@ant-design/icons"
-import { Image_URL } from "../../../utils"
+import { WEB_Image_URL } from "../../../utils"
 import dummyimg from '../../../assets/packages/tours-18.jpg'
 import PropTypes from "prop-types"
 
@@ -12,7 +12,7 @@ const PackageLayoutFive = ({ data }) => {
                 <div className="grid grid-cols-12  h-auto">
                     <div className="col-span-6">
                         <figure className="w-full h-full">
-                            <img src={data.main_image ? Image_URL + "assets/images/" + data.main_image : dummyimg} onError={(e) => e.target.src = dummyimg} alt="" className="w-full h-full  lg:max-h-[290px] max-h-[220px]" />
+                            <img src={data.main_image ? WEB_Image_URL + "assets/images/" + data.main_image : dummyimg} onError={(e) => e.target.src = dummyimg} alt="" className="w-full h-full  lg:max-h-[290px] max-h-[220px]" />
                         </figure>
                     </div>
                     <div className="col-span-6 ">

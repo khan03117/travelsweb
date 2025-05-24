@@ -6,7 +6,7 @@ import { CgMenuRight } from 'react-icons/cg';
 import { isMobile } from 'react-device-detect';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image_URL } from '../utils';
+import { WEB_Image_URL } from '../utils';
 import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
 
 // import { Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react';
@@ -101,7 +101,7 @@ const Header = ({ classname }) => {
                         <div className="col-span-12">
                             <div className="flex relative justify-between items-center">
                                 <Link to={'/'} className="h-[120px] w-auto py-5 inline-block">
-                                    <img src={Image_URL + "assets/images/" + user.logo} className='h-full w-auto' alt="" />
+                                    <img src={WEB_Image_URL + "assets/images/" + user.logo} className='h-full w-auto' alt="" />
                                 </Link>
                                 <ul className="lg:inline-flex hidden gap-5   navlinks mx-auto">
                                     {weblinks()}

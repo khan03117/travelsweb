@@ -1,6 +1,6 @@
 // import React from 'react'
 import { StarFilled } from "@ant-design/icons"
-import { Image_URL } from "../../utils"
+import { WEB_Image_URL } from "../../utils"
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 const DestinationLayoutThree = ({ data }) => {
@@ -13,7 +13,7 @@ const DestinationLayoutThree = ({ data }) => {
                         <span className="inline-block bg-blue-700 text-white   px-2 py-1 text-xs  rounded-e-full">Featured</span>
                         <span className="inline-block text-white  bg-red-500  px-2 py-1 text-xs  rounded-e-full">Offered</span>
                     </div>
-                    <img src={Image_URL + "assets/images/" + data.image} alt="" className="w-full lg:h-[300px] h-[200px] object-cover rounded-none lg:rounded-[2rem]" />
+                    <img src={WEB_Image_URL + "assets/images/" + data.image} alt="" className="w-full lg:h-[300px] h-[200px] object-cover rounded-none lg:rounded-[2rem]" />
                 </figure>
                 <div className="destinationText relative z-50 lg:-mt-6 -mt-10  bg-white/90 backdrop-blur-sm w-[98%] mx-auto lg:p-4 p-2 lg:rounded-[2rem] rounded shadow-lg shadow-black/40">
                     <div className="pb-1 grid grid-cols-2">

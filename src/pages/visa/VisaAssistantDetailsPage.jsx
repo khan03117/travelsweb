@@ -3,7 +3,7 @@ import React from 'react'
 import { useParams } from "react-router-dom"
 import BreadCrumb from "../../components/BreadCrumb"
 import axios from 'axios';
-import { API_URL } from '../../utils';
+import { WEB_API_URL } from '../../utils';
 import { useUser } from '../Account/UserContext';
 
 const VisaAssistantDetailsPage = () => {
@@ -13,7 +13,7 @@ const VisaAssistantDetailsPage = () => {
   const [active, setActive] = React.useState(0)
   const [visa, setVisa] = React.useState({ option_visa: [], desc_visa: [], processing_visa: [] });
   const getitem = async () => {
-    const resp = await axios.get(API_URL + "visa-assistant?slug=" + url);
+    const resp = await axios.get(WEB_API_URL + "visa-assistant?slug=" + url);
     const rep = resp.data.data[0];
     setItem(rep);
     setVisa(JSON.parse(rep.visa_details));

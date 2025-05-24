@@ -31,6 +31,13 @@ import VisaServices from "./pages/visa/VisaServices";
 import OkayBoard from "./pages/visa/OkayBoard";
 import ApplyNow from "./pages/Contact/ApplyNow";
 import CategoryPackage from "./pages/packages/CategoryPackage";
+import HotelLists from "./pages/hotel/HotelLists";
+import SingleHotel from "./pages/hotel/SingleHotel";
+import SearchFlightsRes from "./pages/flight/pages/SearchFlightResult/SearchFlightsRes";
+import Review from "./pages/flight/pages/Review";
+import AddPassengerDetails from "./pages/flight/pages/Review/AddPassengerDetails";
+import SearchHotel from "./pages/hotel/SearchHotel";
+import FlightHome from "./pages/flight/pages/Home";
 
 function App() {
   const ThemeRoutes = createBrowserRouter(
@@ -55,6 +62,18 @@ function App() {
           <Route path="/destinations" element={<Destinations/>} />
           <Route path="/visa-assistant" element={<VisaAssistantPage/>} />
           <Route path="/visa-assistant/:url" element={<VisaAssistantDetailsPage/>} />
+
+
+          <Route path='/flight' element={<FlightHome />} />
+          <Route path='/hotel-list/:id' element={<HotelLists />} />
+          <Route path='/single-list' element={<SingleHotel />} />
+          <Route path='/search-flight' element={<SearchFlightsRes />} />
+          <Route path='/review/:id' element={<Review />} />
+          <Route path='passenger-details/:id' element={<AddPassengerDetails />} />
+         
+     
+         
+          <Route path='search-hotel' element={<SearchHotel/>} />
         </Route>
         <Route path="/" element={<AccountLayout />}>
           <Route path="/user/dashboard" element={<Dashboard />} />

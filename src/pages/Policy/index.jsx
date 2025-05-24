@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { API_URL } from '../../utils';
+import { WEB_API_URL } from '../../utils';
 import { useUser } from '../Account/UserContext';
 
 const AppPolicy = () => {
@@ -13,7 +13,7 @@ const AppPolicy = () => {
     const [policies, setPolicies] = React.useState({ title: "", description: "" });
     const getdata = async () => {
         setLoading(true);
-        const resp = await axios.get(API_URL + 'policies?slug=' + url);
+        const resp = await axios.get(WEB_API_URL + 'policies?slug=' + url);
         setPolicies(resp.data.data[0]);
         setLoading(false);
     }

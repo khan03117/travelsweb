@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import DestinationLayoutOne from './DestinationLayoutOne'
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import { Link, useLocation } from 'react-router-dom';
 import DestinationLayoutTwo from './DestinationLayoutTwo';
 import DestinationLayoutThree from './DestinationLayoutThree';
@@ -22,9 +22,9 @@ const Destinations = () => {
         try {
             setLoading(true);
             const perPage = pathname == "/destinations/" ? 9 : 6;
-            const resp = await axios.get(API_URL + "destinations", {
+            const resp = await axios.get(WEB_API_URL + "destinations", {
                 headers: {
-                    Authorization: usertoken
+                    Authorization: WEB_SANCTUM_KEY
                 },
                 params: {
                     perPage,

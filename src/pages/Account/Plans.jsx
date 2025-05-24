@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React from 'react'
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import Loading from '../../components/Loading';
 
 const Plans = () => {
     const [subs, setSubs] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const purchaseSubscription = async (id) => {
-        const resp = await axios.post(API_URL + "cart", { id, request_from: "Web" }, {
+        const resp = await axios.post(WEB_API_URL + "cart", { id, request_from: "Web" }, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -18,7 +18,7 @@ const Plans = () => {
     const getsubs = async () => {
         try {
             setLoading(true)
-            const items = await axios.get(API_URL + "subscription");
+            const items = await axios.get(WEB_API_URL + "subscription");
             setSubs(items.data.data);
         } catch (err) {
             console.log(err);

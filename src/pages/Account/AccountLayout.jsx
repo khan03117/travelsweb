@@ -5,14 +5,14 @@ import Sidebar from "./Sidebar"
 import Header from "../../layout/Header"
 import Footer from "../../layout/Footer"
 import { UserProvider } from "./UserContext"
-import { API_URL, usertoken } from "../../utils"
+import { WEB_API_URL, WEB_SANCTUM_KEY } from "../../utils"
 import React from "react"
 import axios from "axios"
 import Loading from "../../components/Loading"
 import { ToastContainer } from "react-toastify"
 
 const AccountLayout = () => {
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const [load, setLoad] = React.useState(true);
     const [isAuth, setAuth] = React.useState(false);
     const location = useLocation();
@@ -20,7 +20,7 @@ const AccountLayout = () => {
     const authorized = async () => {
         try {
             setLoad(true);
-            const users = await axios.get(API_URL + "user/all?id=self", {
+            const users = await axios.get(WEB_API_URL + "user/all?id=self", {
                 headers: {
                     Authorization: "Bearer " + token
                 }

@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React from 'react'
-import { API_URL, BASE_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_BASE_URL, WEB_SANCTUM_KEY } from '../../utils';
 import Chat from './Chat';
 
 const UserChat = () => {
     const [users, setUsers] = React.useState([]);
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const [room, setRoom] = React.useState('');
     const [user_id, setUserId] = React.useState('');
     const handleRoom = (rid, uid) => {
@@ -13,7 +13,7 @@ const UserChat = () => {
         setRoom(rid);
     }
     const getusers = async () => {
-        const resps = await axios.get(API_URL + "chat/room", {
+        const resps = await axios.get(WEB_API_URL + "chat/room", {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -35,7 +35,7 @@ const UserChat = () => {
                                         <>
                                             <div className={`w-full ${usr._id == room ? 'bg-primary/20' : 'bg-white'}  gap-2 border border-primary   flex  rounded-full p-3`} onClick={() => handleRoom(usr._id, usr.room_user._id)}>
                                                 <div className="size-10">
-                                                    <img src={usr.room_user?.profile_image ? BASE_URL + usr.room_user?.profile_image : 'https://via.placeholder.com/150'} alt="" className="size-full rounded-full" />
+                                                    <img src={usr.room_user?.profile_image ? WEB_BASE_URL + usr.room_user?.profile_image : 'https://via.placeholder.com/150'} alt="" className="size-full rounded-full" />
                                                 </div>
                                                 <div className="w-[calc(100%-3rem)] text-lg font-light">
                                                     <h4>{usr?.room_user?.name}</h4>

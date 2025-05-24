@@ -1,19 +1,19 @@
 import axios from 'axios';
 import React from 'react'
-import { API_URL, usertoken } from '../../utils';
+import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 import { useParams } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
 const PaymentResponse = () => {
     const [cart, setCart] = React.useState({});
-    const token = localStorage.getItem(usertoken);
+    const token = localStorage.getItem(WEB_SANCTUM_KEY);
     const [loading, setLoading] = React.useState(true);
     const { id } = useParams();
     const getcart = async () => {
         try {
             setLoading(true);
-            const item = await axios.get(API_URL + "cart/show/" + id, {
+            const item = await axios.get(WEB_API_URL + "cart/show/" + id, {
                 headers: {
                     Authorization: "Bearer " + token
                 }

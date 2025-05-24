@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useUser } from '../pages/Account/UserContext'
 import { EnvironmentOutlined, FacebookFilled,  InstagramFilled, LinkedinFilled, TwitterSquareFilled } from '@ant-design/icons';
 import { IoIosCall, IoMdMail } from 'react-icons/io';
-import { Image_URL } from '../utils';
+import { WEB_Image_URL } from '../utils';
 
 const Footer = () => {
     const { user } = useUser();
@@ -37,7 +37,7 @@ const Footer = () => {
                                     <div className=" col-span-12">
                                         <div className="footer-widgets w-full">
                                             <div className="logimg size-[90px] mb-4">
-                                                 <img src={Image_URL + "assets/images/" + user.logo} className='w-full' alt="" />
+                                                 <img src={WEB_Image_URL + "assets/images/" + user.logo} className='w-full' alt="" />
                                             </div>
                                             <ul className='flex gap-4'>
                                                 <li>
