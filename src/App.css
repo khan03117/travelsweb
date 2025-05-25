@@ -218,13 +218,13 @@ body {
   position: relative;
 }
 
-.navlinks a {
+.navlinks a, .navlinks button {
   display: block;
 
   font-weight: 400;
   font-size: 15px;
   color: var(--primary);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
 .stroke_text {
@@ -720,7 +720,7 @@ table {
   .navlinkmobile button {
     display: block;
     padding: 6px 5px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 2px;
     position: relative;
     font-weight: 200;

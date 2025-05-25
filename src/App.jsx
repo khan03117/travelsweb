@@ -74,7 +74,7 @@ function App() {
          
      
          
-          <Route path='search-hotel' element={<SearchHotel/>} />
+          <Route path='/hotel' element={<SearchHotel/>} />
           <Route path='ticket/:order_id?' element={<Ticket/>} />
         </Route>
         <Route path="/" element={<AccountLayout />}>

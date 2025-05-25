@@ -148,7 +148,7 @@ const SearchHotel = () => {
     return (
         <>
             <CalendarPopup handleDateClick={handleDateClick} startDate={startDate} endDate={endDate} open={open} toggleDialog={toggleDialog} />
-            <section>
+            <section className='py-10'>
                 <div className="container mx-auto">
                     <div className="grid grid-cols-12 gap-5">
                         <div className="col-span-3">

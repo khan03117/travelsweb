@@ -28,12 +28,18 @@ const Header = ({ classname }) => {
             <li>
                 <Link to={'/about/'} >About</Link>
             </li>
+             <li>
+                <Link to={'/flight'} >Flight</Link>
+            </li>
+             <li>
+                <Link to={'/hotel'} >Hotel</Link>
+            </li>
 
             <li>
                 {/* <Link to={'/destinations/'} >Destinations</Link> */}
                 <Menu >
                     <MenuHandler>
-                        <button className='lg:text-primary uppercase'>Packages</button>
+                        <button className='lg:text-primary '>Packages</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem>
@@ -68,7 +74,7 @@ const Header = ({ classname }) => {
                 {/* <Link to={'/visa'} >Visa</Link> */}
                 <Menu className="hidden">
                     <MenuHandler>
-                        <button className='lg:text-[var(--primary)] sm:text-white sm:font-light uppercase'>Add On Services</button>
+                        <button className='lg:text-[var(--primary)] sm:text-white sm:font-light'>Add On Services</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem className='p-0'>
@@ -103,14 +109,19 @@ const Header = ({ classname }) => {
                                 <Link to={'/'} className="h-[120px] w-auto py-5 inline-block">
                                     <img src={WEB_Image_URL + "assets/images/" + user.logo} className='h-full w-auto' alt="" />
                                 </Link>
-                                <ul className="lg:inline-flex hidden gap-5   navlinks mx-auto">
+                                <ul className="lg:inline-flex hidden gap-6   navlinks mx-auto">
                                     {weblinks()}
                                 </ul>
-                                <ul className="lg:hidden block relative items-center ms-auto gap-5">
+                                <ul className=" relative items-center ms-auto gap-5">
 
                                     <li >
                                         <button onClick={() => handleOpen()} className='text-[var(--primary)] lg:hidden block text-xl'>
                                             <CgMenuRight />
+                                        </button>
+                                    </li>
+                                    <li >
+                                        <button className='bg-[var(--primary)] text-white px-10 rounded-full py-2  lg:block hidden  text-sm'>
+                                           Send Query
                                         </button>
                                     </li>
                                 </ul>
