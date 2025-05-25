@@ -38,6 +38,7 @@ import Review from "./pages/flight/pages/Review";
 import AddPassengerDetails from "./pages/flight/pages/Review/AddPassengerDetails";
 import SearchHotel from "./pages/hotel/SearchHotel";
 import FlightHome from "./pages/flight/pages/Home";
+import Ticket from "./pages/flight/ticket/Ticket";
 
 function App() {
   const ThemeRoutes = createBrowserRouter(
@@ -74,6 +75,7 @@ function App() {
      
          
           <Route path='search-hotel' element={<SearchHotel/>} />
+          <Route path='ticket/:order_id?' element={<Ticket/>} />
         </Route>
         <Route path="/" element={<AccountLayout />}>
           <Route path="/user/dashboard" element={<Dashboard />} />

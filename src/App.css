@@ -70,7 +70,7 @@ body {
   transform: rotateY(0deg);
   transform-origin: center;
 }
-.bannerFour::before{
+.bannerFour::before {
   content: "";
   position: absolute;
   top: 0;
@@ -78,28 +78,27 @@ body {
   width: 100%;
   height: 100%;
   background-color: transparent;
-    --background-overlay: '';
-    background-image: linear-gradient(to bottom, #00000033 43%, #000000 71%);
-    
-    z-index: 8;
+  --background-overlay: "";
+  background-image: linear-gradient(to bottom, #00000033 43%, #000000 71%);
+
+  z-index: 8;
 }
-.bannerfouroverlay{
+.bannerfouroverlay {
   background-image: linear-gradient(to bottom, #0000000f 20%, #000000 90%);
-
 }
-#bannerFive   .elementor-shape-fill{
-  fill: #063E4B;
+#bannerFive .elementor-shape-fill {
+  fill: #063e4b;
 }
-.bannerFive{
-  background-image: linear-gradient(to bottom, #063e4b37 20%, #063E4B 90%);
-
+.bannerFive {
+  background-image: linear-gradient(to bottom, #063e4b37 20%, #063e4b 90%);
 }
 .container {
   margin: 0 auto;
   max-width: 1250px;
   padding: 0 2rem;
 }
-.slick-prev, .slick-next {
+.slick-prev,
+.slick-next {
   display: block !important;
   z-index: 10;
 }
@@ -603,6 +602,71 @@ img {
   color: #000;
 }
 
+.ticketborder {
+  border: 1px solid #ddd;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.space {
+  padding: 3rem 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+.airdiv {
+  display: flex;
+  gap: 5px;
+}
+
+.aeroplane {
+  height: 30px;
+}
+
+
+
+.ticket .main {
+  text-align: end;
+}
+
+.ticket .maindiv {
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 5px 2px;
+}
+
+.ticket .list {
+  padding: 1rem 1rem;
+  font-size: 18px;
+}
+
+.ticket .tablemain {
+  width: 100%;
+  border: 1px solid gray;
+  text-align: center;
+}
+
+.ticket .tablemain td {
+  border: 1px solid gray;
+}
+
+.ticket .info {
+  padding: 10px 0;
+}
+
+.ticket .second {
+  text-align: start;
+}
+
+.ticket .first {
+  text-align: end;
+}
+
 @media (max-width: 998px) {
   .section_title {
     font-size: 1.3rem;
@@ -666,7 +730,7 @@ img {
   .aboutUs h2 {
     font-family: "Cinzel Decorative", serif !important;
     font-size: 1.5rem;
-    color: var(--primary)
+    color: var(--primary);
   }
 
   .ab-wel-rhs p {
@@ -680,11 +744,8 @@ img {
   }
   .forexBox h4 {
     font-size: 1.2rem;
-  
   }
   .forexBox p {
     font-size: 14px;
   }
-  
-  
 }
