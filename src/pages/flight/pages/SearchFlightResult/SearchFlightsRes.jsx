@@ -8,6 +8,10 @@ import airplane from '../../../../assets/airplane.gif';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRightOutlined, CloseOutlined } from '@ant-design/icons';
 import { JS_API_URL } from '../../../../utils';
+import SearchFlightComponent from '../Home/components/SearchFlightComponent';
+
+
+
 
 
 const SearchFlightsRes = () => {
@@ -22,7 +26,7 @@ const SearchFlightsRes = () => {
     const [pid, setPid] = React.useState('');
     const [rpid, setRpid] = React.useState('');
     const [allow, setAllow] = React.useState(false);
-    const [isloading, setIsLoading] = React.useState(false);
+    const [isloading, setIsLoading] = React.useState(true);
     const [routeid, setRouteId] = React.useState(0);
     const [pids, setPids] = React.useState([]);
     const [airlines, setAirlines] = useState([]);
@@ -32,6 +36,9 @@ const SearchFlightsRes = () => {
     const [dt, setDt] = useState(["Before 6AM", "6AM - 12PM", "12PM - 6PM", "After 6PM"]);
     const [at, setAt] = useState(["Before 6AM", "6AM - 12PM", "12PM - 6PM", "After 6PM"]);
     const [open, setOpen] = useState(false);
+
+
+
 
     const handleFilter = () => {
         setOpen(true);
@@ -237,7 +244,14 @@ const SearchFlightsRes = () => {
                                 <div className="container mx-auto">
                                     <div className="w-full">
                                         <div className="w-full">
-                                           
+                                            {
+                                                !isloading && (
+                                                    <>
+                                                        <SearchFlightComponent />
+                                                    </>
+                                                )
+                                            }
+                                        
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-12 gap-3">

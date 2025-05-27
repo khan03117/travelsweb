@@ -7,8 +7,9 @@ import { CloseCircleFilled, DownOutlined, PlusOutlined } from "@ant-design/icons
 import TravellersBox from "./TravellersBox"
 // import { formatDate, pfts, trips } from '../../Utils'
 import { useNavigate } from 'react-router-dom'
-import { formatDate, pfts, trips } from '../../../../utils'
+import { formatDate,  trips } from '../../../../utils'
 import { TbArrowsExchange } from 'react-icons/tb'
+import AllPfts from './components/AllPfts'
 
 const FlightHome = () => {
     const [travellers, setTravellers] = useState({
@@ -52,7 +53,7 @@ const FlightHome = () => {
 
     const [open, setOpen] = useState({ id: 0, type: "" })
     const [trip, setTrip] = useState(1)
-    const [quota, setQuota] = useState('');
+    const [quotatype, setQuota] = useState('');
     const [rows, setRows] = useState(1);
     const [fdata, setFdata] = useState([]);
     const [tbox, setTbox] = useState(false);
@@ -222,8 +223,8 @@ const FlightHome = () => {
                     });
                 }
                 const searchModifiers = {};
-                if (quota) {
-                    searchModifiers['pft'] = quota;
+                if (quotatype) {
+                    searchModifiers['pft'] = quotatype;
                 }
                 const data = {
                     searchQuery: {
@@ -242,7 +243,7 @@ const FlightHome = () => {
                 }
                 const appid = localStorage.getItem('appId');
                 localStorage.setItem('search', JSON.stringify({ data: data, trip: trip, isInt: isInt }));
-
+                localStorage.setItem('cities', JSON.stringify(selectedcities));
                 navigate('/search-flight', {
                     state: {
                         searchQuery: data, appId: appid, is_international: isInt
@@ -394,18 +395,7 @@ const FlightHome = () => {
 
                     <div className="grid grid-cols-1">
                         <div className="col-span-1">
-                            <div className="w-full flex flex-wrap gap-4 mt-5">
-                                {
-                                    pfts.map((itm) => (
-                                        <>
-                                            <div onClick={() => checkinquota(itm.key)} className={`inline-flex gap-1 cursor-pointer ${quota == itm.key ? "active" : ""} quotabox`}>
-                                                <div className={`size-4 rounded-full border checkbox relative ${quota == itm.key ? "bg-white" : ""} quotabox`}> </div>
-                                                <span className="text-sm text-white">{itm.title}</span>
-                                            </div>
-                                        </>
-                                    ))
-                                }
-                            </div>
+                            <AllPfts checkinquota={checkinquota} quota={quotatype} />
                         </div>
                     </div>
                 </div>

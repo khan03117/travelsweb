@@ -26,13 +26,9 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
   };
   const getdata = async () => {
     const items = await getData(`airports?key=${keyword}`);
-
     const obj1 = values[sid]?.From_obj;
     const obj2 = values[sid]?.To_obj;
     const arr = [...items.data];
-    console.log(obj1)
-    console.log(obj2)
-
     if (obj1 && obj2) {
       arr.push(obj1, obj2);
     }
@@ -71,9 +67,11 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
   return (
     <div onClick={handleOpen} className="w-full h-full min-h-20 group p-3 cursor-pointer lg:relative bg-white">
       <LabelSearch label={label} />
+
       <div className="w-full">
         <h4 className="text-xl font-bold">{selectedcities.find(obj => obj.code == values[sid][label])?.code}</h4>
         <p className="text-sm font-light">{selectedcities.find(obj => obj.code == values[sid][label])?.name}</p>
+        {selectedcities.find(obj => obj.code == values[sid][label])?.code}
       </div>
       {
         open && (
