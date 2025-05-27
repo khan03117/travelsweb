@@ -9,10 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import CountBox from '../../components/CountBox';
 import { JS_API_URL } from '../../utils';
 import LabelSearch from '../flight/pages/Home/LabelSearch';
+import Loading from '../../components/Loading';
+
 
 const SearchHotel = () => {
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
 
     const toggleDialog = () => {
         setOpen(!open);
@@ -111,6 +114,7 @@ const SearchHotel = () => {
     }
     const getSearchId = async () => {
         try {
+            setLoading(true);
             const searchdata = {
                 "searchQuery": {
                     "checkinDate": moment(startDate).format('YYYY-MM-DD'),
@@ -138,8 +142,10 @@ const SearchHotel = () => {
             const resp = await axios.post(JS_API_URL + "hotel/search", { searchQuery: searchdata });
             if (resp.data.success == 1) {
                 const response = resp.data.data.searchIds[0];
+                setLoading(false);
                 navigate('/hotel-list/'+response)
             }
+               setLoading(false);
 
         } catch (err) {
             console.log(err);
@@ -148,7 +154,14 @@ const SearchHotel = () => {
     return (
         <>
             <CalendarPopup handleDateClick={handleDateClick} startDate={startDate} endDate={endDate} open={open} toggleDialog={toggleDialog} />
-            <section className='py-10'>
+            <section className='py-10 mb-40 relative'>
+                {
+                    loading && (
+                        <>
+                            <Loading/>
+                        </>
+                    )
+                }
                 <div className="container mx-auto">
                     <div className="grid grid-cols-12 gap-5">
                         <div className="col-span-3">
@@ -173,7 +186,7 @@ const SearchHotel = () => {
                                         {rooms.flatMap(rm => rm.numberOfChild).reduce((sum, total) => sum + total)}  Childs
                                     </div>
                                 </div>
-                                <div className={`w-full ${topen ? " translate-y-0 opacity-100" : "translate-y-56 opacity-0"} transition-all duration-1000 absolute top-full left-0 p-3 bg-gray-200/75`}>
+                                <div className={`w-full ${topen ? " translate-y-0 opacity-100" : "translate-y-56 opacity-0"} transition-all duration-1000 relative top-full left-0 p-3 bg-gray-200/75`}>
                                     {
                                         topen && (
                                             <>

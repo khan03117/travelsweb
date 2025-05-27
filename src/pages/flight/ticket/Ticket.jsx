@@ -193,12 +193,12 @@ const Ticket = () => {
                                 <table>
                                     <thead>
                                         <tr className='*:text-start *:font-semibold *:text-xs *:p-2 *:border *:border-blue-gray-200'>
-                                            
+
                                             <th>Passenger </th>
                                             <th>Ticket & PNR</th>
-                                            
+
                                             <th>Seat & SSR</th>
-                                           
+
                                             <th>Cabin Class</th>
                                             <th>Is Refundable</th>
                                         </tr>
@@ -208,7 +208,7 @@ const Ticket = () => {
                                             details.booking_details.itemInfos.AIR.travellerInfos.map((trv) => (
                                                 <>
                                                     <tr className='*:text-start *:font-light *:text-xs *:p-2 *:border *:border-blue-gray-200'>
-                                                       
+
                                                         <td>
                                                             <p>Category : {trv.pt}</p>
                                                             <p>  {trv.ti + " " + trv.fN + " " + trv.lN} </p>
@@ -226,7 +226,7 @@ const Ticket = () => {
                                                                 Object.entries(trv.pnrDetails).map(([column, value], index) => (
                                                                     <>
                                                                         <p key={column}>
-                                                                            {trv.ticketNumberDetails && Object.entries(trv.ticketNumberDetails)[index][1]}                                                                           
+                                                                            {trv.ticketNumberDetails && Object.entries(trv.ticketNumberDetails)[index][1]}
                                                                             <span className='mx-3'>{value}</span>
                                                                         </p>
                                                                     </>
@@ -235,31 +235,31 @@ const Ticket = () => {
                                                         </td>
                                                         <td>
                                                             {
-                                                               trv?.ssrBaggageInfos &&  Object.entries(trv.ssrBaggageInfos).map(([column, value]) => (
+                                                                trv?.ssrBaggageInfos && Object.entries(trv.ssrBaggageInfos).map(([column, value]) => (
                                                                     <>
                                                                         <p key={column}>
-                                                                        
-                                                                          <strong className="font-semibold">Baggage: </strong>     <span className='mx-3'>{value.desc}</span>
+
+                                                                            <strong className="font-semibold">Baggage: </strong>     <span className='mx-3'>{value.desc}</span>
                                                                         </p>
                                                                     </>
                                                                 ))
                                                             }
                                                             {
-                                                               trv?.ssrMealInfos &&  Object.entries(trv.ssrMealInfos).map(([column, value]) => (
+                                                                trv?.ssrMealInfos && Object.entries(trv.ssrMealInfos).map(([column, value]) => (
                                                                     <>
                                                                         <p key={column}>
-                                                                        
-                                                                         <strong className="font-semibold">Meal: </strong>   <span className='mx-3'>{value.desc}</span>
+
+                                                                            <strong className="font-semibold">Meal: </strong>   <span className='mx-3'>{value.desc}</span>
                                                                         </p>
                                                                     </>
                                                                 ))
                                                             }
                                                             {
-                                                               trv?.ssrSeatInfos &&  Object.entries(trv.ssrSeatInfos).map(([column, value]) => (
+                                                                trv?.ssrSeatInfos && Object.entries(trv.ssrSeatInfos).map(([column, value]) => (
                                                                     <>
                                                                         <p key={column}>
-                                                                        
-                                                                         <strong className="font-semibold">Seat : </strong>   <span className='mx-3'>{value.code}</span>
+
+                                                                            <strong className="font-semibold">Seat : </strong>   <span className='mx-3'>{value.code}</span>
                                                                         </p>
                                                                     </>
                                                                 ))
@@ -267,13 +267,13 @@ const Ticket = () => {
                                                             {
                                                                 !trv?.ssrBaggageInfos && (
                                                                     <>
-                                                                      <p>{trv.fd.bI.cB}</p>
+                                                                        <p>{trv.fd.bI.cB}</p>
                                                                     </>
                                                                 )
                                                             }
-                                                          
+
                                                         </td>
-                                                      
+
                                                         <td>
                                                             {trv.fd.cc}
                                                         </td>

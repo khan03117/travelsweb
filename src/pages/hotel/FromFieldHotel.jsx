@@ -60,8 +60,9 @@ const FromFieldHotel = ({ label = "from", sid, handleFdata }) => {
         <div onClick={handleOpen} className="w-full h-full min-h-20 group p-3 cursor-pointer lg:relative bg-white">
             <LabelSearch label={label} />
             <div className="w-full">
+                {/* {JSON.stringify(code)} */}
                 <h4 className="text-xl font-bold">{cities.find(obj => obj.id == code.id)?.code}</h4>
-                <p className="text-sm font-light">{cities.find(obj => obj.id == code.id)?.name}</p>
+                <p className="text-sm font-light">{cities.find(obj => obj.id == code.id)?.fullRegionName}</p>
             </div>
             {
                 open && (

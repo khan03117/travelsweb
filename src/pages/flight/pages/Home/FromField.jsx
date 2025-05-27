@@ -5,11 +5,12 @@ import React from 'react';
 // import { getData } from '../../Utils';
 import { GiAirplaneDeparture, GiAirplaneArrival } from "react-icons/gi";
 import { getData } from '../../../../utils';
-const FromField = ({ label, sid, handleFdata }) => {
+const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelectedCities }) => {
+  console.log(selectedcities)
   const [keyword, setKeyword] = React.useState('');
   const [open, setOpen] = useState(false);
   const [cities, setCities] = React.useState([]);
-  const [code, setCode] = React.useState({ name: "", code: "" });
+  // const [code, setCode] = React.useState({ name: "", code: "" });
   const handleOpen = () => {
     setOpen(!open);
   }
@@ -25,16 +26,29 @@ const FromField = ({ label, sid, handleFdata }) => {
   };
   const getdata = async () => {
     const items = await getData(`airports?key=${keyword}`);
-    setCities(items.data);
+
+    const obj1 = values[sid]?.From_obj;
+    const obj2 = values[sid]?.To_obj;
+    const arr = [...items.data];
+    console.log(obj1)
+    console.log(obj2)
+
+    if (obj1 && obj2) {
+      arr.push(obj1, obj2);
+    }
+    setCities(arr);
   }
   React.useEffect(() => {
     getdata();
   }, [keyword]);
   const handleCode = (obj) => {
-    setCode(obj);
+    // setCode(obj);
+    setSelectedCities((prev) => ([...prev, { ...obj }]));
     setOpen(false);
     handleFdata(sid, label, obj.code);
+    handleFdata(sid, label + "_obj", obj);
     handleFdata(sid, label + '_country', obj.countrycode);
+
   }
 
   React.useEffect(() => {
@@ -49,14 +63,17 @@ const FromField = ({ label, sid, handleFdata }) => {
     };
   }, []);
 
-
+  const getignoreid = () => {
+    const findid = label == "From" ? "To" : "From";
+    return values[sid]?.[findid];
+  }
 
   return (
     <div onClick={handleOpen} className="w-full h-full min-h-20 group p-3 cursor-pointer lg:relative bg-white">
       <LabelSearch label={label} />
       <div className="w-full">
-        <h4 className="text-xl font-bold">{cities.find(obj => obj.code == code.code)?.code}</h4>
-        <p className="text-sm font-light">{cities.find(obj => obj.code == code.code)?.name}</p>
+        <h4 className="text-xl font-bold">{selectedcities.find(obj => obj.code == values[sid][label])?.code}</h4>
+        <p className="text-sm font-light">{selectedcities.find(obj => obj.code == values[sid][label])?.name}</p>
       </div>
       {
         open && (
@@ -74,7 +91,7 @@ const FromField = ({ label, sid, handleFdata }) => {
               <div className="w-full">
                 <ul className="*:p-1 *:text-sm max-h-[250px] overflow-x-hidden overflow-y-auto">
                   {
-                    cities.length > 0 && cities.map((cit) => (
+                    cities.length > 0 && cities.filter(obj => obj.code != getignoreid()).map((cit) => (
                       <>
                         <li key={cit._id} className='border-b border-dashed border-blue-gray-200 last:border-b-0'>
                           <button onClick={() => handleCode(cit)} className=" gap-2 text-xs w-full text-start">
@@ -119,6 +136,9 @@ FromField.propTypes = {
   // }),
   sid: PropTypes.number,
   handleFdata: PropTypes.func,
+  values: PropTypes.array,
+  selectedcities: PropTypes.array,
+  setSelectedCities: PropTypes.func,
 };
 
 export default FromField;

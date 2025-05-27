@@ -235,6 +235,11 @@ const SearchFlightsRes = () => {
 
                             <section className="bg-[#e8f2fa] py-2 px-5">
                                 <div className="container mx-auto">
+                                    <div className="w-full">
+                                        <div className="w-full">
+                                           
+                                        </div>
+                                    </div>
                                     <div className="grid grid-cols-12 gap-3">
                                         <div className="lg:col-span-3 lg:block hidden col-span-12 sticky top-0">
                                             <Filter

@@ -8,6 +8,7 @@ import TravellersBox from "./TravellersBox"
 // import { formatDate, pfts, trips } from '../../Utils'
 import { useNavigate } from 'react-router-dom'
 import { formatDate, pfts, trips } from '../../../../utils'
+import { TbArrowsExchange } from 'react-icons/tb'
 
 const FlightHome = () => {
     const [travellers, setTravellers] = useState({
@@ -56,10 +57,10 @@ const FlightHome = () => {
     const [fdata, setFdata] = useState([]);
     const [tbox, setTbox] = useState(false);
     const [errors, setErrors] = useState([]);
-
+    const [selectedcities, setSelectedCities] = useState([]);
 
     const validate = () => {
-        console.log(fdata);
+
         let validationErrors = [];
 
         // Validate fdata
@@ -109,6 +110,18 @@ const FlightHome = () => {
         if (boxRef.current && !boxRef.current.contains(event.target)) {
             setTbox(false);
         }
+    };
+    const interchange = (id) => {
+        const arr = [...fdata]; // Clone the array to avoid mutating original
+        const obj = arr[id];    // Get the object by index
+
+        // Swap 'From' and 'To'
+        [obj.From, obj.To, obj.From_obj] = [obj.To, obj.From, obj.To_obj];
+
+        // Swap 'From_country' and 'To_country'
+        [obj.From_country, obj.To_country] = [obj.To_country, obj.From_country];
+        setFdata(arr)
+        
     };
 
     useEffect(() => {
@@ -229,7 +242,7 @@ const FlightHome = () => {
                 }
                 const appid = localStorage.getItem('appId');
                 localStorage.setItem('search', JSON.stringify({ data: data, trip: trip, isInt: isInt }));
-               
+
                 navigate('/search-flight', {
                     state: {
                         searchQuery: data, appId: appid, is_international: isInt
@@ -266,11 +279,14 @@ const FlightHome = () => {
                         [...Array(rows)].map((a, index) => (
                             <>
                                 <div key={a} className={`grid relative mb-2 last:border-none ${trip == 1 ? 'lg:grid-cols-5' : ''} ${trip == 3 ? 'lg:grid-cols-4' : ''} ${trip == 2 ? 'lg:grid-cols-6' : ''}   grid-cols-8  *:border-e *:border-blue-gray-100`}>
-                                    <div className="lg:col-span-1 col-span-4 lg:rounded-s lg:border-none border-b   border-gray-100">
-                                        <FromField key={index + 3} handleFdata={handleFdata} sid={index} open={open} label="From" />
+                                    <div className="lg:col-span-1 col-span-4 lg:rounded-s lg:border-none border-b   border-gray-100 relative">
+                                        <FromField setSelectedCities={setSelectedCities} selectedcities={selectedcities} key={index + 3} values={fdata} handleFdata={handleFdata} sid={index} open={open} label="From" />
+                                        <button onClick={() => interchange(index)} className='absolute size-8 border border-gray-400 rounded-full bg-gray-300 text-[var(--primary)] -end-0 top-9 z-30 text-3xl'>
+                                            <TbArrowsExchange />
+                                        </button>
                                     </div>
                                     <div className="lg:col-span-1 col-span-4 lg:border-none border-b">
-                                        <FromField key={index + 4} handleFdata={handleFdata} sid={index} open={open} label="To" />
+                                        <FromField setSelectedCities={setSelectedCities} selectedcities={selectedcities} key={index + 4} values={fdata} handleFdata={handleFdata} sid={index} open={open} label="To" />
                                     </div>
                                     <div className="lg:col-span-1 col-span-4">
                                         <DateField key={index + 5} handleFdata={handleFdata} sid={index} handletrip={handletrip} disabled={false} label={"Departure Date"} />

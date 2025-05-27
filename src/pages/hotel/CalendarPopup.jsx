@@ -38,8 +38,8 @@ const isSameDay = (date1, date2) =>
 const isInRange = (date, start, end) =>
     start && end && date > start && date < end;
 
-const CalendarPopup = ({open, toggleDialog,startDate,endDate,  handleDateClick}) => {
-    
+const CalendarPopup = ({ open, toggleDialog, startDate, endDate, handleDateClick }) => {
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const months = getMonthYearArray();
     const visibleMonths = months.slice(currentIndex, currentIndex + 2);
@@ -50,11 +50,18 @@ const CalendarPopup = ({open, toggleDialog,startDate,endDate,  handleDateClick})
     const handlePrev = () => {
         if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
     };
+    const isBeforeToday = (date) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return date < today;
+    };
 
-   
+
 
     const getDateClass = (date) => {
         if (!date) return "";
+
+        if (isBeforeToday(date)) return "text-gray-400 cursor-not-allowed";
 
         const isStart = isSameDay(date, startDate);
         const isEnd = isSameDay(date, endDate);
@@ -70,7 +77,7 @@ const CalendarPopup = ({open, toggleDialog,startDate,endDate,  handleDateClick})
 
     return (
         <>
-            
+
 
             <Dialog open={open} handler={toggleDialog} size="lg">
                 <DialogHeader className="justify-between items-center">
@@ -116,7 +123,9 @@ const CalendarPopup = ({open, toggleDialog,startDate,endDate,  handleDateClick})
                                         date ? (
                                             <div
                                                 key={index}
-                                                onClick={() => handleDateClick(date)}
+                                                onClick={() => {
+                                                    if (!isBeforeToday(date)) handleDateClick(date);
+                                                }}
                                                 className={`w-8 h-8 flex items-center justify-center rounded-md text-sm cursor-pointer ${getDateClass(date)}`}
                                             >
                                                 {date.getDate()}
