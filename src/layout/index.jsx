@@ -5,21 +5,12 @@ import Footer from './Footer'
 import { UserProvider, useUser } from '../pages/Account/UserContext'
 import { ToastContainer } from 'react-toastify'
 import Loading from '../components/Loading'
-import { v4 as uuidv4 } from 'uuid';
+
 
 const Layout = () => {
   const { pathname } = useLocation();
   const { user, theme } = useUser();
-  const setAppid = () => {
-    const appid = uuidv4();
-    const isApp = localStorage.getItem('appId');
-    if (!isApp) {
-      localStorage.setItem('appId', appid);
-    }
-  }
-  React.useEffect(() => {
-    setAppid();
-  }, []);
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
