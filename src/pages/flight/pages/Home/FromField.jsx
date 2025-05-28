@@ -6,7 +6,6 @@ import React from 'react';
 import { GiAirplaneDeparture, GiAirplaneArrival } from "react-icons/gi";
 import { getData } from '../../../../utils';
 const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelectedCities }) => {
-  console.log(selectedcities)
   const [keyword, setKeyword] = React.useState('');
   const [open, setOpen] = useState(false);
   const [cities, setCities] = React.useState([]);
@@ -69,9 +68,9 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
       <LabelSearch label={label} />
 
       <div className="w-full">
-        <h4 className="text-xl font-bold">{selectedcities.find(obj => obj.code == values[sid][label])?.code}</h4>
-        <p className="text-sm font-light">{selectedcities.find(obj => obj.code == values[sid][label])?.name}</p>
-        {selectedcities.find(obj => obj.code == values[sid][label])?.code}
+        <h4 className="text-xl font-bold">{selectedcities.find(obj => obj.code == values[sid]?.[label])?.code}</h4>
+        <p className="text-sm font-light">{selectedcities.find(obj => obj.code == values[sid]?.[label])?.name}</p>
+      
       </div>
       {
         open && (

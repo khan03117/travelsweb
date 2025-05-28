@@ -290,7 +290,7 @@ const FlightHome = () => {
                                         <FromField setSelectedCities={setSelectedCities} selectedcities={selectedcities} key={index + 4} values={fdata} handleFdata={handleFdata} sid={index} open={open} label="To" />
                                     </div>
                                     <div className="lg:col-span-1 col-span-4">
-                                        <DateField key={index + 5} handleFdata={handleFdata} sid={index} handletrip={handletrip} disabled={false} label={"Departure Date"} />
+                                        <DateField key={index + 5} values={fdata} handleFdata={handleFdata} sid={index} handletrip={handletrip} disabled={false} label={"Departure Date"} />
                                     </div>
 
                                     {
@@ -298,7 +298,7 @@ const FlightHome = () => {
                                             <>
                                                 <div className="lg:col-span-1 col-span-4  lg:border-none border-b   ">
                                                     <div className={`bg-white w-full  h-full`}>
-                                                        <DateField key={index + 6} sid={index} handleFdata={handleFdata} handletrip={handletrip} label={"Return Date"} disabled={trip == 2 ? false : true} />
+                                                        <DateField key={index + 6} values={fdata} sid={index} handleFdata={handleFdata} handletrip={handletrip} label={"Return Date"} disabled={trip == 2 ? false : true} />
                                                     </div>
                                                 </div>
                                             </>

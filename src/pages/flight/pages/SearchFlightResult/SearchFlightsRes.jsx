@@ -5,24 +5,25 @@ import Filter from "./Filter"
 import SingleFlightResBox from "./SingleFlightResBox"
 
 import airplane from '../../../../assets/airplane.gif';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRightOutlined, CloseOutlined } from '@ant-design/icons';
 import { JS_API_URL } from '../../../../utils';
 import SearchFlightComponent from '../Home/components/SearchFlightComponent';
+import { Collapse } from '@material-tailwind/react';
 
 
 
 
 
 const SearchFlightsRes = () => {
-    const location = useLocation();
-    const searchData = location.state;
+    // const location = useLocation();
+    // const searchData = location.state;
     const [onwards, setOnwards] = React.useState([]);
     const [returns, setReturns] = React.useState([]);
     const [comobs, setCombos] = React.useState([]);
     const [multies, setMulties] = React.useState({});
-    const searchdata = localStorage.getItem('search');
-    const { data, trip, isInt } = JSON.parse(searchdata);
+    const searchdata = JSON.parse(localStorage.getItem('search'));
+    const { data, trip, isInt } = searchdata;
     const [pid, setPid] = React.useState('');
     const [rpid, setRpid] = React.useState('');
     const [allow, setAllow] = React.useState(false);
@@ -82,11 +83,12 @@ const SearchFlightsRes = () => {
         set_allow();
     }, [pid, rpid, pids]);
 
-
+ const [copen, setCOpen] = React.useState(false);
+ const toggleOpen = () => setCOpen((cur) => !cur);
 
     const searchFlight = async () => {
         setIsLoading(true)
-        const resp = await axios.post(JS_API_URL + "search-query", searchData);
+        const resp = await axios.post(JS_API_URL + "search-query", { searchQuery: data, is_international: isInt });
         const { searchResult } = resp.data.data;
         const search_id = resp.data.search_id;
         localStorage.setItem('search_id', search_id._id);
@@ -239,19 +241,34 @@ const SearchFlightsRes = () => {
                                     />
                                 </div>
                             </div>
+                            {
+                                !isloading && (
+                                    <>
+                                    
+                                        <section className='bg-[var(--primary)] py-5'>
+                                            <div className="container mx-auto">
+                                                <div className="w-full text-end p-2">
+                                                    <button onClick={toggleOpen} className='px-4 py-2 text-xs border border-white text-white'>Modify Search</button>
+                                                </div>
+                                                <Collapse open={copen}>
+                                               
+                                                <div className="w-full">
+                                                    <SearchFlightComponent />
+                                                </div>
+                                                 </Collapse>
+                                            </div>
+                                        </section>
+
+                                    </>
+                                )
+                            }
 
                             <section className="bg-[#e8f2fa] py-2 px-5">
                                 <div className="container mx-auto">
                                     <div className="w-full">
                                         <div className="w-full">
-                                            {
-                                                !isloading && (
-                                                    <>
-                                                        <SearchFlightComponent />
-                                                    </>
-                                                )
-                                            }
-                                        
+
+
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-12 gap-3">

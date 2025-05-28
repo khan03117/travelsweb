@@ -7,7 +7,7 @@ import LabelSearch from '../LabelSearch'
 import { CloseCircleFilled, DownOutlined, PlusOutlined } from '@ant-design/icons'
 import TravellersBox from '../TravellersBox'
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { formatDate, trips } from '../../../../../utils'
 
 const SearchFlightComponent = () => {
@@ -21,11 +21,12 @@ const SearchFlightComponent = () => {
     };
     const handleIncrement = (key) => {
         setTravellers((prev) => {
-            const newValue = prev[key] + 1;
+            const newValue = parseInt(prev[key]) + 1;
+            console.log(newValue)
             if (key === 'INFANT' && newValue > prev['ADULT']) {
                 return prev;
             }
-            if ((key === 'ADULT' || key === 'CHILD') && (newValue + prev[key === 'ADULT' ? 'CHILD' : 'ADULT']) > 9) {
+            if ((key === 'ADULT' || key === 'CHILD') && (newValue + parseInt(prev[key === 'ADULT' ? 'CHILD' : 'ADULT'])) > 9) {
                 return prev;
             }
             return { ...prev, [key]: newValue };
@@ -51,22 +52,35 @@ const SearchFlightComponent = () => {
     const [open, setOpen] = useState({ id: 0, type: "" })
     const [trip, setTrip] = useState(searchdata.trip)
     const [quotatype, setQuota] = useState('');
-    const [rows, setRows] = useState(query.routeInfos.length);
+    const [rows, setRows] = useState(searchdata.trip != 2 ? query.routeInfos.length : 1);
     const initialFdata = () => {
         const arr = query.routeInfos;
-        const marr = arr.map((itm, index) => ({
-            "id": index,
-            "DepartureDate": itm.travelDate,
-            "From": itm.fromCityOrAirport.code,
-            "To": itm.toCityOrAirport.code
-        }));
-        return marr;
+        if (searchdata.trip != 2) {
+            const marr = arr.map((itm, index) => ({
+                "id": index,
+                "DepartureDate": itm.travelDate,
+                "From": itm.fromCityOrAirport.code,
+                "To": itm.toCityOrAirport.code
+            }));
+            return marr;
+        }
+        if (searchdata.trip == 2) {
+            const obj = {
+                "id": 0,
+                "DepartureDate": arr[0].travelDate,
+                "ReturnDate": arr[1].travelDate,
+                "From": arr[0].fromCityOrAirport.code,
+                "To": arr[0].toCityOrAirport.code
+            }
+            return [obj];
+        }
+
     }
     const [fdata, setFdata] = useState(initialFdata());
     const [tbox, setTbox] = useState(false);
     const [errors, setErrors] = useState([]);
     const [selectedcities, setSelectedCities] = useState(JSON.parse(localStorage.getItem('cities')));
-    
+
     const validate = () => {
 
         let validationErrors = [];
@@ -181,7 +195,7 @@ const SearchFlightComponent = () => {
     useEffect(() => {
         console.log(fdata)
     }, [fdata]);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const searchFlight = async () => {
         try {
             if (validate()) {
@@ -248,14 +262,10 @@ const SearchFlightComponent = () => {
                 if (Object.keys(searchModifiers).length > 0) {
                     data.searchQuery.searchModifiers = searchModifiers;
                 }
-                const appid = localStorage.getItem('appId');
+                // const appid = localStorage.getItem('appId');
                 localStorage.setItem('search', JSON.stringify({ data: data, trip: trip, isInt: isInt }));
                 localStorage.setItem('cities', JSON.stringify(selectedcities));
-                navigate('/search-flight', {
-                    state: {
-                        searchQuery: data, appId: appid, is_international: isInt
-                    }
-                });
+                window.location.reload();
 
             }
         } catch (error) {
@@ -281,7 +291,7 @@ const SearchFlightComponent = () => {
             <div className="w-full text-white text-xs">
                 {errors.length > 0 && '*' + errors[0]}
             </div>
-        
+
             {
                 [...Array(rows)].map((a, index) => (
                     <>
@@ -296,7 +306,7 @@ const SearchFlightComponent = () => {
                                 <FromField setSelectedCities={setSelectedCities} selectedcities={selectedcities} key={index + 4} values={fdata} handleFdata={handleFdata} sid={index} open={open} label="To" />
                             </div>
                             <div className="lg:col-span-1 col-span-4">
-                                <DateField key={index + 5} handleFdata={handleFdata} sid={index} handletrip={handletrip} disabled={false} label={"Departure Date"} />
+                                <DateField key={index + 5} values={fdata} handleFdata={handleFdata} sid={index} handletrip={handletrip} disabled={false} label={"Departure Date"} />
                             </div>
 
                             {
@@ -304,7 +314,7 @@ const SearchFlightComponent = () => {
                                     <>
                                         <div className="lg:col-span-1 col-span-4  lg:border-none border-b   ">
                                             <div className={`bg-white w-full  h-full`}>
-                                                <DateField key={index + 6} sid={index} handleFdata={handleFdata} handletrip={handletrip} label={"Return Date"} disabled={trip == 2 ? false : true} />
+                                                <DateField key={index + 6} values={fdata} sid={index} handleFdata={handleFdata} handletrip={handletrip} label={"Return Date"} disabled={trip == 2 ? false : true} />
                                             </div>
                                         </div>
                                     </>
@@ -319,7 +329,7 @@ const SearchFlightComponent = () => {
                                             <div onClick={handleTravellerBox} className="w-full p-3 bg-white h-full relative">
                                                 <LabelSearch key={index + 7} label={"Traveller & Class"} />
                                                 <h4>
-                                                    <span className="text-xl font-bold me-1">{travellers.ADULT + travellers.CHILD + travellers.INFANT}</span>
+                                                    <span className="text-xl font-bold me-1">{parseInt(travellers.ADULT) + parseInt(travellers.CHILD) + parseInt(travellers.INFANT)}</span>
                                                     <span className="text-sm me-1">Traveller(s)</span>
                                                     <span><DownOutlined /></span>
                                                 </h4>
