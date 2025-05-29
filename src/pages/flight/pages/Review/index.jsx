@@ -8,7 +8,7 @@ import Steps from './Steps';
 import FlightDetailsReview from './FlightDetailsReview';
 import Conditions from './Conditions';
 import ReviewLoading from './ReviewLoading';
-import { JS_API_URL, JS_BASE_URL, REVIEW } from '../../../../utils';
+import { JS_API_URL, REVIEW } from '../../../../utils';
 const Review = () => {
     const { id } = useParams();
     const [reviews, setReview] = React.useState({});
@@ -16,13 +16,14 @@ const Review = () => {
     const [error, setError] = React.useState('');
     const allids = id.split(',');
     const save_price_id = async () => {
-        const id = localStorage.getItem('search_id');
-        await axios.post(JS_BASE_URL + "api/v1/search-query/update/" + id, { "priceIds": allids }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
+        // const id = localStorage.getItem('search_id');
+        // await axios.post(JS_BASE_URL + "api/v1/search-query/update/" + id, { "priceIds": allids }, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json'
+        //     }
+        // })
+        console.log('');
     }
     const save_review = async () => {
         // const id = localStorage.getItem('search_id');
@@ -51,11 +52,9 @@ const Review = () => {
                     'Content-Type': 'application/json'
                 },
             });
-            if (resp.status != 400) {
-                console.log(resp)
+            if (resp.data.success == "1") {
                 setReview(resp.data.data);
                 setLoading(false);
-
             } else {
                 setError('Request flight is not longer available.Please try different flight')
             }

@@ -12,7 +12,7 @@ import ReviewLoading from './ReviewLoading';
 import SeatMap from './SeatMap';
 import moment from 'moment';
 import { Checkbox, Dialog, DialogBody } from '@material-tailwind/react';
-import { JS_API_URL, BOOK, postData, SEAT } from '../../../../utils';
+import { JS_API_URL, BOOK, SEAT } from '../../../../utils';
 
 const AddPassengerDetails = () => {
     const { state } = useLocation();
@@ -26,7 +26,6 @@ const AddPassengerDetails = () => {
     const [errors, setErrors] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const search_id = localStorage.getItem('search_id');
-    const appId = localStorage.getItem('appId');
     const [seats, setSeats] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [ssrSeatInfos, setssrSeatInfos] = React.useState([]);
@@ -117,58 +116,27 @@ const AddPassengerDetails = () => {
         }
     }
 
-    const checkout = async () => {
-        if (validation()) {
-            setLoading(true);
-            const bookdata = {
-                bookingId: bookingId,
-                "travellerInfo": [...pinfo],
-                gstInfo: gstDetails,
-                deliveryInfo: deliveryInfo
-            }
-            await axios.post(BOOK, bookdata, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }).then(resp => {
-                console.log(resp);
-                postData('booking', { ...bookdata, travel_id: search_id, appId: appId }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }).then(resp => {
-                    if (resp.success) {
-                        setLoading(false);
-
-                    }
-                })
-            }
-
-            ).catch(err => console.log(err));
-        }
-    }
     const validateDeliveryInfo = (info) => {
         const errorList = [];
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^[0-9]{10}$/;
 
         if (!Array.isArray(info.emails) || info.emails.length === 0) {
-            errorList.push({ "email": "At least one contact number is required." });
+            errorList.push({ path: "deliver_email", "msg": "At least one contact number is required." });
         } else {
             info.emails.forEach((email) => {
                 if (!emailRegex.test(email)) {
-                    errorList.push({ "delivery_email": `Invalid email: ${email}` });
+                    errorList.push({ path: "deliver_email", "msg": `Invalid email: ${email}` });
                 }
             });
         }
 
         if (!Array.isArray(info.contacts) || info.contacts.length === 0) {
-            errorList.push({ "email": "At least one contact number is required." });
+            errorList.push({ path: "deliver_email", "msg": "At least one contact number is required." });
         } else {
             info.contacts.forEach((contact) => {
                 if (!phoneRegex.test(contact)) {
-                    errorList.push({ "delivery_mobile": `Invalid contact number: ${contact}` });
+                    errorList.push({ path: "deliver_mobile", "msg": `Invalid contact number: ${contact}` });
                 }
             });
         }
