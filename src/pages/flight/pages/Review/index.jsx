@@ -8,12 +8,12 @@ import Steps from './Steps';
 import FlightDetailsReview from './FlightDetailsReview';
 import Conditions from './Conditions';
 import ReviewLoading from './ReviewLoading';
-import { JS_API_URL, JS_BASE_URL,  REVIEW } from '../../../../utils';
+import { JS_API_URL, JS_BASE_URL, REVIEW } from '../../../../utils';
 const Review = () => {
     const { id } = useParams();
     const [reviews, setReview] = React.useState({});
     const [loading, setLoading] = React.useState(false);
-    const [error, setError] = React.useState('');   
+    const [error, setError] = React.useState('');
     const allids = id.split(',');
     const save_price_id = async () => {
         const id = localStorage.getItem('search_id');
@@ -25,23 +25,28 @@ const Review = () => {
         })
     }
     const save_review = async () => {
-        const id = localStorage.getItem('search_id');
-        await axios.post(JS_BASE_URL + "api/v1/search-query/update/" + id, { "review": reviews }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
+        // const id = localStorage.getItem('search_id');
+        // await axios.post(JS_BASE_URL + "api/v1/search-query/update/" + id, { "review": reviews }, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json'
+        //     }
+        // })
+        console.clear(); // Clears the browser's console
 
     }
 
     const validateSearch = async () => {
         try {
-            setLoading(true)
+            setLoading(true);
+            const id = localStorage.getItem('search_id');
             const data = {
-                "priceIds": allids
+                review: {
+                    "priceIds": allids
+                },
+                "searchId": id
             }
-            const resp = await axios.post(JS_API_URL +  REVIEW, data, {
+            const resp = await axios.post(JS_API_URL + REVIEW, data, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -70,7 +75,7 @@ const Review = () => {
     React.useEffect(() => {
         save_review();
     }, [reviews]);
-    
+
     const conditions = reviews.conditions;
     return (
         <>
