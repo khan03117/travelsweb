@@ -11,7 +11,7 @@ import axios from 'axios';
 import ReviewLoading from './ReviewLoading';
 import SeatMap from './SeatMap';
 import moment from 'moment';
-import { Dialog, DialogBody } from '@material-tailwind/react';
+import { Checkbox, Dialog, DialogBody } from '@material-tailwind/react';
 import { JS_API_URL, BOOK, postData, SEAT } from '../../../../utils';
 
 const AddPassengerDetails = () => {
@@ -58,6 +58,40 @@ const AddPassengerDetails = () => {
     }
     const handlePinfo = (obj) => {
         setPinfo([...pinfo, obj]);
+    }
+    const [gstOpen, setGstOpen] = React.useState(false);
+    const handleGstOpen = () => {
+        setGstOpen((prev) => {
+            if (prev) {
+                setGstDetails({});
+            }
+            return !prev;
+        });
+
+    }
+    const validation_gst = () => {
+        const err = [];
+        if (!gstDetails?.registeredName) {
+            err.push({ msg: "registeredName is required", path: "registeredName" });
+        }
+        if (!gstDetails?.gstNumber) {
+            err.push({ msg: "gstNumber is required", path: "gstNumber" });
+        }
+        if (!gstDetails?.email) {
+            err.push({ msg: "email is required", path: "email" });
+        }
+        if (!gstDetails?.mobile) {
+            err.push({ msg: "mobile is required", path: "mobile" });
+        }
+        if (!gstDetails?.address) {
+            err.push({ msg: "address is required", path: "address" });
+        }
+        if (err.length > 0) {
+            setErrors(err);
+            return false;
+        } else {
+            return true;
+        }
     }
     const totalPax = searchQuery.paxInfo;
     const conditions = reviews.conditions;
@@ -114,10 +148,53 @@ const AddPassengerDetails = () => {
             ).catch(err => console.log(err));
         }
     }
+    const validateDeliveryInfo = (info) => {
+        const errorList = [];
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9]{10}$/;
 
+        if (!Array.isArray(info.emails) || info.emails.length === 0) {
+            errorList.push({ "email": "At least one contact number is required." });
+        } else {
+            info.emails.forEach((email) => {
+                if (!emailRegex.test(email)) {
+                    errorList.push({ "delivery_email": `Invalid email: ${email}` });
+                }
+            });
+        }
+
+        if (!Array.isArray(info.contacts) || info.contacts.length === 0) {
+            errorList.push({ "email": "At least one contact number is required." });
+        } else {
+            info.contacts.forEach((contact) => {
+                if (!phoneRegex.test(contact)) {
+                    errorList.push({ "delivery_mobile": `Invalid contact number: ${contact}` });
+                }
+            });
+        }
+        if (errorList.length > 0) {
+            setErrors(errorList);
+            return false;
+        } else {
+            return true;
+        }
+
+    };
     const checkoutBooking = async () => {
+        if (gstOpen && !validation_gst()) {
+            return false;
+        }
+        if (!validation()) {
+            return false;
+        }
+        if (!validateDeliveryInfo(deliveryInfo)) {
+            return false;
+        }
+        setLoading(true);
         const meals = smeals.filter(item => item.service === "MEAL");
         const baggage = smeals.filter(item => item.service === "BAGGAGE");
+        await axios.put(JS_API_URL + "search-query/update/" + search_id, { seat: ssrSeatInfos, meal: meals, baggage: baggage });
+
         const p_info = pinfo.map((pinf, index) => {
             const matchedSeats = ssrSeatInfos
                 .filter(obj => obj.pactive === index)
@@ -148,28 +225,11 @@ const AddPassengerDetails = () => {
         }
         const resp = await axios.post(JS_API_URL + BOOK, { bookdata: bookdata1, amount: totalamounttopay, search_id: search_id });
         const link = resp.data.data.payment_gateway_request.payment_links.web;
-        // const bookdata = {
-        //     bookingId: bookingId,
-        //     paymentInfos: [{
-        //         amount: totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount()
-        //     }],
-        //     "travellerInfo": [...p_info],
-        //     gstInfo: gstDetails,
-        //     deliveryInfo: deliveryInfo,
-        //     search_id: search_id,
-        //     appId: appId
+        setLoading(false);
+        // if (resp.data.success == "1") {
+        //     window.location.href = link;
         // }
-        // const paydata = {
-        //     order_id: bookingId,
-        //     amount: totalFareDetail.fC.TF,
-        //     request_by: "tripjack"
-        // }
-        // const resp = await postData('payment', paydata);
-        // const link = resp.payment_links.web;
-        // bookdata['payment_gateway_request'] = resp;
-        // const pers = await postData('booking', bookdata);
-        window.open(link)
-        // console.log(pers);
+
     }
     const handleSsrSeat = (key, code, amount, pactive) => {
         const arr = [...ssrSeatInfos];
@@ -264,13 +324,22 @@ const AddPassengerDetails = () => {
                                                     <DeliveryInfo errors={errors} setDeliveryInfo={setDeliveryInfo} />
                                                 </div>
                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
-                                                    <p className="text-black lg:text-md text-xs border-b border-gray-400">GST Number for Bussiness Travel</p>
-
-
-                                                    <div className="w-full bg-white py-3 lg:px-3 px-2">
-                                                        <p className="text-gray-400 lg:text-sm text-xs font-light">to claim credit of GST charged by airlines. please enter your company GST number</p>
-                                                        <GstDetails errors={errors} setGstDetails={setGstDetails} />
+                                                    <div className="text-black lg:text-md text-xs border-b border-gray-400 ">
+                                                        <Checkbox color='blue' onClick={handleGstOpen} className='text-sm font-bold' label={<span className='font-bold'>GST Number for Bussiness Travel</span>} />
                                                     </div>
+                                                    {
+                                                        gstOpen && (
+                                                            <>
+                                                                <div className="w-full bg-white py-3 lg:px-3 px-2">
+                                                                    <p className="text-gray-400 lg:text-sm text-xs font-light">to claim credit of GST charged by airlines. please enter your company GST number</p>
+                                                                    <GstDetails errors={errors} setGstDetails={setGstDetails} />
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    }
+
+
+
                                                 </div>
                                                 {
                                                     (totalarray.length == pinfo.length) && (

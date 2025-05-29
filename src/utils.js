@@ -34,11 +34,11 @@ export const formatDate = (date) => {
 };
 // export const token = "7121046d868390-4355-4319-bfe2-710739a8df9d";
 // export const token = "61032947730e85de-b941-4ad5-96fb-b95a9a249343";
-export const JS_BASE_URL = "https://www.aahiltours.com:8771/";
-export const JS_API_URL = "https://www.aahiltours.com:8771/api/v1/";
+// export const JS_BASE_URL = "https://www.aahiltours.com:8771/";
+// export const JS_API_URL = "https://www.aahiltours.com:8771/api/v1/";
 
-// export const JS_BASE_URL = "https://localhost:8771/";
-// export const JS_API_URL = "https://localhost:8771/api/v1/";
+export const JS_BASE_URL = "https://localhost:8771/";
+export const JS_API_URL = "https://localhost:8771/api/v1/";
 export const AIRIQ = "https://omairiq.azurewebsites.net/";
 export const AIRIQKEY = "NTMzNDUwMDpBSVJJUSBURVNUIEFQSToxODkxOTMwMDM1OTk2OlFRYjhLVjNFMW9UV05RY1NWL0Vtcm9UYXFKTSs5dkZvaHo0RzM4WWhwTDhsamNqR3pPN1dJSHhVQ2pCSzNRcW0="
 export const getData = async (endpoint) => {

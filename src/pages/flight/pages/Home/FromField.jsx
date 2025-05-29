@@ -38,12 +38,12 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
   }, [keyword]);
   const handleCode = (obj) => {
     // setCode(obj);
-    setSelectedCities((prev) => ([...prev, { ...obj }]));
-    setOpen(false);
+    console.log(obj);
     handleFdata(sid, label, obj.code);
     handleFdata(sid, label + "_obj", obj);
     handleFdata(sid, label + '_country', obj.countrycode);
-
+    setSelectedCities((prev) => ([...prev, { ...obj }]));
+    setOpen(false);
   }
 
   React.useEffect(() => {
@@ -70,7 +70,7 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
       <div className="w-full">
         <h4 className="text-xl font-bold">{selectedcities.find(obj => obj.code == values[sid]?.[label])?.code}</h4>
         <p className="text-sm font-light">{selectedcities.find(obj => obj.code == values[sid]?.[label])?.name}</p>
-      
+
       </div>
       {
         open && (
