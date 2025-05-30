@@ -75,7 +75,7 @@ const Review = () => {
         save_review();
     }, [reviews]);
 
-    const conditions = reviews.conditions;
+    const conditions = reviews?.conditions;
     return (
         <>
 

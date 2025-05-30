@@ -7,7 +7,7 @@ import { CloseCircleFilled, DownOutlined, PlusOutlined } from "@ant-design/icons
 import TravellersBox from "./TravellersBox"
 // import { formatDate, pfts, trips } from '../../Utils'
 import { useNavigate } from 'react-router-dom'
-import { formatDate,  trips } from '../../../../utils'
+import { formatDate, trips } from '../../../../utils'
 import { TbArrowsExchange } from 'react-icons/tb'
 import AllPfts from './components/AllPfts'
 
@@ -122,7 +122,7 @@ const FlightHome = () => {
         // Swap 'From_country' and 'To_country'
         [obj.From_country, obj.To_country] = [obj.To_country, obj.From_country];
         setFdata(arr)
-        
+
     };
 
     useEffect(() => {
@@ -144,6 +144,7 @@ const FlightHome = () => {
         } else {
             temp.push({ id: index, [key]: value });
         }
+        
         setFdata(temp);
     }
 

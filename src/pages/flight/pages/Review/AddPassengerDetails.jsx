@@ -161,7 +161,7 @@ const AddPassengerDetails = () => {
         setLoading(true);
         const meals = smeals.filter(item => item.service === "MEAL");
         const baggage = smeals.filter(item => item.service === "BAGGAGE");
-        await axios.put(JS_API_URL + "search-query/update/" + search_id, { seat: ssrSeatInfos, meal: meals, baggage: baggage });
+        // await axios.put(JS_API_URL + "search-query/update/" + search_id, { seat: ssrSeatInfos, meal: meals, baggage: baggage });
 
         const p_info = pinfo.map((pinf, index) => {
             const matchedSeats = ssrSeatInfos
@@ -191,12 +191,30 @@ const AddPassengerDetails = () => {
             gstInfo: gstDetails,
             deliveryInfo: deliveryInfo
         }
-        const resp = await axios.post(JS_API_URL + BOOK, { bookdata: bookdata1, amount: totalamounttopay, search_id: search_id });
-        const link = resp.data.data.payment_gateway_request.payment_links.web;
+        const alldata = {
+            bookdata: bookdata1,
+            gstInfo : gstDetails,
+            deliveryInfo : deliveryInfo,
+            travellerInfo : [...p_info],
+            seat: ssrSeatInfos ?? [],
+            meal: meals ?? [],
+            baggage: baggage ?? [],
+            search_id: search_id,
+            amount: totalamounttopay,
+        }
+        const resp = await axios.post(JS_API_URL + BOOK, alldata);
         setLoading(false);
-        // if (resp.data.success == "1") {
-        //     window.location.href = link;
-        // }
+        const link = resp.data.data.payment_gateway_request.payment_links.web;
+        
+        if (resp.data.success == "1") {
+            window.location.href = link;
+        }else{
+            const erro = {
+                "path" : "msg",
+                "msg" : resp.data.message
+            }
+            setErrors(erro);
+        }
 
     }
     const handleSsrSeat = (key, code, amount, pactive) => {
@@ -423,7 +441,7 @@ const AddPassengerDetails = () => {
                                                 </table>
                                                 <div className="w-full bg-gray-200 rounded-lg shadow-lg shadow-gray-400 py-5 px-2 flex items-center justify-between ">
                                                     <div className="button w-full">
-                                                        <button onClick={checkout} className="bg-primary text-white text-xs hidden   py-2 px-2 rounded-lg w-full">Checkout</button>
+                                                        {/* <button onClick={checkout} className="bg-primary text-white text-xs hidden   py-2 px-2 rounded-lg w-full">Checkout</button> */}
                                                         <button onClick={checkoutBooking} className="bg-primary text-white text-xs   py-2 px-2 rounded-lg w-full">Checkout</button>
                                                     </div>
                                                 </div>
