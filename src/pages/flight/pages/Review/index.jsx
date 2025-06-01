@@ -191,7 +191,7 @@ const Review = () => {
                                                     <div className="grid grid-cols-1">
                                                         <div className="w-full flex justify-between">
                                                             <span></span>
-                                                            <Link state={{ reviews: reviews, markup: { commission } }} to={'/passenger-details/' + reviews.bookingId} className="bg-primary text-white px-3 text-nowrap py-2">Add passenger</Link>
+                                                            <Link state={{ reviews: reviews, markup:  commission}} to={'/passenger-details/' + reviews.bookingId} className="bg-primary text-white px-3 text-nowrap py-2">Add passenger</Link>
                                                         </div>
                                                     </div>
                                                 </div>

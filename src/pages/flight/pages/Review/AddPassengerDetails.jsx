@@ -18,7 +18,7 @@ import { JS_API_URL, BOOK, SEAT } from '../../../../utils';
 const AddPassengerDetails = () => {
     const { state } = useLocation();
     const { reviews, markup } = state;
-    const markupcom = parseInt(markup.commission)
+
 
 
 
@@ -133,6 +133,8 @@ const AddPassengerDetails = () => {
         }
     }
     const totalPax = searchQuery.paxInfo;
+    const totalcount = Object.values(totalPax).reduce((total, count) => total + count, 0);
+    const markupcom = parseInt(markup) * totalcount;
     const conditions = reviews.conditions;
     const totalarray = Object.entries(totalPax).flatMap(([type, count]) =>
         Array(count).fill(type)
@@ -453,7 +455,7 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Taxes and fees</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TAF + markupcom}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TAF }</td>
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Seat Amount</td>
@@ -475,7 +477,7 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Amount to pay</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom} {markupcom}</td>
                                                         </tr>
 
                                                         <tr className="border-b-2 border-gray-200">
