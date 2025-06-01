@@ -28,7 +28,7 @@ const SingleFlightResBox = ({ flight, paxinfo, name, handlepid, _pid, isInt = fa
     const getMyCommission = async () => {
         let markup = isInt ? user.admin.int_flight : user.admin.dom_flight;
         markup = parseInt(markup);
-        setCommission({ adult: markup, child: markup, infant: markup, });
+        setCommission(markup);
     }
     const viewDetails = (itm) => {
         setView(itm)
@@ -46,14 +46,17 @@ const SingleFlightResBox = ({ flight, paxinfo, name, handlepid, _pid, isInt = fa
         let price = 0;
         const arr = pricelist.find(obj => obj.id == id);
         if (arr) {
-            const adult_price = arr.fd.ADULT.fC.TF + commission.adult;
-            const child_price = arr.fd?.CHILD?.fC.TF ?? 0 + commission.child;
-            const infant_price = arr.fd?.INFANT?.fC.TF ?? 0 + commission.infant;
+            const adult_price = arr.fd.ADULT.fC.TF;
+            const child_price = arr.fd?.CHILD?.fC.TF ?? 0;
+            const infant_price = arr.fd?.INFANT?.fC.TF ?? 0;
+          
             const adultcount = paxinfo.ADULT;
             const childcount = paxinfo.CHILD;
             const infantcount = paxinfo.INFANT;
-            price = adult_price * adultcount + child_price * childcount + infant_price * infantcount;
-            return price;
+            const totalmarkup = commission * (parseInt(adultcount) + parseInt(childcount) + parseInt(infantcount));
+            price = adult_price * adultcount + child_price * childcount + infant_price * infantcount + totalmarkup;
+            console.log(" adult :" + adult_price * adultcount +   "  child :" + child_price * childcount  + " infant :" + infant_price * infantcount + " " + totalmarkup );
+            return price ;
         } else {
             return 0;
         }
@@ -85,6 +88,10 @@ const SingleFlightResBox = ({ flight, paxinfo, name, handlepid, _pid, isInt = fa
         }
         getMyCommission();
     }, [price_id]);
+    useEffect(() => {
+        console.log(commission)
+    }, [commission]);
+
 
 
     if (!flight) {
