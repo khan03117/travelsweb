@@ -10,6 +10,7 @@ import { ArrowRightOutlined, CloseOutlined } from '@ant-design/icons';
 import { JS_API_URL } from '../../../../utils';
 import SearchFlightComponent from '../Home/components/SearchFlightComponent';
 import { Collapse } from '@material-tailwind/react';
+import { useUser } from '../../../Account/UserContext';
 
 
 
@@ -18,6 +19,7 @@ import { Collapse } from '@material-tailwind/react';
 const SearchFlightsRes = () => {
     // const location = useLocation();
     // const searchData = location.state;
+    const {user} = useUser();
     const [onwards, setOnwards] = React.useState([]);
     const [returns, setReturns] = React.useState([]);
     const [comobs, setCombos] = React.useState([]);
@@ -88,7 +90,12 @@ const SearchFlightsRes = () => {
 
     const searchFlight = async () => {
         setIsLoading(true)
-        const resp = await axios.post(JS_API_URL + "search-query", { searchQuery: data, is_international: isInt });
+        const agency = {
+            username : user.user.email,
+            name  : user.user.name,
+            admin : user.admin.name
+        }
+        const resp = await axios.post(JS_API_URL + "search-query", { searchQuery: data, is_international: isInt, agency : agency });
         const { searchResult } = resp.data.data;
         const search_id = resp.data.search_id;
         localStorage.setItem('search_id', search_id._id);
@@ -98,7 +105,6 @@ const SearchFlightsRes = () => {
             setOnwards(tripInfos.ONWARD || []);
             tripInfos.ONWARD.forEach(onward => {
                 onward.sI.forEach(segment => {
-
                     if (segment.fD && segment.fD.aI && segment.fD.aI.code) {
                         airlineNames.push({ code: segment.fD.aI.code, name: segment.fD.aI.name });
                     }

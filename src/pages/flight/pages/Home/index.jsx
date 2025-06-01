@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom'
 import { formatDate, trips } from '../../../../utils'
 import { TbArrowsExchange } from 'react-icons/tb'
 import AllPfts from './components/AllPfts'
+// import { useUser } from '../../../Account/UserContext'
 
 const FlightHome = () => {
+    
     const [travellers, setTravellers] = useState({
         ADULT: 1,
         CHILD: 0,
@@ -55,7 +57,23 @@ const FlightHome = () => {
     const [trip, setTrip] = useState(1)
     const [quotatype, setQuota] = useState('');
     const [rows, setRows] = useState(1);
-    const [fdata, setFdata] = useState([]);
+    const [fdata, setFdata] = useState([
+        {
+            "id": 0,
+            "From_country": "IN",
+            "From": "MAA",
+            "From_obj": {
+                "_id": "66ad1340463b78588b1d8094",
+                "code": "MAA",
+                "name": "Chennai Arpt",
+                "citycode": "MAA",
+                "city": "Chennai",
+                "country": "India",
+                "countrycode": "IN",
+                "__v": 0
+            }
+        }
+    ]);
     const [tbox, setTbox] = useState(false);
     const [errors, setErrors] = useState([]);
     const [selectedcities, setSelectedCities] = useState([]);
@@ -144,7 +162,7 @@ const FlightHome = () => {
         } else {
             temp.push({ id: index, [key]: value });
         }
-        
+
         setFdata(temp);
     }
 

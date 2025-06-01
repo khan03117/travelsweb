@@ -31,7 +31,7 @@ const DeliveryInfo = ({errors, setDeliveryInfo}) => {
     }, [dinfo]);
     return (
         <>
-            <div className="container">
+            <div className="w-full">
                 <div className="grid grid-cols-4 gap-4">
                     <div className="lg:col-span-1 col-span-2">
                         <label htmlFor="" className='lg:text-sm text-xs'>Enter Email</label>

@@ -1,7 +1,7 @@
 export const WEB_BASE_URL = "https://b2b.aahiltours.com/";
 export const WEB_API_URL = "https://b2b.aahiltours.com/api/";
 export const WEB_Image_URL = "https://b2b.aahiltours.com/public/";
-export const WEB_SANCTUM_KEY = "5|Uz7g7BixTqYmCLq2XZFJaS956a8iUCcSdFpDzHhQc243c82d	";
+export const WEB_SANCTUM_KEY = "5|Uz7g7BixTqYmCLq2XZFJaS956a8iUCcSdFpDzHhQc243c82d";
 
 export const trips = [
   { id: 1, trip: "One Way" },
@@ -36,7 +36,6 @@ export const formatDate = (date) => {
 // export const token = "61032947730e85de-b941-4ad5-96fb-b95a9a249343";
 export const JS_BASE_URL = "https://www.aahiltours.com:8771/";
 export const JS_API_URL = "https://www.aahiltours.com:8771/api/v1/";
-
 // export const JS_BASE_URL = "https://localhost:8771/";
 // export const JS_API_URL = "https://localhost:8771/api/v1/";
 export const AIRIQ = "https://omairiq.azurewebsites.net/";

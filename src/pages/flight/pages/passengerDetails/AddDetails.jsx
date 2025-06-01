@@ -97,7 +97,7 @@ const AddDetails = ({ onsubmit, type, show, id, conditions }) => {
 
     return (
         <>
-            <div className="container groupDetails">
+            <div className="w-full groupDetails">
                 <div className="grid grid-cols-4 gap-4 *:text-sm ">
                     <div className="lg:col-span-1 col-span-2">
                         <label htmlFor="ti">Select Title</label>

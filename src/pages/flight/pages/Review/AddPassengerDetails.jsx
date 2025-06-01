@@ -29,6 +29,23 @@ const AddPassengerDetails = () => {
     const [seats, setSeats] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [ssrSeatInfos, setssrSeatInfos] = React.useState([]);
+    const [pcode, setPcode] = React.useState('');
+    const [papply, setPapply] = React.useState(false);
+    const applypromocdode = async () => {
+        try {
+            const data = {
+                search_id: search_id,
+                code: pcode
+            }
+            const resp = await axios.post(JS_API_URL + "apply-promocode", data);
+            if (resp.data.success == 1) {
+                setPapply(resp.data.data);
+            }
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const getSeatAmount = () => {
         const totalAmount = ssrSeatInfos.reduce((sum, seatInfo) => {
             return sum + seatInfo.amount;
@@ -193,9 +210,9 @@ const AddPassengerDetails = () => {
         }
         const alldata = {
             bookdata: bookdata1,
-            gstInfo : gstDetails,
-            deliveryInfo : deliveryInfo,
-            travellerInfo : [...p_info],
+            gstInfo: gstDetails,
+            deliveryInfo: deliveryInfo,
+            travellerInfo: [...p_info],
             seat: ssrSeatInfos ?? [],
             meal: meals ?? [],
             baggage: baggage ?? [],
@@ -205,13 +222,13 @@ const AddPassengerDetails = () => {
         const resp = await axios.post(JS_API_URL + BOOK, alldata);
         setLoading(false);
         const link = resp.data.data.payment_gateway_request.payment_links.web;
-        
+
         if (resp.data.success == "1") {
             window.location.href = link;
-        }else{
+        } else {
             const erro = {
-                "path" : "msg",
-                "msg" : resp.data.message
+                "path": "msg",
+                "msg": resp.data.message
             }
             setErrors(erro);
         }
@@ -437,6 +454,23 @@ const AddPassengerDetails = () => {
                                                             <td className="py-3">Amount to pay</td>
                                                             <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount()}</td>
                                                         </tr>
+
+                                                        <tr className="border-b-2 border-gray-200">
+                                                            <td className="py-3">Promo Code</td>
+                                                            <td className="text-end py-3">
+                                                                <div className="flex border border-[var(--primary)] rounded overflow-hidden items-center">
+                                                                    <input type="text" value={pcode} onChange={(e) => setPcode(e.target.value)} name="" className="w-full px-3 py-2 outline-none" id="" />
+                                                                    <button onClick={applypromocdode} className="px-3 text-white py-2 bg-[var(--primary)]">Apply</button>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="border-b-2 border-gray-200">
+                                                            <td className="py-3">Discount</td>
+                                                            <td className="text-end py-3">&#8377; 0</td>
+
+                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                                 <div className="w-full bg-gray-200 rounded-lg shadow-lg shadow-gray-400 py-5 px-2 flex items-center justify-between ">

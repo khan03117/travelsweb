@@ -10,11 +10,12 @@ export const UserProvider = ({ children }) => {
         secondary: "#9333ea",
     });
     const [user, setUser] = useState(false);
-   
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [policies, setPolicies] = useState([]);
     const [banners, setBanners] = useState([]);
+
     const faqs = useState([]);
     const [testimonial, setTestimonial] = useState([]);
     const gettestimonial = async () => {
@@ -42,13 +43,16 @@ export const UserProvider = ({ children }) => {
                 headers: {
                     Authorization: WEB_SANCTUM_KEY
                 }
-            })
-            const data = resp.data.data;
-            if(data.theme){
-                setTheme(JSON.parse(data.theme))
+            });
+            if (resp.data.success == "1") {
+                const data = resp.data.data;
+                if (data.theme) {
+                    setTheme(JSON.parse(data.theme))
+                }
+
+                setUser({ admin: resp.data.data, user: resp.data.user });
             }
-           
-            setUser(resp.data.data);
+
         } catch (err) {
             userLogout();
             setError(err.message);

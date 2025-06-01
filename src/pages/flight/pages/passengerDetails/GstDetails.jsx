@@ -16,7 +16,7 @@ const GstDetails = ({ errors, setGstDetails }) => {
 
     return (
         <>
-            <div className="container">
+            <div className="w-full">
                 <div className="grid lg:grid-cols-4 grid-cols-2 gap-4">
                     <div className="col-span-1">
                         <label className='lg:text-sm text-xs font-light uppercase' htmlFor="gstNumber">GST Number</label>
