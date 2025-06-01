@@ -190,9 +190,7 @@ const FlightHome = () => {
         setRows((prev) => Math.max(prev - 1, 1));
         setOpen({ id: "", type: "" })
     }
-    useEffect(() => {
-        console.log(fdata)
-    }, [fdata]);
+    
     const navigate = useNavigate();
     const searchFlight = async () => {
         try {

@@ -13,10 +13,20 @@ import SeatMap from './SeatMap';
 import moment from 'moment';
 import { Checkbox, Dialog, DialogBody } from '@material-tailwind/react';
 import { JS_API_URL, BOOK, SEAT } from '../../../../utils';
+// import { useUser } from '../../../Account/UserContext';
 
 const AddPassengerDetails = () => {
     const { state } = useLocation();
-    const { reviews } = state;
+    const { reviews, markup } = state;
+    const markupcom = parseInt(markup.commission)
+
+
+
+    // const { user } = useUser();
+
+
+
+
     const { tripInfos, totalPriceInfo, searchQuery, bookingId } = reviews;
     const { totalFareDetail } = totalPriceInfo;
     const [pinfo, setPinfo] = React.useState([]);
@@ -39,8 +49,21 @@ const AddPassengerDetails = () => {
             }
             const resp = await axios.post(JS_API_URL + "apply-promocode", data);
             if (resp.data.success == 1) {
-                setPapply(resp.data.data);
+                const promocode = resp.data.data.promo_code;
+                let discountAmount = 0;
+                let sumAmount = totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom;
+                if (promocode) {
+                    const discountType = promocode.discount_type;
+                    const discountValue = Number(promocode.discount);
+                    if (discountType === "Percent") {
+                        discountAmount = (sumAmount * discountValue) / 100;
+                    } else if (discountType === "Flat") {
+                        discountAmount = discountValue;
+                    }
+                }
+                setPapply(discountAmount)
             }
+
 
         } catch (err) {
             console.log(err);
@@ -426,11 +449,11 @@ const AddPassengerDetails = () => {
                                                     <tbody className="*:text-sm">
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Base fare</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.BF}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.BF + markupcom}</td>
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Taxes and fees</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TAF}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TAF + markupcom}</td>
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Seat Amount</td>
@@ -452,7 +475,7 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Amount to pay</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount()}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom}</td>
                                                         </tr>
 
                                                         <tr className="border-b-2 border-gray-200">
@@ -467,7 +490,12 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Discount</td>
-                                                            <td className="text-end py-3">&#8377; 0</td>
+                                                            <td className="text-end py-3">&#8377; {papply ?? 0}</td>
+
+                                                        </tr>
+                                                        <tr className="border-b-2 border-gray-200">
+                                                            <td className="py-3">Net Payable</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom - papply}</td>
 
                                                         </tr>
 

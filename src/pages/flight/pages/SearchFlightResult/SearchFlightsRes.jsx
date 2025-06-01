@@ -93,7 +93,9 @@ const SearchFlightsRes = () => {
         const agency = {
             username : user.user.email,
             name  : user.user.name,
-            admin : user.admin.name
+            admin : user.admin.name,
+            user_id : user.user.id,
+            admin_id : user.admin.id
         }
         const resp = await axios.post(JS_API_URL + "search-query", { searchQuery: data, is_international: isInt, agency : agency });
         const { searchResult } = resp.data.data;
@@ -320,7 +322,7 @@ const SearchFlightsRes = () => {
                                                                                 {
                                                                                     filterFlights(onwards, { stops, sairlines: selectedAirline, departureTimes: dt, arrivalTimes: at }).map((flight) => (
                                                                                         <>
-                                                                                            <SingleFlightResBox _pid={[pid]} name="onwards" handlepid={setPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
+                                                                                            <SingleFlightResBox  isInt={isInt} _pid={[pid]} name="onwards" handlepid={setPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
                                                                                         </>
                                                                                     ))
                                                                                 }
@@ -337,7 +339,7 @@ const SearchFlightsRes = () => {
                                                                         {
                                                                             returns.filter(obj => stops.includes(obj.sI.length - 1)).map((flight) => (
                                                                                 <>
-                                                                                    <SingleFlightResBox _pid={[rpid]} name="return" handlepid={setRpid} flight={flight} paxinfo={data.searchQuery.paxInfo} />
+                                                                                    <SingleFlightResBox isInt={isInt} _pid={[rpid]} name="return" handlepid={setRpid} flight={flight} paxinfo={data.searchQuery.paxInfo} />
                                                                                 </>
                                                                             ))
                                                                         }
@@ -349,7 +351,7 @@ const SearchFlightsRes = () => {
                                                             {
                                                                 ((trip == 3 && !isInt) && Object.values(multies).length > 0) && Object.values(multies)[routeid].filter(obj => stops.includes(obj.sI.length - 1)).map((flight) => (
                                                                     <>
-                                                                        <SingleFlightResBox _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
+                                                                        <SingleFlightResBox isInt={isInt} _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
 
                                                                     </>
                                                                 ))
@@ -357,7 +359,7 @@ const SearchFlightsRes = () => {
                                                             {
                                                                 (trip == 3 && isInt) && comobs.filter(obj => stops.includes(obj.sI.length - 1)).map((flight) => (
                                                                     <>
-                                                                        <SingleFlightResBox _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
+                                                                        <SingleFlightResBox isInt={isInt} _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
 
                                                                     </>
                                                                 ))

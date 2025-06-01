@@ -9,12 +9,22 @@ import FlightDetailsReview from './FlightDetailsReview';
 import Conditions from './Conditions';
 import ReviewLoading from './ReviewLoading';
 import { JS_API_URL, REVIEW } from '../../../../utils';
+import { useUser } from '../../../Account/UserContext';
 const Review = () => {
     const { id } = useParams();
     const [reviews, setReview] = React.useState({});
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState('');
     const allids = id.split(',');
+    const conditions = reviews?.conditions;
+    const isInt = (reviews && conditions?.pcs) ? true : false;
+    const [commission, setCommission] = React.useState('');
+    const { user } = useUser();
+    const getMyCommission = () => {
+        let markup = isInt ? user.admin.int_flight : user.admin.dom_flight;
+        markup = parseInt(markup);
+        setCommission(markup);
+    }
     const save_price_id = async () => {
         // const id = localStorage.getItem('search_id');
         // await axios.post(JS_BASE_URL + "api/v1/search-query/update/" + id, { "priceIds": allids }, {
@@ -72,10 +82,11 @@ const Review = () => {
 
     }, []);
     React.useEffect(() => {
+        getMyCommission();
         save_review();
     }, [reviews]);
 
-    const conditions = reviews?.conditions;
+
     return (
         <>
 
@@ -134,14 +145,14 @@ const Review = () => {
                                                         {
                                                             reviews && reviews.tripInfos && reviews.tripInfos.length > 0 && reviews.tripInfos.map((infos) => (
                                                                 <>
-                                                                    <FareDetailsTable totalPriceList={infos.totalPriceList} passengerCount={reviews.searchQuery.paxInfo} />
+                                                                    <FareDetailsTable markup={commission} totalPriceList={infos.totalPriceList} passengerCount={reviews.searchQuery.paxInfo} />
                                                                 </>
                                                             ))
                                                         }
                                                         {
                                                             reviews?.totalPriceInfo && (
                                                                 <>
-                                                                    <table border="1" cellPadding="10" cellSpacing="0" className='w-full table-fixed text-start'>
+                                                                    <table border="1" cellPadding="10" cellSpacing="0" className='w-full hidden table-fixed text-start'>
                                                                         <tbody>
 
                                                                             <tr className='*:p-2 *:text-sm *:border *:border-blue-gray-200 *:border-b-0 *:text-start'>
@@ -180,7 +191,7 @@ const Review = () => {
                                                     <div className="grid grid-cols-1">
                                                         <div className="w-full flex justify-between">
                                                             <span></span>
-                                                            <Link state={{ reviews: reviews }} to={'/passenger-details/' + reviews.bookingId} className="bg-primary text-white px-3 text-nowrap py-2">Add passenger</Link>
+                                                            <Link state={{ reviews: reviews, markup: { commission } }} to={'/passenger-details/' + reviews.bookingId} className="bg-primary text-white px-3 text-nowrap py-2">Add passenger</Link>
                                                         </div>
                                                     </div>
                                                 </div>

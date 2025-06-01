@@ -13,9 +13,10 @@ import FareRule from './FareRule'
 import { MdOutlineAirlineSeatReclineExtra } from "react-icons/md";
 import PriceBox from './PriceBox'
 import FlightInfo from './FlightInfo'
-import { JS_API_URL, JS_BASE_URL, FAIR_RULE } from '../../../../utils'
+import { JS_API_URL, FAIR_RULE } from '../../../../utils'
+import { useUser } from '../../../Account/UserContext'
 
-const SingleFlightResBox = ({ flight, paxinfo, name, handlepid, _pid }) => {
+const SingleFlightResBox = ({ flight, paxinfo, name, handlepid, _pid, isInt = false }) => {
     const [view, setView] = React.useState('');
     const [show, setShow] = useState(false);
     const [fairRule, setFairRule] = useState([]);
@@ -23,18 +24,11 @@ const SingleFlightResBox = ({ flight, paxinfo, name, handlepid, _pid }) => {
     const [priceindex, setPriceIndex] = useState(0);
     const [open, setOpen] = useState(false);
     const [commission, setCommission] = React.useState('');
+    const { user } = useUser();
     const getMyCommission = async () => {
-        const agency = localStorage.getItem('agency');
-        if (agency) {
-            const item = await axios.get(JS_BASE_URL + 'api/v1/pricelist', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('agency')}`
-                }
-            });
-            setCommission(item.data.data);
-        } else {
-            setCommission({ adult: 200, child: 100, infant: 50 });
-        }
+        let markup = isInt ? user.admin.int_flight : user.admin.dom_flight;
+        markup = parseInt(markup);
+        setCommission({ adult: markup, child: markup, infant: markup, });
     }
     const viewDetails = (itm) => {
         setView(itm)
@@ -265,7 +259,8 @@ SingleFlightResBox.propTypes = {
     paxinfo: PropTypes.object,
     name: PropTypes.string,
     handlepid: PropTypes.func,
-    _pid: PropTypes.array
+    _pid: PropTypes.array,
+    isInt: PropTypes.bool
 }
 
 
