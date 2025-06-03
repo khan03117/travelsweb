@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ArrowRightOutlined } from "@ant-design/icons"
+import { ArrowRightOutlined, EditOutlined } from "@ant-design/icons"
 import { useLocation } from "react-router-dom"
 import ServiceSelection from "../passengerDetails/ServiceSelection";
 import AddDetails from "../passengerDetails/AddDetails";
@@ -18,15 +18,6 @@ import { JS_API_URL, BOOK, SEAT } from '../../../../utils';
 const AddPassengerDetails = () => {
     const { state } = useLocation();
     const { reviews, markup } = state;
-
-
-
-
-    // const { user } = useUser();
-
-
-
-
     const { tripInfos, totalPriceInfo, searchQuery, bookingId } = reviews;
     const { totalFareDetail } = totalPriceInfo;
     const [pinfo, setPinfo] = React.useState([]);
@@ -43,6 +34,7 @@ const AddPassengerDetails = () => {
     const [papply, setPapply] = React.useState(false);
     const applypromocdode = async () => {
         try {
+            setLoading(true);
             const data = {
                 search_id: search_id,
                 code: pcode
@@ -63,10 +55,12 @@ const AddPassengerDetails = () => {
                 }
                 setPapply(discountAmount)
             }
+            setLoading(false);
 
 
         } catch (err) {
             console.log(err);
+            setLoading(false);
         }
     }
     const getSeatAmount = () => {
@@ -139,6 +133,7 @@ const AddPassengerDetails = () => {
     const totalarray = Object.entries(totalPax).flatMap(([type, count]) =>
         Array(count).fill(type)
     );
+
     const validation = () => {
         const err = [];
         if (totalarray.length != pinfo.length) {
@@ -156,6 +151,11 @@ const AddPassengerDetails = () => {
         } else {
             return true;
         }
+    }
+    const handleEdit = (index) => {
+        const arr = [...pinfo];  // Create a copy to avoid mutating state directly
+        arr.splice(index, 1);    // Remove 1 item at the specified index
+        setPinfo(arr);
     }
 
     const validateDeliveryInfo = (info) => {
@@ -321,16 +321,24 @@ const AddPassengerDetails = () => {
                                                                     <>
                                                                         {
                                                                             pinfo.length > index ? (<>
-                                                                                <p className="text-black text-md border-b border-gray-400">{a} {index + 1} : </p>
-                                                                                {
-                                                                                    Object.entries(pinfo[index]).map(([k, v]) => (
-                                                                                        <>
-                                                                                            <span key={k} className='me-2 text-sm'>
-                                                                                                {v}
-                                                                                            </span>
-                                                                                        </>
-                                                                                    ))
-                                                                                }
+                                                                                <div className="px-2 relative">
+
+
+                                                                                    <p className="text-blac  text-md border-b border-gray-400">{a} {index + 1} : </p>
+                                                                                    {
+                                                                                        Object.entries(pinfo[index]).map(([k, v]) => (
+                                                                                            <>
+                                                                                                <span key={k} className='me-2 text-sm'>
+                                                                                                    {v}
+                                                                                                </span>
+                                                                                            </>
+                                                                                        ))
+                                                                                    }
+
+                                                                                    <button onClick={() => handleEdit(index)} className='absolute top-0 end-3 text-[var(--primary)]'>
+                                                                                        <EditOutlined />
+                                                                                    </button>
+                                                                                </div>
                                                                             </>) : (<>
                                                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
                                                                                     <p className="text-black text-md border-b border-gray-400">{a} {index + 1} : </p>
@@ -349,7 +357,7 @@ const AddPassengerDetails = () => {
                                                 }
                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
                                                     <p className="text-black lg:text-md text-xs border-b border-gray-400">Contact Details</p>
-                                                    <DeliveryInfo errors={errors} setDeliveryInfo={setDeliveryInfo} />
+                                                    <DeliveryInfo errors={errors} deliveryInfo={deliveryInfo} setDeliveryInfo={setDeliveryInfo} />
                                                 </div>
                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
                                                     <div className="text-black lg:text-md text-xs border-b border-gray-400 ">
@@ -455,7 +463,7 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Taxes and fees</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TAF }</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TAF}</td>
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Seat Amount</td>
@@ -477,7 +485,7 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Amount to pay</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom} {markupcom}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom}</td>
                                                         </tr>
 
                                                         <tr className="border-b-2 border-gray-200">
