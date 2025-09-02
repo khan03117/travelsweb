@@ -28,12 +28,12 @@ const Header = ({ classname }) => {
             <li>
                 <Link to={'/about/'} >About</Link>
             </li>
-             <li>
+            {/* <li>
                 <Link to={'/flight'} >Flight</Link>
             </li>
-             <li>
+            <li>
                 <Link to={'/hotel'} >Hotel</Link>
-            </li>
+            </li> */}
 
             <li>
                 {/* <Link to={'/destinations/'} >Destinations</Link> */}
@@ -119,10 +119,10 @@ const Header = ({ classname }) => {
                                             <CgMenuRight />
                                         </button>
                                     </li>
-                                    <li >
-                                        <button className='bg-[var(--primary)] text-white px-10 rounded-full py-2  lg:block hidden  text-sm'>
-                                           Send Query
-                                        </button>
+                                    <li>
+                                        <Link to={'/contact'} className='bg-[var(--primary)] text-white px-10 rounded-full py-2  lg:block hidden  text-sm'>
+                                            Custom Request
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
