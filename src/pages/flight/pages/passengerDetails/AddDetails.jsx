@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 // import { classes, formatDate, getData, tis } from '../../Utils';
 import PropTypes from 'prop-types';
 import { EditOutlined } from '@ant-design/icons';
-import { classes, formatDate, getData, tis  } from '../../../../utils';
+import { classes, formatDate, getData  } from '../../../../utils';
 const AddDetails = ({ onsubmit, type, show, id, conditions }) => {
     const [errors, setErrors] = React.useState([]);
     const [countries, setCountries] = React.useState([]);
@@ -94,17 +94,27 @@ const AddDetails = ({ onsubmit, type, show, id, conditions }) => {
         console.log(pdata)
     }, [pdata])
 
-
+    const opts = () =>  {
+        if(type == "ADULT"){
+            return ['Mr', 'Mrs', 'Ms']
+        }
+        if(type == "CHILD"){
+            return ['Master', 'Ms']
+        }
+        if(type == "INFANT"){
+            return ['Master', 'Ms']
+        }
+    }
     return (
         <>
-            <div className="container groupDetails">
+            <div className="w-full groupDetails">
                 <div className="grid grid-cols-4 gap-4 *:text-sm ">
                     <div className="lg:col-span-1 col-span-2">
                         <label htmlFor="ti">Select Title</label>
                         <select onChange={handleData} name="ti" id="ti" className={classes}>
                             <option value="">--Select---</option>
                             {
-                                tis.map(ti => (
+                                opts().map(ti => (
                                     <>
                                         <option value={ti}>{ti}.</option>
                                     </>

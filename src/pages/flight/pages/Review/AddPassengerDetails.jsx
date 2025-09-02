@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ArrowRightOutlined } from "@ant-design/icons"
+import { ArrowRightOutlined, EditOutlined } from "@ant-design/icons"
 import { useLocation } from "react-router-dom"
 import ServiceSelection from "../passengerDetails/ServiceSelection";
 import AddDetails from "../passengerDetails/AddDetails";
@@ -13,10 +13,11 @@ import SeatMap from './SeatMap';
 import moment from 'moment';
 import { Checkbox, Dialog, DialogBody } from '@material-tailwind/react';
 import { JS_API_URL, BOOK, SEAT } from '../../../../utils';
+// import { useUser } from '../../../Account/UserContext';
 
 const AddPassengerDetails = () => {
     const { state } = useLocation();
-    const { reviews } = state;
+    const { reviews, markup } = state;
     const { tripInfos, totalPriceInfo, searchQuery, bookingId } = reviews;
     const { totalFareDetail } = totalPriceInfo;
     const [pinfo, setPinfo] = React.useState([]);
@@ -29,6 +30,39 @@ const AddPassengerDetails = () => {
     const [seats, setSeats] = React.useState([]);
     const [open, setOpen] = React.useState(false);
     const [ssrSeatInfos, setssrSeatInfos] = React.useState([]);
+    const [pcode, setPcode] = React.useState('');
+    const [papply, setPapply] = React.useState(false);
+    const applypromocdode = async () => {
+        try {
+            setLoading(true);
+            const data = {
+                search_id: search_id,
+                code: pcode
+            }
+            const resp = await axios.post(JS_API_URL + "apply-promocode", data);
+            if (resp.data.success == 1) {
+                const promocode = resp.data.data.promo_code;
+                let discountAmount = 0;
+                let sumAmount = totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom;
+                if (promocode) {
+                    const discountType = promocode.discount_type;
+                    const discountValue = Number(promocode.discount);
+                    if (discountType === "Percent") {
+                        discountAmount = (sumAmount * discountValue) / 100;
+                    } else if (discountType === "Flat") {
+                        discountAmount = discountValue;
+                    }
+                }
+                setPapply(discountAmount)
+            }
+            setLoading(false);
+
+
+        } catch (err) {
+            console.log(err);
+            setLoading(false);
+        }
+    }
     const getSeatAmount = () => {
         const totalAmount = ssrSeatInfos.reduce((sum, seatInfo) => {
             return sum + seatInfo.amount;
@@ -93,10 +127,13 @@ const AddPassengerDetails = () => {
         }
     }
     const totalPax = searchQuery.paxInfo;
+    const totalcount = Object.values(totalPax).reduce((total, count) => total + count, 0);
+    const markupcom = parseInt(markup) * totalcount;
     const conditions = reviews.conditions;
     const totalarray = Object.entries(totalPax).flatMap(([type, count]) =>
         Array(count).fill(type)
     );
+
     const validation = () => {
         const err = [];
         if (totalarray.length != pinfo.length) {
@@ -114,6 +151,11 @@ const AddPassengerDetails = () => {
         } else {
             return true;
         }
+    }
+    const handleEdit = (index) => {
+        const arr = [...pinfo];  // Create a copy to avoid mutating state directly
+        arr.splice(index, 1);    // Remove 1 item at the specified index
+        setPinfo(arr);
     }
 
     const validateDeliveryInfo = (info) => {
@@ -161,7 +203,7 @@ const AddPassengerDetails = () => {
         setLoading(true);
         const meals = smeals.filter(item => item.service === "MEAL");
         const baggage = smeals.filter(item => item.service === "BAGGAGE");
-        await axios.put(JS_API_URL + "search-query/update/" + search_id, { seat: ssrSeatInfos, meal: meals, baggage: baggage });
+        // await axios.put(JS_API_URL + "search-query/update/" + search_id, { seat: ssrSeatInfos, meal: meals, baggage: baggage });
 
         const p_info = pinfo.map((pinf, index) => {
             const matchedSeats = ssrSeatInfos
@@ -191,12 +233,30 @@ const AddPassengerDetails = () => {
             gstInfo: gstDetails,
             deliveryInfo: deliveryInfo
         }
-        const resp = await axios.post(JS_API_URL + BOOK, { bookdata: bookdata1, amount: totalamounttopay, search_id: search_id });
-        const link = resp.data.data.payment_gateway_request.payment_links.web;
+        const alldata = {
+            bookdata: bookdata1,
+            gstInfo: gstDetails,
+            deliveryInfo: deliveryInfo,
+            travellerInfo: [...p_info],
+            seat: ssrSeatInfos ?? [],
+            meal: meals ?? [],
+            baggage: baggage ?? [],
+            search_id: search_id,
+            amount: totalamounttopay,
+        }
+        const resp = await axios.post(JS_API_URL + BOOK, alldata);
         setLoading(false);
-        // if (resp.data.success == "1") {
-        //     window.location.href = link;
-        // }
+        const link = resp.data.data.payment_gateway_request.payment_links.web;
+
+        if (resp.data.success == "1") {
+            window.location.href = link;
+        } else {
+            const erro = {
+                "path": "msg",
+                "msg": resp.data.message
+            }
+            setErrors(erro);
+        }
 
     }
     const handleSsrSeat = (key, code, amount, pactive) => {
@@ -261,16 +321,24 @@ const AddPassengerDetails = () => {
                                                                     <>
                                                                         {
                                                                             pinfo.length > index ? (<>
-                                                                                <p className="text-black text-md border-b border-gray-400">{a} {index + 1} : </p>
-                                                                                {
-                                                                                    Object.entries(pinfo[index]).map(([k, v]) => (
-                                                                                        <>
-                                                                                            <span key={k} className='me-2 text-sm'>
-                                                                                                {v}
-                                                                                            </span>
-                                                                                        </>
-                                                                                    ))
-                                                                                }
+                                                                                <div className="px-2 relative">
+
+
+                                                                                    <p className="text-blac  text-md border-b border-gray-400">{a} {index + 1} : </p>
+                                                                                    {
+                                                                                        Object.entries(pinfo[index]).map(([k, v]) => (
+                                                                                            <>
+                                                                                                <span key={k} className='me-2 text-sm'>
+                                                                                                    {v}
+                                                                                                </span>
+                                                                                            </>
+                                                                                        ))
+                                                                                    }
+
+                                                                                    <button onClick={() => handleEdit(index)} className='absolute top-0 end-3 text-[var(--primary)]'>
+                                                                                        <EditOutlined />
+                                                                                    </button>
+                                                                                </div>
                                                                             </>) : (<>
                                                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
                                                                                     <p className="text-black text-md border-b border-gray-400">{a} {index + 1} : </p>
@@ -289,7 +357,7 @@ const AddPassengerDetails = () => {
                                                 }
                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
                                                     <p className="text-black lg:text-md text-xs border-b border-gray-400">Contact Details</p>
-                                                    <DeliveryInfo errors={errors} setDeliveryInfo={setDeliveryInfo} />
+                                                    <DeliveryInfo errors={errors} deliveryInfo={deliveryInfo} setDeliveryInfo={setDeliveryInfo} />
                                                 </div>
                                                 <div className="w-full bg-gray-100 py-2 px-2 border-2 border-gray-200 mb-4">
                                                     <div className="text-black lg:text-md text-xs border-b border-gray-400 ">
@@ -391,7 +459,7 @@ const AddPassengerDetails = () => {
                                                     <tbody className="*:text-sm">
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Base fare</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.BF}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.BF + markupcom}</td>
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Taxes and fees</td>
@@ -417,13 +485,35 @@ const AddPassengerDetails = () => {
                                                         </tr>
                                                         <tr className="border-b-2 border-gray-200">
                                                             <td className="py-3">Amount to pay</td>
-                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount()}</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom}</td>
                                                         </tr>
+
+                                                        <tr className="border-b-2 border-gray-200">
+                                                            <td className="py-3">Promo Code</td>
+                                                            <td className="text-end py-3">
+                                                                <div className="flex border border-[var(--primary)] rounded overflow-hidden items-center">
+                                                                    <input type="text" value={pcode} onChange={(e) => setPcode(e.target.value)} name="" className="w-full px-3 py-2 outline-none" id="" />
+                                                                    <button onClick={applypromocdode} className="px-3 text-white py-2 bg-[var(--primary)]">Apply</button>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="border-b-2 border-gray-200">
+                                                            <td className="py-3">Discount</td>
+                                                            <td className="text-end py-3">&#8377; {papply ?? 0}</td>
+
+                                                        </tr>
+                                                        <tr className="border-b-2 border-gray-200">
+                                                            <td className="py-3">Net Payable</td>
+                                                            <td className="text-end py-3">&#8377; {totalFareDetail.fC.TF + getSeatAmount() + getMealAmount() + getBaggageAmount() + markupcom - papply}</td>
+
+                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                                 <div className="w-full bg-gray-200 rounded-lg shadow-lg shadow-gray-400 py-5 px-2 flex items-center justify-between ">
                                                     <div className="button w-full">
-                                                        <button onClick={checkout} className="bg-primary text-white text-xs hidden   py-2 px-2 rounded-lg w-full">Checkout</button>
+                                                        {/* <button onClick={checkout} className="bg-primary text-white text-xs hidden   py-2 px-2 rounded-lg w-full">Checkout</button> */}
                                                         <button onClick={checkoutBooking} className="bg-primary text-white text-xs   py-2 px-2 rounded-lg w-full">Checkout</button>
                                                     </div>
                                                 </div>

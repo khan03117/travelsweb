@@ -7,11 +7,13 @@ import { CloseCircleFilled, DownOutlined, PlusOutlined } from "@ant-design/icons
 import TravellersBox from "./TravellersBox"
 // import { formatDate, pfts, trips } from '../../Utils'
 import { useNavigate } from 'react-router-dom'
-import { formatDate,  trips } from '../../../../utils'
+import { formatDate, trips } from '../../../../utils'
 import { TbArrowsExchange } from 'react-icons/tb'
 import AllPfts from './components/AllPfts'
+// import { useUser } from '../../../Account/UserContext'
 
 const FlightHome = () => {
+    
     const [travellers, setTravellers] = useState({
         ADULT: 1,
         CHILD: 0,
@@ -55,7 +57,23 @@ const FlightHome = () => {
     const [trip, setTrip] = useState(1)
     const [quotatype, setQuota] = useState('');
     const [rows, setRows] = useState(1);
-    const [fdata, setFdata] = useState([]);
+    const [fdata, setFdata] = useState([
+        {
+            "id": 0,
+            "From_country": "IN",
+            "From": "MAA",
+            "From_obj": {
+                "_id": "66ad1340463b78588b1d8094",
+                "code": "MAA",
+                "name": "Chennai Arpt",
+                "citycode": "MAA",
+                "city": "Chennai",
+                "country": "India",
+                "countrycode": "IN",
+                "__v": 0
+            }
+        }
+    ]);
     const [tbox, setTbox] = useState(false);
     const [errors, setErrors] = useState([]);
     const [selectedcities, setSelectedCities] = useState([]);
@@ -122,7 +140,7 @@ const FlightHome = () => {
         // Swap 'From_country' and 'To_country'
         [obj.From_country, obj.To_country] = [obj.To_country, obj.From_country];
         setFdata(arr)
-        
+
     };
 
     useEffect(() => {
@@ -144,6 +162,7 @@ const FlightHome = () => {
         } else {
             temp.push({ id: index, [key]: value });
         }
+
         setFdata(temp);
     }
 
@@ -171,9 +190,7 @@ const FlightHome = () => {
         setRows((prev) => Math.max(prev - 1, 1));
         setOpen({ id: "", type: "" })
     }
-    useEffect(() => {
-        console.log(fdata)
-    }, [fdata]);
+    
     const navigate = useNavigate();
     const searchFlight = async () => {
         try {
@@ -321,7 +338,7 @@ const FlightHome = () => {
                                                         {
                                                             tbox && (
                                                                 <>
-                                                                    <div ref={boxRef} className="absolute top-full start-0 w-full min-w-[250px]">
+                                                                    <div ref={boxRef} className="absolute top-full z-50 start-0 w-full min-w-[250px]">
                                                                         <TravellersBox
                                                                             key={index + 8}
                                                                             travellers={travellers}

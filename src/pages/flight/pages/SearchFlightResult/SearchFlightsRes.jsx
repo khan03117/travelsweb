@@ -10,6 +10,7 @@ import { ArrowRightOutlined, CloseOutlined } from '@ant-design/icons';
 import { JS_API_URL } from '../../../../utils';
 import SearchFlightComponent from '../Home/components/SearchFlightComponent';
 import { Collapse } from '@material-tailwind/react';
+import { useUser } from '../../../Account/UserContext';
 
 
 
@@ -18,6 +19,7 @@ import { Collapse } from '@material-tailwind/react';
 const SearchFlightsRes = () => {
     // const location = useLocation();
     // const searchData = location.state;
+    const { user } = useUser();
     const [onwards, setOnwards] = React.useState([]);
     const [returns, setReturns] = React.useState([]);
     const [comobs, setCombos] = React.useState([]);
@@ -37,6 +39,12 @@ const SearchFlightsRes = () => {
     const [dt, setDt] = useState(["Before 6AM", "6AM - 12PM", "12PM - 6PM", "After 6PM"]);
     const [at, setAt] = useState(["Before 6AM", "6AM - 12PM", "12PM - 6PM", "After 6PM"]);
     const [open, setOpen] = useState(false);
+
+
+    let markup = parseInt(isInt ? user.admin.int_flight : user.admin.dom_flight);
+  
+
+
 
 
 
@@ -83,12 +91,20 @@ const SearchFlightsRes = () => {
         set_allow();
     }, [pid, rpid, pids]);
 
- const [copen, setCOpen] = React.useState(false);
- const toggleOpen = () => setCOpen((cur) => !cur);
+    const [copen, setCOpen] = React.useState(false);
+    const toggleOpen = () => setCOpen((cur) => !cur);
 
     const searchFlight = async () => {
         setIsLoading(true)
-        const resp = await axios.post(JS_API_URL + "search-query", { searchQuery: data, is_international: isInt });
+        const agency = {
+            username: user.user.email,
+            name: user.user.name,
+            admin: user.admin.name,
+            user_id: user.user.id,
+            admin_id: user.admin.id,
+            markup: markup
+        }
+        const resp = await axios.post(JS_API_URL + "search-query", { searchQuery: data, is_international: isInt, agency: agency });
         const { searchResult } = resp.data.data;
         const search_id = resp.data.search_id;
         localStorage.setItem('search_id', search_id._id);
@@ -98,7 +114,6 @@ const SearchFlightsRes = () => {
             setOnwards(tripInfos.ONWARD || []);
             tripInfos.ONWARD.forEach(onward => {
                 onward.sI.forEach(segment => {
-
                     if (segment.fD && segment.fD.aI && segment.fD.aI.code) {
                         airlineNames.push({ code: segment.fD.aI.code, name: segment.fD.aI.name });
                     }
@@ -244,18 +259,18 @@ const SearchFlightsRes = () => {
                             {
                                 !isloading && (
                                     <>
-                                    
+
                                         <section className='bg-[var(--primary)] py-5'>
                                             <div className="container mx-auto">
                                                 <div className="w-full text-end p-2">
                                                     <button onClick={toggleOpen} className='px-4 py-2 text-xs border border-white text-white'>Modify Search</button>
                                                 </div>
                                                 <Collapse open={copen}>
-                                               
-                                                <div className="w-full">
-                                                    <SearchFlightComponent />
-                                                </div>
-                                                 </Collapse>
+
+                                                    <div className="w-full">
+                                                        <SearchFlightComponent />
+                                                    </div>
+                                                </Collapse>
                                             </div>
                                         </section>
 
@@ -314,7 +329,7 @@ const SearchFlightsRes = () => {
                                                                                 {
                                                                                     filterFlights(onwards, { stops, sairlines: selectedAirline, departureTimes: dt, arrivalTimes: at }).map((flight) => (
                                                                                         <>
-                                                                                            <SingleFlightResBox _pid={[pid]} name="onwards" handlepid={setPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
+                                                                                            <SingleFlightResBox isInt={isInt} _pid={[pid]} name="onwards" handlepid={setPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
                                                                                         </>
                                                                                     ))
                                                                                 }
@@ -331,7 +346,7 @@ const SearchFlightsRes = () => {
                                                                         {
                                                                             returns.filter(obj => stops.includes(obj.sI.length - 1)).map((flight) => (
                                                                                 <>
-                                                                                    <SingleFlightResBox _pid={[rpid]} name="return" handlepid={setRpid} flight={flight} paxinfo={data.searchQuery.paxInfo} />
+                                                                                    <SingleFlightResBox isInt={isInt} _pid={[rpid]} name="return" handlepid={setRpid} flight={flight} paxinfo={data.searchQuery.paxInfo} />
                                                                                 </>
                                                                             ))
                                                                         }
@@ -343,7 +358,7 @@ const SearchFlightsRes = () => {
                                                             {
                                                                 ((trip == 3 && !isInt) && Object.values(multies).length > 0) && Object.values(multies)[routeid].filter(obj => stops.includes(obj.sI.length - 1)).map((flight) => (
                                                                     <>
-                                                                        <SingleFlightResBox _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
+                                                                        <SingleFlightResBox isInt={isInt} _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
 
                                                                     </>
                                                                 ))
@@ -351,7 +366,7 @@ const SearchFlightsRes = () => {
                                                             {
                                                                 (trip == 3 && isInt) && comobs.filter(obj => stops.includes(obj.sI.length - 1)).map((flight) => (
                                                                     <>
-                                                                        <SingleFlightResBox _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
+                                                                        <SingleFlightResBox isInt={isInt} _pid={pids} name={'multi'} handlepid={setAllPid} paxinfo={data.searchQuery.paxInfo} flight={flight} />
 
                                                                     </>
                                                                 ))

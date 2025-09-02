@@ -2,7 +2,9 @@
 // import React from 'react';
 import PropTypes from 'prop-types';
 
-const FareDetailsTable = ({ passengerCount, totalPriceList }) => {
+const FareDetailsTable = ({ passengerCount, totalPriceList, markup = 0 }) => {
+   const totalPassengers = Object.values(passengerCount).reduce((sum, count) => sum + count, 0);
+   const totalextra = parseFloat(markup)*totalPassengers
     if (totalPriceList.length === 0) {
         return <div>No fare details available</div>;
     }
@@ -22,7 +24,7 @@ const FareDetailsTable = ({ passengerCount, totalPriceList }) => {
             count > 0 && (
                 <tr key={type} className='*:p-2 *:text-sm *:border *:border-blue-gray-200 *:text-start'>
                     <td>{count} x {label}</td>
-                    <td>₹ {fare * count}</td>
+                    <td>₹ {fare  * count + markup*count}</td>
                 </tr>
             )
         );
@@ -33,14 +35,13 @@ const FareDetailsTable = ({ passengerCount, totalPriceList }) => {
         const fare = fareDetails[type]?.fC.TF || 0;
         return total + (fare * count);
     }, 0);
-
     return (
         <table border="1" cellPadding="10" cellSpacing="0" className='w-full table-fixed text-start'>
             <tbody>
                 {rows}
                 <tr className='*:p-2 *:text-sm *:border *:border-blue-gray-200 *:border-b-0 *:text-start'>
                     <td>Total (Base Fare)</td>
-                    <td>₹ {totalBaseFare}</td>
+                    <td>₹ {totalBaseFare + totalextra}</td>
                 </tr>
             </tbody>
         </table>
@@ -74,6 +75,7 @@ FareDetailsTable.propTypes = {
             }).isRequired,
         }).isRequired
     ).isRequired,
+    markup : PropTypes.number
 };
 
 export default FareDetailsTable;

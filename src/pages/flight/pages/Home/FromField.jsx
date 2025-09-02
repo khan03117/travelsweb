@@ -37,8 +37,6 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
     getdata();
   }, [keyword]);
   const handleCode = (obj) => {
-    // setCode(obj);
-    console.log(obj);
     handleFdata(sid, label, obj.code);
     handleFdata(sid, label + "_obj", obj);
     handleFdata(sid, label + '_country', obj.countrycode);
@@ -90,8 +88,8 @@ const FromField = ({ label, sid, handleFdata, values, selectedcities, setSelecte
                   {
                     cities.length > 0 && cities.filter(obj => obj.code != getignoreid()).map((cit) => (
                       <>
-                        <li key={cit._id} className='border-b border-dashed border-blue-gray-200 last:border-b-0'>
-                          <button onClick={() => handleCode(cit)} className=" gap-2 text-xs w-full text-start">
+                        <li onClick={() => handleCode(cit)}  key={cit._id} className='border-b border-dashed border-blue-gray-200 last:border-b-0'>
+                          <button className=" gap-2 text-xs w-full text-start">
                             <div className="flex items-center gap-3">
                               {
                                 label.toLowerCase() == 'from' && (
