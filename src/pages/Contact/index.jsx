@@ -4,7 +4,11 @@ import { useUser } from '../Account/UserContext'
 import { IoIosCall, IoMdMail, IoMdPaperPlane } from 'react-icons/io';
 
 const Contact = () => {
-    const {  user } = useUser();
+    const { user } = useUser();
+    let admin = user.admin;
+    if (!user) {
+        return 'loading...';
+    }
     return (
         <>
             <section className='relative contactPage bg-yellow-100/20 z-[1] py-20 '>
@@ -21,7 +25,7 @@ const Contact = () => {
                                     </span>
                                 </div>
                                 <div className='w-[calc(100%-6rem)] text-wrap block'  >
-                                    {user.address_1}   {user.address_2}  {user.city} {user.pincode}
+                                    {admin.address_1}   {admin.address_2}  {admin.city} {admin.pincode}
                                 </div>
                             </div>
                             <div className="w-full flex items-center gap-3 flex-wrap  mt-5">
@@ -31,7 +35,7 @@ const Contact = () => {
                                     </span>
                                 </div>
                                 <div className='w-[calc(100%-6rem)] text-wrap block'  >
-                                {user.mobile}
+                                    {admin.mobile}
                                 </div>
                             </div>
                             <div className="w-full flex items-center gap-3 flex-wrap  mt-5">
@@ -41,7 +45,7 @@ const Contact = () => {
                                     </span>
                                 </div>
                                 <div className='w-[calc(100%-6rem)] text-wrap block' >
-                                    {user.email}
+                                    {admin.email}
                                 </div>
                             </div>
                         </div>
