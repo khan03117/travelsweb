@@ -1,7 +1,7 @@
 export const WEB_BASE_URL = "https://b2b.aahiltours.com/";
 export const WEB_API_URL = "https://b2b.aahiltours.com/v2/api/";
 export const WEB_Image_URL = "https://b2b.aahiltours.com/public/";
-export const WEB_SANCTUM_KEY = "109|3oAL367WSHXK3tDKmTQyW6Es4dlAbLDBByyO4pJWeecb1ac7";
+export const WEB_SANCTUM_KEY = "7|xTjtk9lsfger6HiBUMvk91yfscoMCRgrAFW93HCS88db10cf";
 
 export const trips = [
   { id: 1, trip: "One Way" },

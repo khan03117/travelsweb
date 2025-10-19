@@ -58,7 +58,7 @@ const Header = ({ classname }) => {
                 {/* <Link to={'/visa'} >Visa</Link> */}
                 <Menu className="hidden">
                     <MenuHandler>
-                        <button className=' lg:text-[var(--primary)] sm:text-white uppercase'>Visa</button>
+                        <button className=' lg:text-[var(--primary)] sm:text-white'>Visa</button>
                     </MenuHandler>
                     <MenuList className=''>
                         <MenuItem className='p-0'>
@@ -95,7 +95,7 @@ const Header = ({ classname }) => {
                 <Link to={'/faqs'} >Faqs</Link>
             </li> */}
             <li>
-                <Link to={'/contact'} >Contact</Link>
+                <Link to={'/contact'} className={`${location.pathname == "/contact" ? 'text-[var(--primary)] border-b border-[var(--primary)]' : ''}`} >Contact</Link>
             </li>
         </>
     )
