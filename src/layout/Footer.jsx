@@ -2,15 +2,19 @@
 import { Link } from 'react-router-dom'
 // import logo from '../assets/logo.png'
 import { useUser } from '../pages/Account/UserContext'
-import { EnvironmentOutlined, FacebookFilled,  InstagramFilled, LinkedinFilled, TwitterSquareFilled } from '@ant-design/icons';
+import { EnvironmentOutlined, FacebookFilled, InstagramFilled, LinkedinFilled, TwitterSquareFilled } from '@ant-design/icons';
 import { IoIosCall, IoMdMail } from 'react-icons/io';
 import { WEB_Image_URL } from '../utils';
+import Loading from '../components/Loading';
 
 const Footer = () => {
     const { user } = useUser();
+    if (!user.user) {
+        return <Loading />
+    }
     return (
         <>
-            <div className="w-full  overflow-x-hidden relative p-5">
+            <div className="w-full hidden  overflow-x-hidden relative p-5">
                 <section className='relative lg:block hidden z-10 '>
                     <div className="w-full -mb-10">
                         <div className="container ">
@@ -19,9 +23,9 @@ const Footer = () => {
                                 <div className="col-span-10">
                                     <div className="w-full overflow-hidden text-center text-white bg-primary p-8 rounded-lg">
                                         <h2 className='text-xl '><span className='cursive2'>Free support: </span>
-                                            <div className='inline-block'  >{user.mobile}</div>
+                                            <div className='inline-block'  >{user.admin?.mobile}</div>
                                             &nbsp;&nbsp;|&nbsp;&nbsp; <span className='cursive2'>Email: </span>
-                                            <div className='inline-block'>{user.email}</div>
+                                            <div className='inline-block'>{user.admin?.email}</div>
                                         </h2>
                                     </div>
                                 </div>
@@ -29,7 +33,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </section>
-                <footer className="bg-gray-300 rounded-3xl shadow-sm shadow-black/40  py-20">
+                <footer className="bg-gray-300 hidden rounded-3xl shadow-sm shadow-black/40  py-20">
                     <div className="container">
                         <div className="grid grid-cols-12 gap-4">
                             <div className="lg:col-span-3 col-span-12">
@@ -37,14 +41,14 @@ const Footer = () => {
                                     <div className=" col-span-12">
                                         <div className="footer-widgets w-full">
                                             <div className="logimg size-[90px] mb-4">
-                                                 <img src={WEB_Image_URL + "assets/images/" + user.logo} className='w-full' alt="" />
+                                                <img src={WEB_Image_URL + "assets/images/" + user.admin.logo} className='w-full' alt="" />
                                             </div>
                                             <ul className='flex gap-4'>
                                                 <li>
                                                     {
-                                                        user.facebook && (
+                                                        user.admin.facebook && (
                                                             <>
-                                                                <a to={user.facebook} target='_blank' className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                <a to={user.admin.facebook} target='_blank' className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
                                                                     <FacebookFilled />
                                                                 </a>
                                                             </>
@@ -54,12 +58,12 @@ const Footer = () => {
 
                                                 </li>
                                                 {
-                                                    user.twitter && (
+                                                    user.admin.twitter && (
                                                         <>
                                                             <li>
-                                                                
 
-                                                                <a target='_blank' href={user.twitter} className='inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white '>
+
+                                                                <a target='_blank' href={user.admin.twitter} className='inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white '>
                                                                     <TwitterSquareFilled />
                                                                 </a>
 
@@ -68,10 +72,10 @@ const Footer = () => {
                                                     )
                                                 }
                                                 {
-                                                    user.instagram && (
+                                                    user.admin.instagram && (
                                                         <>
                                                             <li>
-                                                                <a href={user.instagram} target='_blank' className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                <a href={user.admin.instagram} target='_blank' className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
                                                                     <InstagramFilled />
                                                                 </a>
 
@@ -80,11 +84,11 @@ const Footer = () => {
                                                     )
                                                 }
                                                 {
-                                                    user.linkedin && (
+                                                    user.admin.linkedin && (
                                                         <>
                                                             <li>
-                                                                <a target='_blank' href={user.linkedin} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
-                                                                   <LinkedinFilled/>
+                                                                <a target='_blank' href={user.admin.linkedin} className="inline-block size-10 rounded-full border border-primary text-center leading-10 text-primary hover:bg-primary hover:text-white ">
+                                                                    <LinkedinFilled />
                                                                 </a>
 
                                                             </li>
@@ -143,17 +147,17 @@ const Footer = () => {
                                                 <ul className="list-unstyled *:py-2">
                                                     <li>
                                                         <div className='inline-block font-light text-sm'>
-                                                            <span className="text-primary font-bold text-lg"> <EnvironmentOutlined />   </span>    {user.address_1} {user.address_2} {user.city} {user.pincode}
+                                                            <span className="text-primary font-bold text-lg"> <EnvironmentOutlined />   </span>    {user.admin.address_1} {user.admin.address_2} {user.admin.city} {user.admin.pincode}
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div className='inline-flex items-center gap-1 font-light text-sm'>
-                                                            <span className="text-primary font-bold text-lg"><IoIosCall />  </span>    {user.mobile}
+                                                            <span className="text-primary font-bold text-lg"><IoIosCall />  </span>    {user.admin.mobile}
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div className='inline-flex gap-1 items-center font-light text-sm'>
-                                                            <span className="text-primary font-bold text-lg">  <IoMdMail />  </span>   {user.email}
+                                                            <span className="text-primary font-bold text-lg">  <IoMdMail />  </span>   {user.admin.email}
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -162,20 +166,20 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
 
                     </div>
                 </footer>
-               
+
             </div>
             <div className="tiny-footer bg-primary text-white">
-                    <div className="grid grid-cols-12 align-items-center">
-                        <div className="col-span-12 mb-0 text-center p-3 text-xs">Copyright © <span id="yearText">{new Date().getFullYear()} </span>
-                            <strong>{user.company_name}</strong> Web & App All rights reserved.
-                        </div>
+                <div className="grid grid-cols-12 align-items-center">
+                    <div className="col-span-12 mb-0 text-center p-3 text-xs">Copyright © <span id="yearText">{new Date().getFullYear()} </span>
+                        <strong>{user.admin.company_name}</strong> Web & App All rights reserved.
                     </div>
                 </div>
+            </div>
         </>
     )
 }

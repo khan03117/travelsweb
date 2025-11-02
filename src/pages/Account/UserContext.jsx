@@ -10,12 +10,11 @@ export const UserProvider = ({ children }) => {
         secondary: "#9333ea",
     });
     const [user, setUser] = useState(false);
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [policies, setPolicies] = useState([]);
     const [banners, setBanners] = useState([]);
-
+    const [web_theme, setWebTheme] = useState(1);
     const faqs = useState([]);
     const [testimonial, setTestimonial] = useState([]);
     const gettestimonial = async () => {
@@ -49,7 +48,7 @@ export const UserProvider = ({ children }) => {
                 if (data.theme) {
                     setTheme(JSON.parse(data.theme))
                 }
-
+                setWebTheme(resp.data?.data?.web_theme)
                 setUser({ admin: resp.data.data, user: resp.data.user });
             }
 
@@ -99,7 +98,21 @@ export const UserProvider = ({ children }) => {
         fetchBanners();
     }, []);
     return (
-        <UserContext.Provider value={{ user, theme, setTheme, testimonial, setUser, loading, error, fetchUser, userLogout, policies, banners, faqs }}>
+        <UserContext.Provider value={{
+            user,
+            theme,
+            web_theme,
+            setTheme,
+            testimonial,
+            setUser,
+            loading,
+            error,
+            fetchUser,
+            userLogout,
+            policies,
+            banners,
+            faqs
+        }}>
             {children}
         </UserContext.Provider>
     );

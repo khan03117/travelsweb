@@ -12,8 +12,8 @@ import Loading from '../../components/Loading';
 // import DestinationLayoutTwo from './DestinationLayoutTwo';
 
 const Destinations = () => {
-    const { user } = useUser();
-    const id = user.web_theme ?? 1;
+    const { web_theme } = useUser();
+    const id = web_theme ?? 1;
     const [loading, setLoading] = React.useState(true);
     const [items, setItems] = React.useState([]);
     const { pathname } = useLocation();
@@ -139,7 +139,7 @@ const Destinations = () => {
                                             </div>
                                         </div>
                                         <div className="col-span-6">
-                                        <Link to={'/destinations'} className='bg-[var(--primary)] rounded-full px-10 hover:bg-opacity-75 py-2 lg:text-sm text-xs text-white'>View All</Link>
+                                            <Link to={'/destinations'} className='bg-[var(--primary)] rounded-full px-10 hover:bg-opacity-75 py-2 lg:text-sm text-xs text-white'>View All</Link>
 
                                         </div>
                                     </div>

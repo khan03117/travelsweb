@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: "Noto Sans", sans-serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 #hero_banner img {
@@ -65,11 +65,13 @@ body {
   font-weight: 300;
   letter-spacing: 1px;
 }
+
 .elementor-shape .elementor-shape-fill {
   fill: #fff;
   transform: rotateY(0deg);
   transform-origin: center;
 }
+
 .bannerFour::before {
   content: "";
   position: absolute;
@@ -83,24 +85,30 @@ body {
 
   z-index: 8;
 }
+
 .bannerfouroverlay {
   background-image: linear-gradient(to bottom, #0000000f 20%, #000000 90%);
 }
+
 #bannerFive .elementor-shape-fill {
   fill: #063e4b;
 }
+
 .bannerFive {
   background-image: linear-gradient(to bottom, #063e4b37 20%, #063e4b 90%);
 }
+
 .container {
   margin: 0 auto;
   padding: 0 1rem;
 }
+
 .slick-prev,
 .slick-next {
   display: block !important;
   z-index: 10;
 }
+
 .quick_access {
   position: relative;
   border-radius: 1rem;
@@ -217,7 +225,8 @@ body {
   position: relative;
 }
 
-.navlinks a, .navlinks button {
+.navlinks a,
+.navlinks button {
   display: block;
 
   font-weight: 400;
@@ -226,6 +235,7 @@ body {
   /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
+
 .stroke_text {
   font-weight: 700;
   -webkit-text-stroke-width: 1px;
@@ -234,19 +244,26 @@ body {
   font-size: 80px;
   z-index: 1;
 }
+
 .included_ul ul,
 .excluded_ul ul {
-  list-style: none;
+
   padding: 0;
   margin: 0;
 }
+
 .included_ul ul li,
-.excluded_ul ul li {
+.included_ul ol li,
+.excluded_ul ul li,
+.excluded_ul ol li {
   position: relative;
-  padding-left: 26px;
+  line-height: 1.8;
   font-size: 15px;
-  padding-bottom: 20px;
+  padding-left: 26px;
+  padding-bottom: 10px;
+
 }
+
 .included_ul ul li::before {
   content: "";
   position: absolute;
@@ -258,6 +275,19 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.included_ul ol li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: url(./assets/checkmark.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .excluded_ul ul li::before {
   content: "";
   position: absolute;
@@ -269,6 +299,19 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.excluded_ul ol li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: url(./assets/cross.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .form-label {
   font-size: 12px;
   font-weight: 600;
@@ -277,6 +320,7 @@ body {
   display: block;
   margin-bottom: 0.5rem;
 }
+
 .loginbg {
   width: 100%;
   height: 77px;
@@ -300,6 +344,7 @@ body {
     background-position: -10000% -18px;
   }
 }
+
 .destinationbgoverlay::before {
   content: "";
   position: absolute;
@@ -311,6 +356,7 @@ body {
   height: 100%;
   z-index: 30;
 }
+
 .otpbox input {
   width: 50px !important;
   height: 50px;
@@ -385,6 +431,7 @@ body {
   font-weight: 300;
   letter-spacing: 1px;
 }
+
 .themetransition {
   transition: all 0.5s linear !important;
 }
@@ -485,6 +532,7 @@ img {
   font-weight: 500;
   line-height: 25px;
 }
+
 .work-section {
   background: #feedeb;
   position: relative;
@@ -501,6 +549,7 @@ img {
   height: 60px;
   top: -50px;
 }
+
 .work-section .work-avatar {
   font-size: 50px;
   font-weight: bold;
@@ -509,6 +558,7 @@ img {
   position: relative;
   background: transparent;
 }
+
 .bg-overlay {
   background: url("./assets/bg-body.png");
   background-size: contain;
@@ -521,6 +571,7 @@ img {
   width: 100%;
   z-index: 1;
 }
+
 .dynamicContent ul {
   position: relative;
   list-style: none;
@@ -528,6 +579,7 @@ img {
   margin-bottom: 2rem;
   padding: 0;
 }
+
 .dynamicContent ul li {
   position: relative;
   padding-left: 25px;
@@ -535,6 +587,7 @@ img {
   /* letter-spacing: 1px; */
   padding-bottom: 10px;
 }
+
 .dynamicContent ul li::before {
   content: "";
   position: absolute;
@@ -547,13 +600,16 @@ img {
   background-size: contain;
   background-position: left;
 }
+
 .dynamicContent ul li strong {
   font-size: 20px;
   text-transform: capitalize;
 }
+
 .dynamicContent ul li ul li {
   padding-left: 25px;
 }
+
 .dynamicContent h4 {
   margin-bottom: 0.5rem;
   border-bottom: 2px solid var(--primary);
@@ -562,6 +618,7 @@ img {
   color: var(--primary);
   font-weight: 600;
 }
+
 .embesyDetail h4 {
   font-size: 20px;
   display: inline-block;
@@ -570,6 +627,7 @@ img {
   border-bottom: 2px solid var(--primary);
   margin-bottom: 0.5rem;
 }
+
 .dynamicContent p {
   font-size: 14px;
   margin-bottom: 1rem;
@@ -582,18 +640,21 @@ img {
   border-top: 1px solid #eeeeee;
   border: 20px solid #eeeeee;
 }
+
 .forexBox h4 {
   font-size: 2rem;
   padding-bottom: 1rem;
   font-weight: bolder;
   color: var(--primary);
 }
+
 .forexBox p {
   color: gray;
   line-height: 1.7;
   letter-spacing: 1px;
   margin-bottom: 1rem;
 }
+
 .oboardbox p:nth-of-type(2) {
   padding: 15px 10px;
   background-color: #ddd;
@@ -664,6 +725,27 @@ table {
 
 .ticket .first {
   text-align: end;
+}
+
+.termssection h1,
+.termssection h2,
+.termssection h3,
+.termssection h4 {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.termssection p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.termssection ol li {
+  list-style: disc;
+  padding: 5px 10px;
+  font-size: 16px;
+  line-height: 1.9;
+
 }
 
 @media (max-width: 998px) {
@@ -741,9 +823,11 @@ table {
   #hero_banner img {
     height: 380px;
   }
+
   .forexBox h4 {
     font-size: 1.2rem;
   }
+
   .forexBox p {
     font-size: 14px;
   }

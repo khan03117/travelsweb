@@ -18,7 +18,9 @@ import Loading from '../../components/Loading'
 
 const Packages = () => {
   const { user } = useUser();
-  const id = user.web_theme;
+
+  console.log(user);
+  const id = user?.admin?.web_theme;
   const { url } = useParams();
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -57,6 +59,9 @@ const Packages = () => {
     if (id == 5) {
       return <PackageLayoutFive data={data} />
     }
+  }
+  if (!user.admin) {
+    return <Loading />
   }
   return (
     <>

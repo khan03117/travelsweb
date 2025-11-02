@@ -5,16 +5,17 @@ import Footer from './Footer'
 import { UserProvider, useUser } from '../pages/Account/UserContext'
 import { ToastContainer } from 'react-toastify'
 import Loading from '../components/Loading'
+import FooterWhite from './FooterWhite'
 
 
 const Layout = () => {
   const { pathname } = useLocation();
-  const { user, theme } = useUser();
-
+  const { user, theme, loading } = useUser();
+  console.log(user);
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  if (!user) {
+  if (!user || loading) {
     return (
       <>
         <Loading className="min-h-lvh h-full" />
@@ -41,6 +42,7 @@ const Layout = () => {
 
           <Header classname={``} />
           <Outlet />
+          <FooterWhite />
           <Footer />
         </main>
       </UserProvider>

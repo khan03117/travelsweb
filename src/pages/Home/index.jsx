@@ -32,8 +32,8 @@ import PackageLayoutFour from '../packages/elements/PackageLayoutFour';
 import PackageLayoutFive from '../packages/elements/PackageLayoutFive';
 
 const Home = () => {
-  const { user } = useUser();
-  const id = user.web_theme ?? 1;
+  const { web_theme } = useUser();
+  const id = web_theme ?? 1;
   const [packages, setPackages] = React.useState([]);
   const getpackages = async () => {
     const resp = await axios.get(WEB_API_URL + "package/most-viewed", {
@@ -57,7 +57,7 @@ const Home = () => {
   React.useEffect(() => {
     getuser();
   }, []);
-  if (!user) {
+  if (!web_theme) {
     return (
       <>
         <Loading className="min-h-lvh h-full" />
@@ -66,22 +66,22 @@ const Home = () => {
   }
   return (
     <>
-    {
-      id == 4 && (
-        <>
-         <BannerFour/>
-        </>
-      )
-    }
-    {
-      id == 5 && (
-        <>
-         <BannerFive/>
-        </>
-      )
-    }
-   
-   
+      {
+        id == 4 && (
+          <>
+            <BannerFour />
+          </>
+        )
+      }
+      {
+        id == 5 && (
+          <>
+            <BannerFive />
+          </>
+        )
+      }
+
+
       {
         (id == 1) && (
           <>

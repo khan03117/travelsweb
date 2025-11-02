@@ -12,8 +12,8 @@ import AboutTwo from './AboutTwo';
 import Vision from './AboutElements/Vision';
 import TestimonialLayoutThree from '../Testimonial/TestimonialLayoutThree';
 const About = () => {
-    const {user} = useUser();
-   const id = user.web_theme;
+    const { user } = useUser();
+    const id = user.admin.web_theme;
     // const { policies } = useUser();
     return (
         <>
@@ -88,13 +88,13 @@ const About = () => {
             {
                 id == 3 && (
                     <>
-                        <TestimonialLayoutThree/>
+                        <TestimonialLayoutThree />
                     </>
                 )
             }
             {/* <Testimonials bg={"bg-primary/30"} pb={'pb-10'} /> */}
             <HowItWorks />
-           
+
             <section className="py-10"></section>
         </>
     )

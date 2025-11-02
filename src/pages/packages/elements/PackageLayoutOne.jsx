@@ -1,4 +1,4 @@
-import { CalendarOutlined, UsergroupAddOutlined } from '@ant-design/icons'
+import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons'
 import PackageShortInfoWithIcon from './Minielements/PackageShortInfoWithIcon'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -7,6 +7,7 @@ import dummyimg from '../../../assets/packages/8.jpeg'
 // import React from 'react'
 
 const PackageLayoutOne = ({ data }) => {
+    console.log(data);
     return (
         <>
             <div className="w-full overflow-hidden p-0 bg-white shadow shadow-black/40 rounded">
@@ -32,7 +33,7 @@ const PackageLayoutOne = ({ data }) => {
                                 <PackageShortInfoWithIcon icon={<CalendarOutlined />} title={'Duration'} value={data?.days + ' days ' + data?.nights + ' Nights'} />
                             </div>
                             <div className="col-span-1 ">
-                                <PackageShortInfoWithIcon icon={<UsergroupAddOutlined />} title={'Users'} value={data?.min_travellers ?? '2'} />
+                                <PackageShortInfoWithIcon icon={<EnvironmentOutlined />} title={'Location'} value={data?.cities.map(itm => itm.state)?.join(', ') ?? 'NA'} />
 
                             </div>
                         </div>

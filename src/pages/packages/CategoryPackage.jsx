@@ -12,8 +12,8 @@ import axios from 'axios';
 import { WEB_API_URL, WEB_SANCTUM_KEY } from '../../utils';
 
 const CategoryPackage = () => {
-    const { user } = useUser();
-  const id = user.web_theme;
+  const { user } = useUser();
+  const id = user.admin.web_theme;
   const { url } = useParams();
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -55,36 +55,36 @@ const CategoryPackage = () => {
   }
   return (
     <>
-    {
-      loading ? (
-        <>
-          <Loading height={'min-h-lvh h-full'} />
-        </>
-      ) : (
-        <>
+      {
+        loading ? (
+          <>
+            <Loading height={'min-h-lvh h-full'} />
+          </>
+        ) : (
+          <>
 
-          <BreadCrumb path={['Home', url.toLocaleUpperCase() +' Packages']} title={ url.toLocaleUpperCase() + ' Packages'} />
-          <section className="py-20">
-            <div className="container">
-              <div className="grid grid-cols-12 gap-7 gap-y-7 ">
-                {
-                  items.map((itm) => (
-                    <>
-                      <div className="lg:col-span-4 col-span-12">
-                        <Link to={'/package/show/' + itm.url} className="block">
-                          {getlayout(itm)}
-                        </Link>
-                      </div>
-                    </>
-                  ))
-                }
+            <BreadCrumb path={['Home', url.toLocaleUpperCase() + ' Packages']} title={url.toLocaleUpperCase() + ' Packages'} />
+            <section className="py-20">
+              <div className="container">
+                <div className="grid grid-cols-12 gap-7 gap-y-7 ">
+                  {
+                    items.map((itm) => (
+                      <>
+                        <div className="lg:col-span-4 col-span-12">
+                          <Link to={'/package/show/' + itm.url} className="block">
+                            {getlayout(itm)}
+                          </Link>
+                        </div>
+                      </>
+                    ))
+                  }
+                </div>
               </div>
-            </div>
-          </section>
-        </>
-      )
-    }
-  </>
+            </section>
+          </>
+        )
+      }
+    </>
   )
 }
 
