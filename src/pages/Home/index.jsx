@@ -36,9 +36,12 @@ const Home = () => {
   const id = web_theme ?? 1;
   const [packages, setPackages] = React.useState([]);
   const getpackages = async () => {
-    const resp = await axios.get(WEB_API_URL + "package/most-viewed", {
+    const resp = await axios.get(WEB_API_URL + "all-packages", {
       headers: {
         Authorization: WEB_SANCTUM_KEY
+      },
+      params: {
+        limit: 6
       }
     });
     setPackages(resp.data.data);
@@ -111,7 +114,7 @@ const Home = () => {
       {/* <VisaSteps /> */}
       <section className="py-10 bg-primary/10">
         <div className="container">
-          <div className="grid grid-cols-12 lg:gap-8 gap-4">
+          <div className="grid grid-cols-12 lg:gap-2 gap-4">
             <div className="col-span-12">
               <div className="w-full mb-10 text-center">
                 <h2 className="section_title">
