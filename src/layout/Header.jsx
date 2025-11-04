@@ -107,7 +107,7 @@ const Header = ({ classname }) => {
                         <div className="col-span-12">
                             <div className="flex relative justify-between items-center">
                                 <Link to={'/'} className="h-[120px] w-auto py-5 inline-block">
-                                    <img src={WEB_Image_URL + "register/" + user.admin.logo} className='h-full w-auto' alt="" />
+                                    <img src={WEB_Image_URL + "register/" + user?.admin?.logo} className='h-full w-auto' alt="" />
                                 </Link>
                                 <ul className="lg:inline-flex hidden gap-6   navlinks mx-auto">
                                     {weblinks()}
