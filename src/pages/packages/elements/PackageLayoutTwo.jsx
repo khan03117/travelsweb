@@ -52,7 +52,7 @@ const PackageLayoutTwo = ({ data }) => {
                                 ₹ {data?.sharing[0]?.amount_b2c}
                             </h3>
                             <p className='text-gray-500'>
-                                avg per night
+                                avg per person
                             </p>
                         </div>
                     </div>

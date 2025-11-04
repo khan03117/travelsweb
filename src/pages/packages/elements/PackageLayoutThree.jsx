@@ -1,4 +1,4 @@
-import { CalendarOutlined, EnvironmentOutlined, UsergroupAddOutlined } from '@ant-design/icons'
+import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons'
 // import { Button } from '@material-tailwind/react'
 // import React from 'react'
 import imageone from '../../../assets/packages/9.jpeg'
@@ -6,7 +6,7 @@ import { WEB_Image_URL } from '../../../utils'
 import PropTypes from 'prop-types'
 // import { Button } from '@material-tailwind/react'
 
-const PackageLayoutThree = ({data}) => {
+const PackageLayoutThree = ({ data }) => {
     return (
         <>
             <div className="w-full rounded-lg group overflow-hidden bg-white shadow shadow-primary/40">
@@ -14,7 +14,7 @@ const PackageLayoutThree = ({data}) => {
                     <div className="col-span-12 h-full">
                         <figure className='rounded-xl relative overflow-hidden w-full h-full'>
                             <div className="absolute top-0 end-0 w-full h-full z-10 bg-black/20"></div>
-                            <img src={data.main_image ? WEB_Image_URL + "assets/images/"+data.main_image : imageone} alt="" className="w-full  lg:h-[450px] h-[300px]" />
+                            <img src={data.main_image ? WEB_Image_URL + "assets/images/" + data.main_image : imageone} alt="" className="w-full  lg:h-[450px] h-[300px]" />
                         </figure>
                     </div>
                     <div className="bg-black/30 themetransition transition-all translate-y-14 group-hover:-translate-y-0  *:text-white backdrop-blur-sm p-4 absolute bottom-0 w-full start-[50%]  translate-x-[-50%] z-40" >
@@ -26,7 +26,9 @@ const PackageLayoutThree = ({data}) => {
                                 <span>
                                     <EnvironmentOutlined />
                                 </span>
-                                <span  className='capitalize'>{data.state?.state}, {data.state?.country?.country?.toLowerCase()}</span>
+                                <span className='capitalize'>
+                                    {data?.cities && data?.cities.map(itm => itm.state)?.join(', ')}
+                                </span>
                             </div>
                             <p className='text-white hidden text-xs tracking-widest'>
                                 Here we will write short descrition to each package which will be added from backend admin panel
@@ -37,24 +39,24 @@ const PackageLayoutThree = ({data}) => {
                                 <div className="col-span-1">
                                     <div className="flex text-sm gap-2 items-center">
                                         <span className="text-xl">
-                                        <CalendarOutlined />
+                                            <CalendarOutlined />
                                         </span>
-                                      
+
                                         <span>
                                             {data.days} Day, {data.nights} Nights
                                         </span>
                                     </div>
                                 </div>
                                 <div className="col-span-1 text-end">
-                                    <div className="inline-flex text-sm gap-2 items-center">
-                                        <span className="text-xl">
-                                        <UsergroupAddOutlined />
-                                        </span>
-                                       
-                                        <span>
-                                            2 Guests
-                                        </span>
+                                    <div className="w-full">
+                                        <h3 className='text-lg font-bold'>
+                                            ₹ {data?.sharing[0]?.amount_b2c}
+                                        </h3>
+                                        <p className='text-gray-300'>
+                                            avg per person
+                                        </p>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -71,5 +73,5 @@ const PackageLayoutThree = ({data}) => {
 export default PackageLayoutThree
 
 PackageLayoutThree.propTypes = {
-    data : PropTypes.object
+    data: PropTypes.object
 }
