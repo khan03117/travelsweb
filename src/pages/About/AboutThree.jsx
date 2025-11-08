@@ -21,7 +21,7 @@ const AboutThree = () => {
                                     Explore Beyond the Horizon: Discover the World’s Wonders
                                 </h2>
                                 <p className='py-2 text-md font-light'>
-                                    {user.about_us}
+                                    {user.admin?.about_us}
                                 </p>
                                 <p className='py-2 hidden text-md font-light'>
                                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believabl

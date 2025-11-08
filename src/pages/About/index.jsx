@@ -34,7 +34,7 @@ const About = () => {
                                     <div className="lg:col-span-6 col-span-12">
                                         <div className="w-full aboutUs lg:mt-0 mt-10 ">
                                             <div className='w-[calc(100%-1rem)] ab-wel-rhs *:mb-5 text-wrap block' >
-                                                {user.about_us}
+                                                {user.admin?.about_us}
                                             </div>
                                         </div>
                                     </div>

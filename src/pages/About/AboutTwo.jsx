@@ -20,7 +20,7 @@ const AboutTwo = () => {
                             About Us
                         </h2>
                         <p>
-                            {user.about_us}
+                            {user.admin.about_us}
                         </p>
                     </div>
                     <div className="grid grid-cols-12 items-center gap-5">
