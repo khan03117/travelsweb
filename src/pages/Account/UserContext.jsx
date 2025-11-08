@@ -16,6 +16,7 @@ export const UserProvider = ({ children }) => {
     const [banners, setBanners] = useState([]);
     const [web_theme, setWebTheme] = useState(1);
     const faqs = useState([]);
+    const [seos, setSeos] = useState([]);
     const [testimonial, setTestimonial] = useState([]);
     const gettestimonial = async () => {
         const item = await axios.get(WEB_API_URL + "testimonial", {
@@ -24,6 +25,17 @@ export const UserProvider = ({ children }) => {
             }
         });
         setTestimonial(item.data.data);
+    }
+    const getseos = async () => {
+        const item = await axios.get(WEB_API_URL + "seo", {
+            headers: {
+                Authorization: WEB_SANCTUM_KEY
+            },
+            params: {
+                per_page: 2000
+            }
+        });
+        setSeos(item.data.data.data);
     }
     // const fetchfaqs = async () => {
     //     try {
@@ -94,7 +106,7 @@ export const UserProvider = ({ children }) => {
         // fetchfaqs();
         fetchpolicies();
         fetchUser();
-
+        getseos();
         fetchBanners();
     }, []);
     return (
@@ -111,7 +123,8 @@ export const UserProvider = ({ children }) => {
             userLogout,
             policies,
             banners,
-            faqs
+            faqs,
+            seos
         }}>
             {children}
         </UserContext.Provider>

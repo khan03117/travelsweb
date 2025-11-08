@@ -2,7 +2,12 @@
 
 import { Link, useParams } from "react-router-dom";
 import BreadCrumb from "../../components/BreadCrumb";
-
+import v1 from '../../assets/visa/v1.jpg';
+import v2 from '../../assets/visa/v2.png';
+import v3 from '../../assets/visa/v3.png';
+import v4 from '../../assets/visa/v4.jpg';
+import v5 from '../../assets/visa/v5.jpg';
+import v6 from '../../assets/visa/v6.png';
 const VisaServices = () => {
     const { slug } = useParams();
     let arr;
@@ -12,17 +17,17 @@ const VisaServices = () => {
         arr = [
             {
                 title: "E- Visa Service & Visa Assistance",
-                image: "https://aahiltours.com/public/assets/img/visa-assistance.jpg",
+                image: v1,
                 content: `We provide the simplest solution to process your travel visa. We enable travelers to process visas from a computer, smartphone or tablet. Travelers no longer need to research or get frustrated dealing with different Governments. Travel agents, Destination Management Companies and Corporates can use our services to process any travel visa. We provide the best solution in the market.`
             },
             {
                 title: "Visa Stamping Service",
-                image: "https://aahiltours.com/public/assets/img/Visa-stamping-banner.jpg",
+                image: v2,
                 content: `We provides the simplest solution to process for Visa Stamping service. We offer the best rates from the market.`
             },
             {
                 title: "Tour Itinerary Service",
-                image: "https://aahiltours.com/public/assets/img/Applying-for-UK-Student-Visa-Online.jpg",
+                image: v3,
                 content: "We provides the simplest solution to process for Tour Itinerary service. We offer the best rates from the market."
             }
         ];
@@ -34,16 +39,16 @@ const VisaServices = () => {
             {
                 title: "GAMCA Appointment",
                 content: `You can book your medical examination appointment for GCC (Saudi Arabia, United Arab Emirates, Kuwait, Bahrain, Oman etc...) work visa`,
-                image: "https://aahiltours.com/public/assets/img/ml-2.jpeg"
+                image: v4
             },
             {
                 title: "PCC Appointment",
                 content: `These appointments will be released everyday based on their availability. Applicant can book new appointments and even can reschedule their already booked appointments accordingly`,
-                image: "https://aahiltours.com/public/assets/img/ms-3.jpeg"
+                image: v5
             },
             {
                 title: "Passport services",
-                image: "https://aahiltours.com/public/assets/img/ms-4.jpeg",
+                image: v6,
                 content: `A passport is a travel document, usually issued by a country’s government to its citizens, that certifies the identity and nationality of its holders, primarily for the purpose of international travel. Indian passports are issued to the eligible citizens by the Ministry of External Affairs, through its Consular, Passport & Visa division. Our dedicated team of Passport Specialists can assist our esteemed clients in the following services for passports: New Passport, Passport Renewal, changes in information etc...`
             }
         ];
@@ -70,7 +75,7 @@ const VisaServices = () => {
                                                 <div dangerouslySetInnerHTML={{ __html: itm?.content }} />
                                             </div>
                                             <div className="w-full mt-10">
-                                                <Link to={'/apply-now?title='+itm.title} className="px-10 py-3 bg-teal-500 rounded-full text-white text-xs">Apply Now</Link>
+                                                <Link to={'/apply-now?title=' + itm.title} className="px-10 py-3 bg-teal-500 rounded-full text-white text-xs">Apply Now</Link>
                                             </div>
                                         </div>
                                     </div>

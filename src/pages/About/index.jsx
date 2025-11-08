@@ -13,7 +13,7 @@ import Vision from './AboutElements/Vision';
 import TestimonialLayoutThree from '../Testimonial/TestimonialLayoutThree';
 const About = () => {
     const { user } = useUser();
-    const id = user.admin.web_theme;
+    const id = user.admin?.web_theme;
     // const { policies } = useUser();
     return (
         <>

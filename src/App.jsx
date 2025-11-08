@@ -1,6 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './App.css'
+import './App.css';
+
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import Layout from "./layout";
 import Home from "./pages/Home";
@@ -60,9 +61,9 @@ function App() {
           <Route path="/packages/:url" element={<Packages />} />
           <Route path="/category-packages/:url" element={<CategoryPackage />} />
           <Route path="/package/show/:url" element={<SinglePackageOne />} />
-          <Route path="/destinations" element={<Destinations/>} />
-          <Route path="/visa-assistant" element={<VisaAssistantPage/>} />
-          <Route path="/visa-assistant/:url" element={<VisaAssistantDetailsPage/>} />
+          <Route path="/destinations" element={<Destinations />} />
+          <Route path="/visa-assistant" element={<VisaAssistantPage />} />
+          <Route path="/visa-assistant/:url" element={<VisaAssistantDetailsPage />} />
 
 
           <Route path='/flight' element={<FlightHome />} />
@@ -71,11 +72,11 @@ function App() {
           <Route path='/search-flight' element={<SearchFlightsRes />} />
           <Route path='/review/:id' element={<Review />} />
           <Route path='passenger-details/:id' element={<AddPassengerDetails />} />
-         
-     
-         
-          <Route path='/hotel' element={<SearchHotel/>} />
-          <Route path='ticket/:order_id?' element={<Ticket/>} />
+
+
+
+          <Route path='/hotel' element={<SearchHotel />} />
+          <Route path='ticket/:order_id?' element={<Ticket />} />
         </Route>
         <Route path="/" element={<AccountLayout />}>
           <Route path="/user/dashboard" element={<Dashboard />} />
