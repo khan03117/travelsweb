@@ -528,9 +528,9 @@ img {
 }
 
 .ab-wel-rhs p {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 25px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.8;
 }
 
 .work-section {
@@ -816,7 +816,7 @@ table {
 
   .ab-wel-rhs p {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: lighter;
     line-height: 20px;
   }
 
