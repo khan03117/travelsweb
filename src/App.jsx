@@ -40,6 +40,7 @@ import AddPassengerDetails from "./pages/flight/pages/Review/AddPassengerDetails
 import SearchHotel from "./pages/hotel/SearchHotel";
 import FlightHome from "./pages/flight/pages/Home";
 import Ticket from "./pages/flight/ticket/Ticket";
+import ThankYouPage from "./pages/ThankYouPage";
 
 function App() {
   const ThemeRoutes = createBrowserRouter(
@@ -57,6 +58,7 @@ function App() {
           <Route path="/apply-now" element={<ApplyNow />} />
           <Route path="/visa/:slug" element={<VisaServices />} />
           <Route path="/addon/:slug" element={<OkayBoard />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packages/:url" element={<Packages />} />
           <Route path="/category-packages/:url" element={<CategoryPackage />} />

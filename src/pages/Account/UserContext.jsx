@@ -25,8 +25,10 @@ export const UserProvider = ({ children }) => {
             }
         });
         setTestimonial(item.data.data);
+        setLoading(false);
     }
     const getseos = async () => {
+        setLoading(false);
         const item = await axios.get(WEB_API_URL + "seo", {
             headers: {
                 Authorization: WEB_SANCTUM_KEY
@@ -65,8 +67,9 @@ export const UserProvider = ({ children }) => {
             }
 
         } catch (err) {
-            userLogout();
+            // userLogout();
             setError(err.message);
+            setLoading(false);
         } finally {
             setLoading(false);
         }
@@ -82,6 +85,7 @@ export const UserProvider = ({ children }) => {
             setBanners(response.data.data);
         } catch (err) {
             console.log(err);
+            setLoading(false);
         } finally {
             setLoading(false);
         }
