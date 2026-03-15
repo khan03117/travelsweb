@@ -1,0 +1,293 @@
+/* ═══════════════════════════════════════════════
+   DestinationLayoutTwo — Cinematic Travel Card
+   Colors: --primary / --secondary
+   injected per-card from API data
+   ═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Outfit:wght@300;400;500&display=swap');
+
+
+
+/* ── Card shell ── */
+.dtwo {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  background: #0d0d0d;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+  transition:
+    transform  .5s cubic-bezier(.34, 1.3, .64, 1),
+    box-shadow .5s ease;
+}
+
+.dtwo:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Image ── */
+.dtwo-img {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+}
+
+.dtwo-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(.88) saturate(1.1);
+  transition:
+    transform 1s  cubic-bezier(.25, .46, .45, .94),
+    filter   .6s  ease;
+}
+
+.dtwo:hover .dtwo-img img {
+  transform: scale(1.1);
+  filter: brightness(.72) saturate(1.25);
+}
+
+/* Gradient scrim over image */
+.dtwo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0)    30%,
+    rgba(0, 0, 0, 0.55) 65%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+}
+
+/* ── Shimmer sweep on hover ── */
+.dtwo-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, .06) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.dtwo:hover .dtwo-shimmer {
+  opacity: 1;
+  animation: dtwo-shimmer 1.2s ease forwards;
+}
+
+@keyframes dtwo-shimmer {
+  from { background-position:  200% 0 }
+  to   { background-position: -200% 0 }
+}
+
+/* ── Package badge (top-left) ── */
+.dtwo-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background .3s,
+    border-color .3s,
+    transform .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.dtwo:hover .dtwo-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.dtwo-badge-icon {
+  width: 13px;
+  height: 13px;
+  stroke: rgba(255, 255, 255, 0.9);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.dtwo-badge span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: .04em;
+}
+
+/* ── Arrow button (top-right) ── */
+.dtwo-arrow {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background .3s,
+    border-color .3s,
+    transform .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.dtwo:hover .dtwo-arrow {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: rotate(45deg) scale(1.08);
+}
+
+.dtwo-arrow-icon {
+  width: 14px;
+  height: 14px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Bottom info panel ── */
+.dtwo-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px 22px;
+  transform: translateY(4px);
+  transition: transform .4s ease;
+}
+
+.dtwo:hover .dtwo-info {
+  transform: translateY(0);
+}
+
+/* Country name */
+.dtwo-country {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  margin: 0 0 8px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  transition: letter-spacing .4s ease;
+}
+
+.dtwo:hover .dtwo-country {
+  letter-spacing: .06em;
+}
+
+/* Animated primary-color divider */
+.dtwo-divider {
+  width: 0;
+  height: 1px;
+  background: var(--primary);
+  margin-bottom: 12px;
+  transition: width .5s .05s cubic-bezier(.25, .46, .45, .94);
+}
+
+.dtwo:hover .dtwo-divider {
+  width: 44px;
+}
+
+/* Meta row — fades up on hover */
+.dtwo-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity   .35s .1s ease,
+    transform .35s .1s ease;
+}
+
+.dtwo:hover .dtwo-meta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stars */
+.dtwo-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.dtwo-star-icon {
+  width: 13px;
+  height: 13px;
+  fill: var(--primary);
+  stroke: none;
+}
+
+.dtwo-rating {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 6px;
+  letter-spacing: .03em;
+}
+
+/* Explore CTA */
+.dtwo-cta {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--secondary);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dtwo-cta-arrow {
+  width: 12px;
+  height: 12px;
+  stroke: var(--secondary);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .3s ease;
+}
+
+.dtwo:hover .dtwo-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .dtwo-img        { height: 260px; }
+  .dtwo-country    { font-size: 20px; }
+}

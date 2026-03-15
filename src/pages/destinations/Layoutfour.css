@@ -1,0 +1,368 @@
+
+/* ══ Card shell ══ */
+.dfour {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--primary);
+  box-shadow: 0 8px 36px rgba(0, 0, 0, .22);
+  transition:
+    transform   .55s cubic-bezier(.34, 1.2, .64, 1),
+    box-shadow  .55s ease;
+}
+
+.dfour:hover {
+  transform: translateY(-10px) scale(1.015);
+  box-shadow: 0 32px 72px rgba(0, 0, 0, .38);
+}
+
+/* ══ Image panel ══ */
+.dfour-img {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+}
+
+.dfour-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(.82) saturate(1.15);
+  transition:
+    transform 1.1s cubic-bezier(.25, .46, .45, .94),
+    filter    .7s ease;
+}
+
+.dfour:hover .dfour-img img {
+  transform: scale(1.12);
+  filter: brightness(.65) saturate(1.3);
+}
+
+/* Diagonal bottom slice that merges image into dark body */
+.dfour-img::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--primary);
+  clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* ══ Floating pills (positioned over image) ══ */
+.dfour-top {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.dfour-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .9);
+  letter-spacing: .04em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    background  .3s ease,
+    transform   .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.dfour-pill--filled {
+  background: rgba(0, 0, 0, .35);
+  border: 0.5px solid rgba(255, 255, 255, .2);
+}
+
+.dfour-pill--outline {
+  background: rgba(0, 0, 0, .25);
+  border: 0.5px solid rgba(255, 255, 255, .2);
+}
+
+.dfour:hover .dfour-pill {
+  background: rgba(0, 0, 0, .5);
+  transform: translateY(-2px);
+}
+
+/* Star icon — filled with secondary color */
+.dfour-star-icon {
+  width: 11px;
+  height: 11px;
+  fill: var(--secondary);
+  stroke: none;
+  flex-shrink: 0;
+}
+
+/* Package icon — outline style */
+.dfour-outline-icon {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: rgba(255, 255, 255, .8);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ══ Dark body ══ */
+.dfour-body {
+  padding: 0 20px 22px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Country + big decorative number */
+.dfour-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.dfour-country {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -.02em;
+  margin: 0;
+  transition: letter-spacing .5s ease, color .4s ease;
+}
+
+.dfour:hover .dfour-country {
+  letter-spacing: .01em;
+  color: var(--secondary);
+}
+
+/* Large ghost monospace number */
+.dfour-bignum {
+  font-family: 'DM Mono', monospace;
+  font-size: 42px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, .08);
+  line-height: 1;
+  letter-spacing: -.04em;
+  user-select: none;
+  transition: color .5s ease, transform .5s ease;
+}
+
+.dfour:hover .dfour-bignum {
+  color: rgba(255, 255, 255, .16);
+  transform: scale(1.08) translateY(-2px);
+}
+
+/* ══ Separator with shimmer sweep ══ */
+.dfour-sep {
+  height: 1px;
+  background: rgba(255, 255, 255, .08);
+  position: relative;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.dfour-sep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+  transition: left .7s .1s ease;
+}
+
+.dfour:hover .dfour-sep::after {
+  left: 100%;
+}
+
+/* ══ Info chips — stagger reveal ══ */
+.dfour-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.dfour-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .06);
+  border: 0.5px solid rgba(255, 255, 255, .1);
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .55);
+  letter-spacing: .03em;
+  /* Stagger delay is set per-chip via --chip-delay inline style */
+  transform: translateY(4px);
+  opacity: 0;
+  transition:
+    background    .25s ease,
+    border-color  .25s ease,
+    color         .25s ease,
+    transform     .4s var(--chip-delay, .04s) ease,
+    opacity       .4s var(--chip-delay, .04s) ease;
+}
+
+.dfour:hover .dfour-chip {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dfour-chip:hover {
+  background: rgba(255, 255, 255, .12);
+  border-color: rgba(255, 255, 255, .22);
+  color: rgba(255, 255, 255, .85);
+}
+
+.dfour-chip-icon {
+  width: 11px;
+  height: 11px;
+  stroke: rgba(255, 255, 255, .4);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  transition: stroke .25s ease;
+}
+
+.dfour-chip:hover .dfour-chip-icon {
+  stroke: var(--secondary);
+}
+
+/* ══ CTA row ══ */
+.dfour-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Explore button */
+.dfour-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--secondary);
+  color: var(--primary);
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .25);
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow .3s ease;
+}
+
+/* Ripple sweep on hover */
+.dfour-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, .18);
+  transform: translateX(-100%);
+  transition: transform .5s ease;
+}
+
+.dfour:hover .dfour-btn::before {
+  transform: translateX(100%);
+}
+
+.dfour:hover .dfour-btn {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
+}
+
+.dfour-btn-arrow {
+  width: 14px;
+  height: 14px;
+  stroke: var(--primary);
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: transform .3s ease;
+}
+
+.dfour:hover .dfour-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Share button */
+.dfour-share {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  border: 0.5px solid rgba(255, 255, 255, .15);
+  background: rgba(255, 255, 255, .06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background    .3s ease,
+    border-color  .3s ease,
+    transform     .35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.dfour:hover .dfour-share {
+  background: rgba(255, 255, 255, .13);
+  border-color: rgba(255, 255, 255, .3);
+  transform: rotate(15deg) scale(1.08);
+}
+
+.dfour-share-icon {
+  width: 15px;
+  height: 15px;
+  stroke: rgba(255, 255, 255, .6);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke .3s ease;
+}
+
+.dfour:hover .dfour-share-icon {
+  stroke: rgba(255, 255, 255, .95);
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 640px) {
+  .dfour-img    { height: 170px; }
+  .dfour-country{ font-size: 24px; }
+  .dfour-bignum { font-size: 32px; }
+  .dfour-body   { padding: 0 16px 18px; }
+}

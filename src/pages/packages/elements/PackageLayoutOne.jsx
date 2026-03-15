@@ -1,57 +1,152 @@
-import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons'
-import PackageShortInfoWithIcon from './Minielements/PackageShortInfoWithIcon'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { WEB_Image_URL } from '../../../utils'
 import dummyimg from '../../../assets/packages/8.jpeg'
-// import React from 'react'
+import './pkgone.css'
+
+
+/* ── SVG Icons (no ant-design dep needed) ── */
+const CalendarIcon = () => (
+  <svg viewBox="0 0 24 24" className="pkg1-info-icon" aria-hidden="true">
+    <rect x="3" y="4" width="18" height="18" rx="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8"  y1="2" x2="8"  y2="6"/>
+    <line x1="3"  y1="10" x2="21" y2="10"/>
+  </svg>
+)
+
+const PinIcon = () => (
+  <svg viewBox="0 0 24 24" className="pkg1-info-icon" aria-hidden="true">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+)
+
+const ArrowIcon = () => (
+  <svg viewBox="0 0 24 24" className="pkg1-btn-arrow" aria-hidden="true">
+    <line x1="5" y1="12" x2="19" y2="12"/>
+    <polyline points="12 5 19 12 12 19"/>
+  </svg>
+)
+
+const BookmarkIcon = () => (
+  <svg viewBox="0 0 24 24" className="pkg1-bookmark-icon" aria-hidden="true">
+    <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+  </svg>
+)
 
 const PackageLayoutOne = ({ data }) => {
-    console.log(data);
-    return (
-        <>
-            <div className="w-full overflow-hidden p-0 bg-white shadow shadow-black/40 rounded">
-                <figure className="w-full  relative overflow-hidden">
-                    <img
-                        src={WEB_Image_URL + "assets/images/" + data.main_image}
-                        onError={(e) => e.target.src = dummyimg}
-                        alt=""
-                        className="w-full h-48"
-                    />
+  // Dynamic colors from API
 
-                </figure>
-                <div className="w-full px-3 pb-4 bg-white pt-2">
-                    <h4 className="text-black  mb-2 font-bold text-lg">
-                        {data?.package_title ?? 'Package Title Not Available'}
-                    </h4>
-                    <p className='text-gray-700 text-xs hidden tracking-widest'>
-                        Here we will write short descrition to each package which will be added from backend admin panel
-                    </p>
-                    <div className="border-t py-2 my-3 border-gray-400">
-                        <div className="grid grid-cols-2">
-                            <div className="col-span-1">
-                                <PackageShortInfoWithIcon icon={<CalendarOutlined />} title={'Duration'} value={data?.days + ' days ' + data?.nights + ' Nights'} />
-                            </div>
-                            <div className="col-span-1 ">
-                                <PackageShortInfoWithIcon icon={<EnvironmentOutlined />} title={'Location'} value={data?.cities.map(itm => itm.state)?.join(', ') ?? 'NA'} />
+  // Location: join city states or fallback
+  const locationStr = data?.cities?.map(c => c.state)?.filter(Boolean)?.join(', ') || 'N/A'
 
-                            </div>
-                        </div>
+  // Duration
+  const duration = `${data?.days ?? 0}D / ${data?.nights ?? 0}N`
 
-                    </div>
-                    <div className="w-full flex items-center justify-between">
-                        <Link to={'/package/show/' + data?.url} className="px-4 py-2 bg-primary text-white text-xs rounded">View Detail</Link>
-                        <button className="px-4 py-2  active:bg-black text-primary border border-primary hover:bg-primary hover:text-white text-xs rounded">Book Now</button>
-                    </div>
-                </div>
+  // Price display — show if available
+  const priceDisplay = data?.price
+    ? `₹${Number(data.price).toLocaleString('en-IN')}`
+    : null
 
-            </div>
-        </>
-    )
+  return (
+    <div
+      className="pkg1"
+    >
+      {/* ════ Image ════ */}
+      <div className="pkg1-img">
+        <img
+          src={`${WEB_Image_URL}assets/images/${data?.main_image}`}
+          onError={(e) => { e.target.src = dummyimg }}
+          alt={data?.package_title || 'Package'}
+          loading="lazy"
+        />
+        <div className="pkg1-scrim" aria-hidden="true" />
+
+        {/* Category tag — fades in on hover */}
+        {data?.tag && (
+          <span className="pkg1-tag">{data.tag}</span>
+        )}
+
+        {/* Price badge */}
+        {priceDisplay && (
+          <div className="pkg1-price" aria-label={`Price: ${priceDisplay}`}>
+            {priceDisplay}
+          </div>
+        )}
+      </div>
+
+      {/* ════ Body ════ */}
+      <div className="pkg1-body">
+        <h4 className="pkg1-title">
+          {data?.package_title ?? 'Package Title Not Available'}
+        </h4>
+
+        {/* Duration + Location row */}
+        <div className="pkg1-info" role="list">
+          <div className="pkg1-info-item" role="listitem">
+            <span className="pkg1-info-label">
+              <CalendarIcon /> Duration
+            </span>
+            <span className="pkg1-info-val">{duration}</span>
+          </div>
+
+          <div className="pkg1-info-item pkg1-info-item--bordered" role="listitem">
+            <span className="pkg1-info-label">
+              <PinIcon /> Location
+            </span>
+            <span className="pkg1-info-val pkg1-info-val--truncate" title={locationStr}>
+              {locationStr}
+            </span>
+          </div>
+        </div>
+
+        {/* CTA row */}
+        <div className="pkg1-cta">
+          <Link
+            to={`/package/show/${data?.url}`}
+            className="pkg1-btn-primary"
+            aria-label={`View details for ${data?.package_title}`}
+          >
+            <span className="pkg1-btn-label">View Detail</span>
+            <ArrowIcon />
+          </Link>
+
+          <button
+            className="pkg1-btn-secondary"
+            type="button"
+            aria-label="Save package"
+          >
+            <BookmarkIcon />
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+PackageLayoutOne.propTypes = {
+  data: PropTypes.shape({
+    url:           PropTypes.string,
+    main_image:    PropTypes.string,
+    package_title: PropTypes.string,
+    days:          PropTypes.number,
+    nights:        PropTypes.number,
+    price:         PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    tag:           PropTypes.string,
+    cities: PropTypes.arrayOf(PropTypes.shape({
+      state: PropTypes.string,
+    })),
+    // Dynamic colors
+    primary_color:   PropTypes.string,
+    primaryColor:    PropTypes.string,
+    color:           PropTypes.string,
+    secondary_color: PropTypes.string,
+    secondaryColor:  PropTypes.string,
+    accent_color:    PropTypes.string,
+    tertiary_color:  PropTypes.string,
+    tertiaryColor:   PropTypes.string,
+  }),
 }
 
 export default PackageLayoutOne
-
-PackageLayoutOne.propTypes = {
-    data: PropTypes.object
-}

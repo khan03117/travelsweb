@@ -1,0 +1,289 @@
+/* ═══════════════════════════════════════════
+   PaginationBar
+   Two variants: pill (A) and compact bar (B)
+   Accent colors use var(--primary) from your
+   global theme, with safe fallbacks.
+   ═══════════════════════════════════════════ */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Fraunces:wght@600&display=swap'); */
+
+
+
+/* ══════════════════════════
+   VARIANT A — Pill + Dots
+══════════════════════════ */
+.pgn-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+/* Pill button */
+.pgn-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(0, 0, 0, .12);
+  background: #fff;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  letter-spacing: .02em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+  transition:
+    background  .3s cubic-bezier(.34, 1.3, .64, 1),
+    color       .3s ease,
+    border-color .3s ease,
+    box-shadow  .3s ease,
+    transform   .3s cubic-bezier(.34, 1.3, .64, 1);
+}
+
+.pgn-pill-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+  transform: translateY(-2px);
+}
+
+.pgn-pill-btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* Arrow shifts on hover */
+.pgn-pill-btn:first-child:hover:not(:disabled) .pgn-arrow-icon {
+  transform: translateX(-2px);
+}
+.pgn-pill-btn:last-child:hover:not(:disabled) .pgn-arrow-icon {
+  transform: translateX(2px);
+}
+
+/* Dot indicators */
+.pgn-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pgn-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(0, 0, 0, .12);
+  cursor: pointer;
+  transition: all .35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.pgn-dot--active {
+  width: 26px;
+  border-radius: 4px;
+  background: var(--primary);
+}
+
+.pgn-dot:hover:not(.pgn-dot--active) {
+  background: rgba(0, 0, 0, .3);
+  transform: scale(1.25);
+}
+
+/* ══════════════════════════
+   VARIANT B — Compact Bar
+══════════════════════════ */
+.pgn-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2.5rem;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, .08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, .07);
+}
+
+.pgn-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pgn-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Icon-only round buttons */
+.pgn-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, .1);
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background .3s cubic-bezier(.34, 1.3, .64, 1),
+    border-color .3s ease,
+    transform .3s cubic-bezier(.34, 1.3, .64, 1);
+}
+
+.pgn-icon-btn:hover:not(:disabled) {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+.pgn-icon-btn:hover:not(:disabled) .pgn-arrow-icon {
+  stroke: #fff;
+}
+
+.pgn-icon-btn:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+/* Animated page number display */
+.pgn-page-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pgn-page-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: #bbb;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+/* CSS keyframe pops the number in when key changes */
+.pgn-page-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1;
+  min-width: 32px;
+  text-align: center;
+  animation: pgn-pop .3s cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+@keyframes pgn-pop {
+  from { transform: translateY(-6px) scale(.85); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);   opacity: 1; }
+}
+
+/* Total pages label */
+.pgn-total {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #bbb;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════
+   VIEW ALL BUTTON (shared)
+══════════════════════════ */
+.pgn-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .16);
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow .4s ease,
+    transform  .4s cubic-bezier(.34, 1.3, .64, 1);
+}
+
+/* Shimmer sweep */
+.pgn-view-all::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, .14) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  transition: background-position .55s ease;
+}
+
+.pgn-view-all:hover::before {
+  background-position: -200% 0;
+}
+
+.pgn-view-all:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .24);
+  transform: translateY(-2px);
+}
+
+.pgn-view-all span {
+  position: relative;
+  z-index: 1;
+}
+
+.pgn-view-all .pgn-arrow-icon {
+  position: relative;
+  z-index: 1;
+  transition: transform .3s ease;
+}
+
+.pgn-view-all:hover .pgn-arrow-icon {
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════
+   SHARED — Arrow icon
+══════════════════════════ */
+.pgn-arrow-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  transition: transform .25s ease, stroke .25s ease;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 480px) {
+  .pgn-bar       { flex-direction: column; gap: 16px; }
+  .pgn-bar-right { width: 100%; justify-content: space-between; }
+  .pgn-row       { gap: 12px; }
+  .pgn-pill-btn  { padding: 9px 14px; font-size: 12px; }
+  .pgn-dots      { gap: 5px; }
+}

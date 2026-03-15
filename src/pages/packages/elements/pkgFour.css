@@ -1,0 +1,406 @@
+/* ══════════════════════════════════════════════
+   PackageLayoutFour — Compact Feature Package Card
+   Image → stats strip → price row → CTA
+   Colors: --primary / -secondary / -tertiary
+   ══════════════════════════════════════════════ */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800&family=DM+Serif+Display&display=swap'); */
+
+.pkg4 {
+ 
+  --tertiary:  #fdf6ea;
+  --green-bg:  #e8f5ee;
+  --green-tx:  #1a6640;
+}
+
+/* ══ Card shell ══ */
+.pkg4 {
+  width: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, .09);
+  transition:
+    transform  .5s cubic-bezier(.34, 1.2, .64, 1),
+    box-shadow .5s ease;
+}
+
+.pkg4:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .16);
+}
+
+/* ════ IMAGE ════ */
+.pkg4-img {
+  position: relative;
+  height: 195px;
+  overflow: hidden;
+}
+
+.pkg4-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(.9) saturate(1.1);
+  transition:
+    transform 1s cubic-bezier(.25, .46, .45, .94),
+    filter    .6s ease;
+}
+
+.pkg4:hover .pkg4-img img {
+  transform: scale(1.09);
+  filter: brightness(.72) saturate(1.25);
+}
+
+.pkg4-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, .70) 100%
+  );
+}
+
+/* Location label — fades up from bottom on hover */
+.pkg4-location {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .92);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+.pkg4:hover .pkg4-location {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pkg4-loc-icon {
+  width: 12px;
+  height: 12px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Badges — slide in from right on hover */
+.pkg4-badges {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.pkg4-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transform: translateX(8px);
+  opacity: 0;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.pkg4-badge--offer    { background: rgba(239, 68, 68, .8);  color: #fff; transition-delay: .04s; }
+.pkg4-badge--featured { background: rgba(14, 28, 47, .75);  color: rgba(255,255,255,.9); transition-delay: .10s; }
+
+.pkg4:hover .pkg4-badge {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ════ BODY ════ */
+.pkg4-body {
+  padding: 16px 18px 18px;
+}
+
+/* Title */
+.pkg4-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #111;
+  line-height: 1.3;
+  margin: 0 0 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color .3s ease;
+}
+
+.pkg4:hover .pkg4-title {
+  color: var(--primary);
+}
+
+/* ── Stats strip ── */
+.pkg4-stats {
+  display: flex;
+  background: var(--tertiary);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.pkg4-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px;
+  position: relative;
+}
+
+.pkg4-stat + .pkg4-stat::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: rgba(0, 0, 0, .08);
+}
+
+.pkg4-stat-icon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--primary);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pkg4-stat-val {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #222;
+}
+
+.pkg4-stat-lbl {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: #aaa;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ── Price + Rating row ── */
+.pkg4-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.pkg4-price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pkg4-price-lbl {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: #bbb;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.pkg4-price {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.1;
+}
+
+.pkg4-price-per {
+  font-size: 12px;
+  font-weight: 400;
+  color: #aaa;
+  margin-left: 2px;
+}
+
+/* Rating pill */
+.pkg4-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--green-bg);
+  padding: 5px 10px;
+  border-radius: 100px;
+}
+
+.pkg4-star {
+  width: 13px;
+  height: 13px;
+  fill: var(--secondary);
+  stroke: none;
+}
+
+.pkg4-rating-val {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green-tx);
+}
+
+.pkg4-rating-ct {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 10px;
+  color: #888;
+}
+
+/* ── CTA ── */
+.pkg4-cta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Book Now button */
+.pkg4-btn-book {
+  flex: 1;
+  padding: 11px 0;
+  border-radius: 5rem;
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .18);
+  transition: box-shadow .3s ease;
+}
+
+/* Shimmer sweep */
+.pkg4-btn-book::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, .15) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  transition: background-position .5s ease;
+}
+
+.pkg4:hover .pkg4-btn-book::before {
+  background-position: -200% 0;
+}
+
+.pkg4:hover .pkg4-btn-book {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .28);
+}
+
+.pkg4-btn-book-lbl {
+  position: relative;
+  z-index: 1;
+}
+
+.pkg4-btn-arrow {
+  width: 13px;
+  height: 13px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: transform .3s ease;
+}
+
+.pkg4:hover .pkg4-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Share button */
+.pkg4-btn-share {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(0, 0, 0, .1);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color .3s ease,
+    background   .3s ease,
+    transform    .35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.pkg4:hover .pkg4-btn-share {
+  border-color: var(--secondary);
+  background: var(--tertiary);
+  transform: rotate(15deg) scale(1.06);
+}
+
+.pkg4-share-icon {
+  width: 14px;
+  height: 14px;
+  stroke: #999;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke .3s ease;
+}
+
+.pkg4:hover .pkg4-share-icon {
+  stroke: #a07830;
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 480px) {
+  .pkg4-img   { height: 165px; }
+  .pkg4-title { font-size: 17px; }
+  .pkg4-price { font-size: 18px; }
+  .pkg4-body  { padding: 14px 14px 16px; }
+}

@@ -1,0 +1,254 @@
+/* ───────────────────────────────────────────
+   DestinationLayoutOne — Elegant Travel Card
+   Colors driven by --dest-primary / --dest-secondary
+   injected as inline CSS vars from API data
+   ─────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=DM+Sans:wght@300;400&display=swap');
+
+/* Fallback values — overridden by inline style on .dest-card */
+.dest-card {
+  --dest-primary:   #C9A96E;
+  --dest-secondary: #E8D5B0;
+}
+
+/* ── Card wrapper ── */
+.dest-card {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  width: var(--dest-size, 200px);
+}
+
+/* ── Ring container ── */
+.dest-ring {
+  position: relative;
+  width: var(--dest-size, 200px);
+  height: var(--dest-size, 200px);
+}
+
+/* ── Dashed SVG ring (hidden → visible on hover) ── */
+.ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dest-card:hover .ring-svg {
+  opacity: 1;
+  transform: rotate(45deg) scale(1.05);
+}
+
+/* Uses --dest-primary / --dest-secondary set per-card */
+.ring-dash {
+  stroke: var(--dest-primary);
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 4 6;
+}
+
+.ring-solid {
+  stroke: var(--dest-secondary);
+  stroke-width: 0.5;
+  fill: none;
+  opacity: 0.5;
+}
+
+/* ── Orbiting dot ── */
+.orbit-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dest-primary);
+  top: -4px;
+  left: calc(50% - 4px);
+  transform-origin: 50% calc(var(--dest-size, 200px) / 2 + 4px);
+  opacity: 0;
+  transition: opacity 0.3s 0.2s;
+}
+
+.dest-card:hover .orbit-dot {
+  opacity: 1;
+  animation: dest-orbit 3s linear infinite;
+}
+
+@keyframes dest-orbit {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Image circle ── */
+.dest-img-wrap {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  transition: transform 0.7s cubic-bezier(0.34, 1.3, 0.64, 1),
+              box-shadow 0.5s ease;
+}
+
+.dest-card:hover .dest-img-wrap {
+  transform: scale(1.06);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+.dest-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dest-card:hover .dest-img-wrap img {
+  transform: scale(1.12);
+}
+
+/* ── Dark overlay on image ── */
+.dest-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 35%,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+  transition: background 0.5s ease;
+}
+
+.dest-card:hover .dest-overlay {
+  background: radial-gradient(
+    circle at 40% 35%,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* ── Country label + icons ── */
+.dest-label {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dest-country {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1;
+  transition: letter-spacing 0.4s ease, transform 0.4s ease;
+}
+
+.dest-card:hover .dest-country {
+  letter-spacing: 0.12em;
+  transform: translateY(-3px);
+}
+
+/* ── Icon pills (hidden → appear on hover) ── */
+.dest-icons {
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s 0.08s ease, transform 0.35s 0.08s ease;
+}
+
+.dest-card:hover .dest-icons {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.icon-pill {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.icon-pill:hover {
+  background: rgba(255, 255, 255, 0.32);
+  transform: scale(1.18);
+}
+
+/* ── Name tag below circle ── */
+.dest-name-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dest-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+/* Name adopts primary color on hover */
+.dest-card:hover .dest-name {
+  color: var(--dest-primary);
+}
+
+.dest-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #999;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Animated underline — uses primary color */
+.dest-underline {
+  display: block;
+  height: 1px;
+  width: 0;
+  background: var(--dest-primary);
+  transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin-top: 4px;
+}
+
+.dest-card:hover .dest-underline {
+  width: 44px;
+}
+
+/* ── Active / press feedback ── */
+.dest-card:active .dest-ring {
+  transform: scale(0.97);
+}
+
+/* ── Responsive scaling ── */
+@media (max-width: 640px) {
+  .dest-card        { --dest-size: 140px; }
+  .dest-country     { font-size: 16px; }
+  .dest-name        { font-size: 14px; }
+  .dest-tagline     { font-size: 10px; }
+  .icon-pill        { width: 22px; height: 22px; }
+}
